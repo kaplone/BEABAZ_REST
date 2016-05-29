@@ -83,6 +83,15 @@ public class MongoAccess {
 
 		return find;
 	}
+
+	public static FindOne request(String table, String id) {
+
+		FindOne find = null;
+		collec = jongo.getCollection(table);
+		find = collec.findOne("{_id :  #}", new ObjectId(id));
+
+		return find;
+	}
     
     public static Find request(String table, Commande commande) {	
 		

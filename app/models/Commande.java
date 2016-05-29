@@ -5,8 +5,11 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.collections.ObservableList;
@@ -49,7 +52,9 @@ public class Commande  extends Commun{
 	private Auteur auteur;
 	private String auteur_id;
 
-	private ArrayList<Traitement> traitements_attendus;
+	@JsonIgnore
+	private List<Traitement> traitements_attendus;
+	private List<String> traitements_attendus_id;
 	
 	public static void update(Commande c){
 
@@ -118,12 +123,23 @@ public class Commande  extends Commun{
 	}
 
 
-	public ArrayList<Traitement> getTraitements_attendus() {
+	public List<Traitement> getTraitements_attendus() {
 		return traitements_attendus;
 	}
 
 	public void setTraitements_attendus(ArrayList<Traitement> traitements_attendus2) {
 		this.traitements_attendus = traitements_attendus2;
+	}
+
+	public List<String> getTraitements_attendus_id() {
+		return traitements_attendus_id;
+	}
+
+	public void setTraitements_attendus_id(ArrayList<String> traitements_attendus_id) {
+		this.traitements_attendus_id = traitements_attendus_id;
+		this.traitements_attendus = traitements_attendus_id.stream()
+				                                           .map(a -> MongoAccess.request("traitement", a).as(Traitement.class))
+		                                                   .collect(Collectors.toList());
 	}
 
 	public String getNom_affichage() {
@@ -166,7 +182,6 @@ public class Commande  extends Commun{
 		return modele;
 	}
 
-	@JsonIgnore
 	public Path getModeleVertical() {
 		
 		Path base = modele.getCheminVersModel().getParent();
