@@ -6,28 +6,20 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
-import java.util.function.Supplier;
+
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.JsonNode;
-import javafx.collections.ObservableList;
+
 
 import org.bson.types.ObjectId;
-import org.jongo.marshall.jackson.oid.MongoObjectId;
+
 
 import utils.MongoAccess;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.*;
-import com.fasterxml.jackson.datatype.jsr310.deser.*;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Commande  extends Commun{
@@ -52,7 +44,7 @@ public class Commande  extends Commun{
 
 	private String auteur_id;
 
-	private List<String> traitements_attendus_id;
+	private List<ObjectId> traitements_attendus_id;
 	
 	public static void update(Commande c){
 		MongoAccess.update("commande", c);
@@ -114,14 +106,12 @@ public class Commande  extends Commun{
 		this.dateFinProjet = res;
 	}
 
-	public List<String> getTraitements_attendus_id() {
+	public List<ObjectId> getTraitements_attendus_id() {
 		return traitements_attendus_id;
 	}
 
 	public void setTraitements_attendus_id(List<ObjectId> traitements_attendus_id) {
-		this.traitements_attendus_id = traitements_attendus_id.stream()
-				                                              .map(a -> a.toString())
-				                                              .collect(Collectors.toList());
+		this.traitements_attendus_id = traitements_attendus_id;
 	}
 
 	public String getNom_affichage() {
