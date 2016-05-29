@@ -19,7 +19,7 @@ public class TacheTraitement extends Commun{
 	private Date date;
 	private ObjectId traitement_id;
 	private String complement;
-	private Map<String, ObjectId> produitsLies;
+	private Map<String, String> produitsLies;
     
     private boolean supp; 
     
@@ -143,7 +143,7 @@ public class TacheTraitement extends Commun{
 		return produitsLies.keySet();
 	}
 	
-	public  Collection<ObjectId> getProduitsLies_id() {
+	public  Collection<String> getProduitsLies_id() {
 		return produitsLies.values();
 	}
 
@@ -151,11 +151,11 @@ public class TacheTraitement extends Commun{
 		this.produitsLies.put(produitLie.getNom(), produitLie.get_id());
 	}
 
-	public Map<String, ObjectId> getProduitsLies() {
+	public Map<String, String> getProduitsLies() {
 		return produitsLies;
 	}
 
-	public void setProduitsLies(Map<String, ObjectId> produitsLies) {
+	public void setProduitsLies(Map<String, String> produitsLies) {
 		this.produitsLies = produitsLies;
 	}
 	
