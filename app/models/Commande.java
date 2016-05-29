@@ -43,8 +43,10 @@ public class Commande  extends Commun{
 	private Client client;
 	
 	private Model modele;
+	private ObjectId modele_id;
 	
 	private Auteur auteur;
+	private ObjectId auteur_id;
 	
 	private ArrayList<ObjectId> oeuvresTraitees;
 	private ArrayList<Traitement> traitements_attendus;
@@ -210,6 +212,22 @@ public class Commande  extends Commun{
 	public void setAuteur(Auteur auteur) {
 		this.auteur = auteur;
 	}
-	
 
+	public ObjectId getModele_id() {
+		return modele_id;
+	}
+
+	public void setModele_id(ObjectId modele_id) {
+		this.modele_id = modele_id;
+		this.modele = MongoAccess.request("modele", modele_id).as(Model.class).next();
+	}
+
+	public ObjectId getAuteur_id() {
+		return auteur_id;
+	}
+
+	public void setAuteur_id(ObjectId auteur_id) {
+		this.auteur_id = auteur_id;
+		this.auteur = MongoAccess.request("auteur", auteur_id).as(Auteur.class).next();
+	}
 }
