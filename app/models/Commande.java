@@ -183,10 +183,6 @@ public class Commande  extends Commun{
 		this.dateFinProjet = dateFinProjet;
 	}
 
-	public Model getModele() {
-		return modele;
-	}
-
 	public Path getModeleVertical() {
 		
 		Path base = modele.getCheminVersModel().getParent();
@@ -199,32 +195,31 @@ public class Commande  extends Commun{
 	}
 
 	public void setModele(Model modele) {
-		this.modele = modele;
-	}
 
-	public Auteur getAuteur() {
-		return auteur;
+		this.modele = modele;
+		this.modele_id = modele.get_id().toString();
 	}
 
 	public void setAuteur(Auteur auteur) {
 		this.auteur = auteur;
+		this.auteur_id = auteur.get_id().toString();
 	}
 
 	public String getModele_id() {
 		return modele_id;
 	}
 
-	public void setModele_id(String modele_id) {
-		this.modele_id = modele_id;
-		this.modele = MongoAccess.request("modele", new ObjectId(modele_id)).as(Model.class).next();
+	public void setModele_id(ObjectId modele_id) {
+		this.modele_id = modele_id.toString();
+		this.modele = MongoAccess.request("modele", this.modele_id).as(Model.class);
 	}
 
 	public String getAuteur_id() {
 		return auteur_id;
 	}
 
-	public void setAuteur_id(String auteur_id) {
-		this.auteur_id = auteur_id;
-		this.auteur = MongoAccess.request("auteur", new ObjectId(auteur_id)).as(Auteur.class).next();
+	public void setAuteur_id(ObjectId auteur_id) {
+		this.auteur_id = auteur_id.toString();
+		this.auteur = MongoAccess.request("auteur", this.auteur_id).as(Auteur.class);
 	}
 }
