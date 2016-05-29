@@ -8,10 +8,12 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
 import javafx.collections.ObservableList;
 
 import org.bson.types.ObjectId;
@@ -135,10 +137,15 @@ public class Commande  extends Commun{
 		return traitements_attendus_id;
 	}
 
-	public void setTraitements_attendus_id(ArrayList<String> traitements_attendus_id) {
-		this.traitements_attendus_id = traitements_attendus_id;
-		this.traitements_attendus = traitements_attendus_id.stream()
-				                                           .map(a -> MongoAccess.request("traitement", a).as(Traitement.class))
+	public void setTraitements_attendus_id(Map<String, ObjectId> traitements_attendus_id) {
+		this.traitements_attendus_id = traitements_attendus_id.values()
+				                                              .stream()
+				                                              .map(a -> a.toString())
+				                                              .collect(Collectors.toList());
+
+		this.traitements_attendus = traitements_attendus_id.values()
+				                                           .stream()
+				                                           .map(a -> MongoAccess.request("traitement", a).as(Traitement.class).next())
 		                                                   .collect(Collectors.toList());
 	}
 
