@@ -18,8 +18,8 @@ public class Commun {
 	private String nom;
 	private String remarques;
 
-    public String get_id() {
-        return _id.toString();
+    public ObjectId get_id() {
+        return _id;
     }
 
 	public Date getCreated_at() {

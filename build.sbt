@@ -15,9 +15,8 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-core" % "2.7.3",
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.7.3",
   "com.fasterxml.jackson.core" % "jackson-annotations" % "2.7.3",
-  "org.mongojack" % "mongojack" % "2.6.0",
+  "org.mongodb" % "mongo-java-driver" % "3.2.2",
   "org.jongo" % "jongo" % "1.3.0"
-
 )
 
 
