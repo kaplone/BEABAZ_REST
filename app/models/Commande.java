@@ -52,29 +52,21 @@ public class Commande  extends Commun{
 
 	private String auteur_id;
 
-	@JsonIgnore
-	private List<Traitement> traitements_attendus;
 	private List<String> traitements_attendus_id;
 	
 	public static void update(Commande c){
-
 		MongoAccess.update("commande", c);
 	}
 	
     public static void save(Commande c){
-		
 		MongoAccess.save("commande", c);
-		
 	}
     
     public Commande get(){
-		
 		return this;
-		
 	}
     
     public String toString(){
-    	
     	return this.getNom();
     }
 
@@ -122,27 +114,18 @@ public class Commande  extends Commun{
 		this.dateFinProjet = res;
 	}
 
-
-	public List<Traitement> getTraitements_attendus() {
-		return traitements_attendus;
-	}
-
-	public void setTraitements_attendus(ArrayList<Traitement> traitements_attendus2) {
-		this.traitements_attendus = traitements_attendus2;
-	}
-
 	public List<String> getTraitements_attendus_id() {
 		return traitements_attendus_id;
 	}
 
 	public void setTraitements_attendus_id(List<ObjectId> traitements_attendus_id) {
 		this.traitements_attendus_id = traitements_attendus_id.stream()
-				                                              .map(a -> a.toString())
+				                                              .map(a -> {
+																  System.out.println(a);
+																  System.out.println(a.toString());
+																  a.toString();
+															  })
 				                                              .collect(Collectors.toList());
-
-		this.traitements_attendus = traitements_attendus_id.stream()
-				                                           .map(a -> MongoAccess.request("traitement", a).as(Traitement.class).next())
-		                                                   .collect(Collectors.toList());
 	}
 
 	public String getNom_affichage() {
