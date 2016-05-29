@@ -7,9 +7,9 @@ import akka.actor.*;
 
 public class MyWebSocketActor extends UntypedActor {
 
-    public static Props props(ActorRef out) {
-        return Props.create(MyWebSocketActor.class, out);
-    }
+//    public static Props props(ActorRef out) {
+//        return Props.create(MyWebSocketActor.class, out);
+//    }
 
     private final ActorRef out;
 

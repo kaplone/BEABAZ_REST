@@ -1,9 +1,8 @@
 package controllers;
 
-import models.Settings;
+import models.*;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCursor;
-import models.Produit;
 import play.mvc.*;
 
 import utils.LoadConfig;
@@ -40,8 +39,20 @@ public class GetElements extends Controller {
         try {
 
             switch (collection){
-                case "produit" : MongoCursor<Produit> m = MongoAccess.request(collection).as(Produit.class);
-                                 stringResult = mapper.writeValueAsString(m);
+                case "produit" : MongoCursor<Produit> m_produit = MongoAccess.request(collection).as(Produit.class);
+                                 stringResult = mapper.writeValueAsString(m_produit);
+                                 break;
+                case "commande" : MongoCursor<Commande> m_commande = MongoAccess.request(collection).as(Commande.class);
+                                 stringResult = mapper.writeValueAsString(m_commande);
+                                 break;
+                case "auteur" : MongoCursor<Auteur> m_auteur = MongoAccess.request(collection).as(Auteur.class);
+                                 stringResult = mapper.writeValueAsString(m_auteur);
+                                 break;
+                case "client" : MongoCursor<Client> m_client = MongoAccess.request(collection).as(Client.class);
+                                 stringResult = mapper.writeValueAsString(m_client);
+                                 break;
+                case "complement" : MongoCursor<Complement> m_complement = MongoAccess.request(collection).as(Complement.class);
+                                 stringResult = mapper.writeValueAsString(m_complement);
                                  break;
             }
 
