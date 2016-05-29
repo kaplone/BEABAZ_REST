@@ -120,11 +120,7 @@ public class Commande  extends Commun{
 
 	public void setTraitements_attendus_id(List<ObjectId> traitements_attendus_id) {
 		this.traitements_attendus_id = traitements_attendus_id.stream()
-				                                              .map(a -> {
-																  System.out.println(a);
-																  System.out.println(a.toString());
-																  a.toString();
-															  })
+				                                              .map(a -> a.toString())
 				                                              .collect(Collectors.toList());
 	}
 
