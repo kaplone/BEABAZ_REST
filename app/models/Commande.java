@@ -50,8 +50,6 @@ public class Commande  extends Commun{
 	private Model modele;
 	private String modele_id;
 
-	@JsonIgnore
-	private Auteur auteur;
 	private String auteur_id;
 
 	@JsonIgnore
@@ -183,6 +181,7 @@ public class Commande  extends Commun{
 		this.dateFinProjet = dateFinProjet;
 	}
 
+	@JsonIgnore
 	public Path getModeleVertical() {
 		
 		Path base = modele.getCheminVersModel().getParent();
@@ -201,7 +200,6 @@ public class Commande  extends Commun{
 	}
 
 	public void setAuteur(Auteur auteur) {
-		this.auteur = auteur;
 		this.auteur_id = auteur.get_id().toString();
 	}
 
@@ -220,6 +218,5 @@ public class Commande  extends Commun{
 
 	public void setAuteur_id(ObjectId auteur_id) {
 		this.auteur_id = auteur_id.toString();
-		this.auteur = MongoAccess.request("auteur", this.auteur_id).as(Auteur.class);
 	}
 }
