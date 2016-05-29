@@ -1,0 +1,16 @@
+# v01.Routes
+# This file defines all application atomic routes (Higher priority routes first)
+# ~~~~
+
+GET     /COUNT                          controllers.CountController.count
+
+GET     /:collection                    controllers.GetElements.getAll(collection: String)
+GET     /:collection/:id                controllers.GetElements.getId(collection: String, id: String)
+GET     /:collection/:champ/:valeur     controllers.GetElements.getField(collection: String, champ: String, valeur: String)
+GET     /:collection/:champ/:valeur/all controllers.GetElements.getFieldAll(collection: String, champ: String, valeur: String)
+
+POST    /ajout/:collection              controllers.AddElement.addOne(collection :String)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

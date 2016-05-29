@@ -1,0 +1,6 @@
+# api.Routes
+# This file defines all application atomic routes (Higher priority routes first)
+# ~~~~
+
+#switch to V01 routes
+->  /V01 v01.Routes
