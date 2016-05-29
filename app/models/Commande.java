@@ -44,12 +44,12 @@ public class Commande  extends Commun{
 	private Client client;
 	
 	private Model modele;
-	private ObjectId modele_id;
+	private String modele_id;
 	
 	private Auteur auteur;
-	private ObjectId auteur_id;
+	private String auteur_id;
 	
-	private ArrayList<ObjectId> oeuvresTraitees;
+	private ArrayList<String> oeuvresTraitees;
 	private ArrayList<Traitement> traitements_attendus;
 	private ArrayList<Traitement> tous_les_traitements;
 	
@@ -127,11 +127,11 @@ public class Commande  extends Commun{
 		this.client = client;
 	}
 
-	public ArrayList<ObjectId> getOeuvresTraitees() {
+	public ArrayList<String> getOeuvresTraitees() {
 		return oeuvresTraitees;
 	}
 
-	public void setOeuvresTraitees(ArrayList<ObjectId> oeuvresTraitees) {
+	public void setOeuvresTraitees(ArrayList<String> oeuvresTraitees) {
 		this.oeuvresTraitees = oeuvresTraitees;
 	}
 
@@ -215,21 +215,21 @@ public class Commande  extends Commun{
 		this.auteur = auteur;
 	}
 
-	public ObjectId getModele_id() {
+	public String getModele_id() {
 		return modele_id;
 	}
 
-	public void setModele_id(ObjectId modele_id) {
+	public void setModele_id(String modele_id) {
 		this.modele_id = modele_id;
-		this.modele = MongoAccess.request("modele", modele_id).as(Model.class).next();
+		this.modele = MongoAccess.request("modele", new ObjectId(modele_id)).as(Model.class).next();
 	}
 
-	public ObjectId getAuteur_id() {
+	public String getAuteur_id() {
 		return auteur_id;
 	}
 
-	public void setAuteur_id(ObjectId auteur_id) {
+	public void setAuteur_id(String auteur_id) {
 		this.auteur_id = auteur_id;
-		this.auteur = MongoAccess.request("auteur", auteur_id).as(Auteur.class).next();
+		this.auteur = MongoAccess.request("auteur", new ObjectId(auteur_id)).as(Auteur.class).next();
 	}
 }
