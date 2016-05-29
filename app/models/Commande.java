@@ -137,14 +137,12 @@ public class Commande  extends Commun{
 		return traitements_attendus_id;
 	}
 
-	public void setTraitements_attendus_id(Map<String, ObjectId> traitements_attendus_id) {
-		this.traitements_attendus_id = traitements_attendus_id.values()
-				                                              .stream()
+	public void setTraitements_attendus_id(List<ObjectId> traitements_attendus_id) {
+		this.traitements_attendus_id = traitements_attendus_id.stream()
 				                                              .map(a -> a.toString())
 				                                              .collect(Collectors.toList());
 
-		this.traitements_attendus = traitements_attendus_id.values()
-				                                           .stream()
+		this.traitements_attendus = traitements_attendus_id.stream()
 				                                           .map(a -> MongoAccess.request("traitement", a).as(Traitement.class).next())
 		                                                   .collect(Collectors.toList());
 	}
