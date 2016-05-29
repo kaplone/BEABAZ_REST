@@ -106,8 +106,10 @@ public class Commande  extends Commun{
 		this.dateFinProjet = res;
 	}
 
-	public List<ObjectId> getTraitements_attendus_id() {
-		return traitements_attendus_id;
+	public List<String> getTraitements_attendus_id() {
+		return traitements_attendus_id.stream()
+				                      .map(a -> a.toString())
+				                      .collect(Collectors.toList());
 	}
 
 	public void setTraitements_attendus_id(List<ObjectId> traitements_attendus_id) {
