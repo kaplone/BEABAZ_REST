@@ -41,17 +41,15 @@ public class Commande  extends Commun{
 
 	private Date dateFinProjet;
 
-	private Client client;
-	
+	@JsonIgnore
 	private Model modele;
 	private String modele_id;
-	
+
+	@JsonIgnore
 	private Auteur auteur;
 	private String auteur_id;
-	
-	private ArrayList<String> oeuvresTraitees;
+
 	private ArrayList<Traitement> traitements_attendus;
-	private ArrayList<Traitement> tous_les_traitements;
 	
 	public static void update(Commande c){
 
@@ -118,22 +116,7 @@ public class Commande  extends Commun{
 		Date res = Date.from(instant);
 		this.dateFinProjet = res;
 	}
-	
-	public Client getClient() {
-		return client;
-	}
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
-	public ArrayList<String> getOeuvresTraitees() {
-		return oeuvresTraitees;
-	}
-
-	public void setOeuvresTraitees(ArrayList<String> oeuvresTraitees) {
-		this.oeuvresTraitees = oeuvresTraitees;
-	}
 
 	public ArrayList<Traitement> getTraitements_attendus() {
 		return traitements_attendus;
@@ -141,14 +124,6 @@ public class Commande  extends Commun{
 
 	public void setTraitements_attendus(ArrayList<Traitement> traitements_attendus2) {
 		this.traitements_attendus = traitements_attendus2;
-	}
-
-	public ArrayList<Traitement> getTous_les_traitements() {
-		return tous_les_traitements;
-	}
-
-	public void setTous_les_traitements(ArrayList<Traitement> tous_les_traitements) {
-		this.tous_les_traitements = tous_les_traitements;
 	}
 
 	public String getNom_affichage() {
