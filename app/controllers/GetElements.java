@@ -28,7 +28,28 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class GetElements extends Controller {
 
-    public Result getAll(String collection) {
+    public Result getAll(String collection) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+
+        LoadConfig.loadSettings();
+
+        String key = Settings.getKey();
+
+        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
+
+        System.out.println("Encrypted : " + new String(encrypted));
+
+        cipher.init(Cipher.DECRYPT_MODE, aesKey);
+        String decrypted = new String(cipher.doFinal(encrypted));
+
+        System.out.println("Decrypted : " + decrypted);
+
+
+        Settings.setLogin(decrypted.split(" ")[0].trim());
+        Settings.setPass(decrypted.split(" ")[1].trim());
+        Settings.setBase(decrypted.split(" ")[2].trim());
 
         MongoAccess.connect();
 
@@ -67,7 +88,28 @@ public class GetElements extends Controller {
         }
     }
 
-    public Result getId(String collection, String id) {
+    public Result getId(String collection, String id) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+
+        LoadConfig.loadSettings();
+
+        String key = Settings.getKey();
+
+        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
+
+        System.out.println("Encrypted : " + new String(encrypted));
+
+        cipher.init(Cipher.DECRYPT_MODE, aesKey);
+        String decrypted = new String(cipher.doFinal(encrypted));
+
+        System.out.println("Decrypted : " + decrypted);
+
+
+        Settings.setLogin(decrypted.split(" ")[0].trim());
+        Settings.setPass(decrypted.split(" ")[1].trim());
+        Settings.setBase(decrypted.split(" ")[2].trim());
 
         MongoAccess.connect();
 
