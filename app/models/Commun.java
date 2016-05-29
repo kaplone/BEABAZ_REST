@@ -9,7 +9,7 @@ public class Commun {
     public Commun(){
     }
 
-	private ObjectId _id;
+	private String _id;
 
 	private Date created_at;
 	private Date updated_at;
@@ -18,8 +18,8 @@ public class Commun {
 	private String nom;
 	private String remarques;
 
-    public ObjectId get_id() {
-        return _id;
+    public String get_id() {
+        return _id.toString();
     }
 
 	public Date getCreated_at() {
