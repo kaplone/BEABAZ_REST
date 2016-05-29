@@ -21,7 +21,7 @@ public class OeuvreTraitee extends Commun {
 	
 	private ObjectId oeuvre_id;
 	
-	private Map<String, ObjectId> traitementsAttendus_id;
+	private Map<String, String> traitementsAttendus_id;
 
 	private EtatFinal etat;
 	private String complement_etat;
@@ -29,7 +29,7 @@ public class OeuvreTraitee extends Commun {
 	private ArrayList<String> alterations;
 	
 	private ArrayList<Fichier> fichiers;
-	private Map<String, ObjectId> fichiers_id;
+	private Map<String, String> fichiers_id;
 	
 	private Progression progressionOeuvreTraitee;
 	
@@ -64,7 +64,7 @@ public class OeuvreTraitee extends Commun {
 		ArrayList<Fichier> fichiers = new ArrayList<>();
 		
 		for (String s : fichiers_id.keySet()) {
-			fichiers.add(MongoAccess.request("fichier", fichiers_id.get(s)).as(Fichier.class).next());
+			fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class).next());
 		}
 		
 		return fichiers;
@@ -77,7 +77,7 @@ public class OeuvreTraitee extends Commun {
 		for (String s : fichiers_id.keySet()) {
 			
 			if (Normalize.normalizeDenormStringField(s).endsWith(".PR.1.JPG")){
-				fichier = MongoAccess.request("fichier", fichiers_id.get(s)).as(Fichier.class).next();
+				fichier = MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class).next();
 			}
 		}
 		
@@ -85,7 +85,7 @@ public class OeuvreTraitee extends Commun {
 		
 	}
 	
-	public Map<String, ObjectId> getFichiers_id() {
+	public Map<String, String> getFichiers_id() {
 		return fichiers_id;
 	}
 	public Set<String> getFichiers_names() {
@@ -105,13 +105,13 @@ public class OeuvreTraitee extends Commun {
 	public Set<String> getTraitementsAttendus_names() {
 		return traitementsAttendus_id.keySet();
 	}
-	public Collection<ObjectId> getTraitementsAttendus_id() {
+	public Collection<String> getTraitementsAttendus_id() {
 		return traitementsAttendus_id.values();
 	}
 	public void addTraitementAttendu(Traitement traitementAttendu) {
 		this.traitementsAttendus_id.put(traitementAttendu.getNom(), traitementAttendu.get_id());
 	}
-	public void addTraitementAttendu(String nom, ObjectId id) {
+	public void addTraitementAttendu(String nom, String id) {
 		this.traitementsAttendus_id.put(nom, id);
 	}
 
@@ -162,11 +162,11 @@ public class OeuvreTraitee extends Commun {
 		this.oeuvre_id = oeuvre_id;
 	}
 
-	public void setTraitementsAttendus_id(Map<String, ObjectId> traitementsAttendus_id) {
+	public void setTraitementsAttendus_id(Map<String, String> traitementsAttendus_id) {
 		this.traitementsAttendus_id = traitementsAttendus_id;
 	}
 
-	public void setFichiers_id(Map<String, ObjectId> fichiers_id) {
+	public void setFichiers_id(Map<String, String> fichiers_id) {
 		this.fichiers_id = fichiers_id;
 	}
 

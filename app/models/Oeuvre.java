@@ -31,8 +31,8 @@ public class Oeuvre extends Commun{
 	
 	private ObjectId auteur;
 	
-	private Map<String, ObjectId> matieresUtilisees_id;
-	private Map<String, ObjectId> techniquesUtilisees_id;
+	private Map<String, String> matieresUtilisees_id;
+	private Map<String, String> techniquesUtilisees_id;
 	
 	private String etat_current;
 	
@@ -76,7 +76,7 @@ public class Oeuvre extends Commun{
 		
 	}
     
-    public void addMatiere(String m, ObjectId oid){
+    public void addMatiere(String m, String oid){
     	
         if (! matieresUtilisees_id.keySet().contains(m)){
     		matieresUtilisees_id.put(m, oid);
@@ -94,7 +94,7 @@ public class Oeuvre extends Commun{
     	} 	
     }
     
-    public void addTechnique(String t, ObjectId oid){
+    public void addTechnique(String t, String oid){
     	
 
     	if (! techniquesUtilisees_id.keySet().contains(t)){
@@ -233,19 +233,19 @@ public class Oeuvre extends Commun{
 		this.techniquesUtilisees_id.put(techniqueUtilisee.getNom(), techniqueUtilisee.get_id());
 	}
 
-	public Map<String, ObjectId> getMatieresUtilisees_id() {
+	public Map<String, String> getMatieresUtilisees_id() {
 		return matieresUtilisees_id;
 	}
 
-	public void setMatieresUtilisees_id(Map<String, ObjectId> matieresUtilisees_id) {
+	public void setMatieresUtilisees_id(Map<String, String> matieresUtilisees_id) {
 		this.matieresUtilisees_id = matieresUtilisees_id;
 	}
 
-	public Map<String, ObjectId> getTechniquesUtilisees_id() {
+	public Map<String, String> getTechniquesUtilisees_id() {
 		return techniquesUtilisees_id;
 	}
 
-	public void setTechniquesUtilisees_id(Map<String, ObjectId> techniquesUtilisees_id) {
+	public void setTechniquesUtilisees_id(Map<String, String> techniquesUtilisees_id) {
 		this.techniquesUtilisees_id = techniquesUtilisees_id;
 	}
 	
@@ -253,7 +253,7 @@ public class Oeuvre extends Commun{
 		
 		return getTechniquesUtilisees_id().entrySet()
                                           .stream()
-                                          .map(a -> MongoAccess.request("technique", a.getValue())
+                                          .map(a -> MongoAccess.request("technique", new ObjectId(a.getValue()))
                                                                .as(Technique.class)
                                                                .next()
                                                                .getNom_complet())
@@ -264,7 +264,7 @@ public class Oeuvre extends Commun{
 		
 		return getMatieresUtilisees_id().entrySet()
                                         .stream()
-                                        .map(a -> MongoAccess.request("matiere", a.getValue())
+                                        .map(a -> MongoAccess.request("matiere", new ObjectId(a.getValue()))
                                                              .as(Matiere.class)
                                                              .next()
                                                              .getNom_complet())
