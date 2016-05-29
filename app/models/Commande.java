@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.collections.ObservableList;
 
 import org.bson.types.ObjectId;
@@ -189,7 +190,8 @@ public class Commande  extends Commun{
 	public Model getModele() {
 		return modele;
 	}
-	
+
+	@JsonIgnore
 	public Path getModeleVertical() {
 		
 		Path base = modele.getCheminVersModel().getParent();
