@@ -46,12 +46,9 @@ public class Commande  extends Commun{
 
 	private String auteur_id;
 
-	private Map<String, ObjectId> oeuvresTraitees_id;
+	private Map<String, String> oeuvresTraitees_id;
 
-    @JsonIgnore
-    private List<String> oeuvresTraitees_string;
-
-	private List<ObjectId> traitements_attendus_id;
+	private Map<String, String> traitements_attendus_id;
 	
 	public static void update(Commande c){
 		MongoAccess.update("commande", c);
@@ -113,13 +110,11 @@ public class Commande  extends Commun{
 		this.dateFinProjet = res;
 	}
 
-	public List<String> getTraitements_attendus_id() {
-		return traitements_attendus_id.stream()
-				                      .map(a -> a.toString())
-				                      .collect(Collectors.toList());
+	public Map<String, String> getTraitements_attendus_id() {
+		return traitements_attendus_id;
 	}
 
-	public void setTraitements_attendus_id(List<ObjectId> traitements_attendus_id) {
+	public void setTraitements_attendus_id(Map<String, String> traitements_attendus_id) {
 		this.traitements_attendus_id = traitements_attendus_id;
 	}
 
@@ -199,11 +194,11 @@ public class Commande  extends Commun{
 	}
 
 
-	public Map<String, ObjectId> getOeuvresTraitees_id() {
+	public Map<String, String> getOeuvresTraitees_id() {
 		return oeuvresTraitees_id;
 	}
 
-	public void setOeuvresTraitees_id(Map<String, ObjectId> oeuvresTraitees_id) {
+	public void setOeuvresTraitees_id(Map<String, String> oeuvresTraitees_id) {
 		this.oeuvresTraitees_id = oeuvresTraitees_id;
 	}
 
