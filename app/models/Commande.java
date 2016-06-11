@@ -5,9 +5,11 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,6 +45,11 @@ public class Commande  extends Commun{
 	private String modele_id;
 
 	private String auteur_id;
+
+	private Map<String, ObjectId> oeuvresTraitees_id;
+
+    @JsonIgnore
+    private List<String> oeuvresTraitees_string;
 
 	private List<ObjectId> traitements_attendus_id;
 	
@@ -190,4 +197,21 @@ public class Commande  extends Commun{
 	public void setAuteur_id(ObjectId auteur_id) {
 		this.auteur_id = auteur_id.toString();
 	}
+
+
+	public Map<String, ObjectId> getOeuvresTraitees_id() {
+		return oeuvresTraitees_id;
+	}
+
+	public void setOeuvresTraitees_id(Map<String, ObjectId> oeuvresTraitees_id) {
+		this.oeuvresTraitees_id = oeuvresTraitees_id;
+	}
+
+
+    public List<String> getOeuvresTraitees_string() {
+        return oeuvresTraitees_id.keySet()
+                                 .stream()
+                                 .sorted()
+                                 .collect(Collectors.toList());
+    }
 }
