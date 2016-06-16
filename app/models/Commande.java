@@ -201,12 +201,12 @@ public class Commande  extends Commun{
 	public void setOeuvresTraitees_id(Map<String, String> oeuvresTraitees_id) {
 		this.oeuvresTraitees_id = oeuvresTraitees_id;
 	}
-
-
-    public List<String> getOeuvresTraitees_string() {
-        return oeuvresTraitees_id.keySet()
-                                 .stream()
-                                 .sorted()
-                                 .collect(Collectors.toList());
-    }
+//
+//
+//    public List<String> getOeuvresTraitees_string() {
+//        return oeuvresTraitees_id.keySet()
+//                                 .stream()
+//                                 .sorted()
+//                                 .collect(Collectors.toList());
+//    }
 }
