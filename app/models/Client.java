@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
@@ -22,7 +23,7 @@ public class Client extends Commun{
 	private String remarques;
 	
 	
-	private ArrayList<ObjectId> commandes;
+	private Map<String, ObjectId> commandes_id;
 
 	public static void update(Client c){
 
@@ -54,12 +55,12 @@ public class Client extends Commun{
 		this.remarques = remarques;
 	}
 
-	public ArrayList<ObjectId> getCommandes() {
-		return commandes;
+	public Map<String, ObjectId> getCommandes_id() {
+		return commandes_id;
 	}
 
-	public void setCommandes(ArrayList<ObjectId> commandes) {
-		this.commandes = commandes;
+	public void setCommandes_id(Map<String, ObjectId> commandes) {
+		this.commandes_id = commandes;
 	}
 
 	public String getAdresse_rue() {
