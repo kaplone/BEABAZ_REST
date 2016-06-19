@@ -23,7 +23,7 @@ public class Client extends Commun{
 	private String remarques;
 	
 	
-	private Map<String, ObjectId> commandes_id;
+	private Map<String, String> commandes_id;
 
 	public static void update(Client c){
 
@@ -55,11 +55,11 @@ public class Client extends Commun{
 		this.remarques = remarques;
 	}
 
-	public Map<String, ObjectId> getCommandes_id() {
+	public Map<String, String> getCommandes_id() {
 		return commandes_id;
 	}
 
-	public void setCommandes_id(Map<String, ObjectId> commandes) {
+	public void setCommandes_id(Map<String, String> commandes) {
 		this.commandes_id = commandes;
 	}
 
