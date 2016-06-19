@@ -123,6 +123,18 @@ public class GetElements extends Controller {
                 case "produit" : Produit m = MongoAccess.request(collection, new ObjectId(id)).as(Produit.class).next();
                     stringResult = mapper.writeValueAsString(m);
                     break;
+                case "commande" : MongoCursor<Commande> m_commande = MongoAccess.request(collection, new ObjectId(id)).as(Commande.class);
+                    stringResult = mapper.writeValueAsString(m_commande);
+                    break;
+                case "auteur" : MongoCursor<Auteur> m_auteur = MongoAccess.request(collection, new ObjectId(id)).as(Auteur.class);
+                    stringResult = mapper.writeValueAsString(m_auteur);
+                    break;
+                case "client" : MongoCursor<Client> m_client = MongoAccess.request(collection, new ObjectId(id)).as(Client.class);
+                    stringResult = mapper.writeValueAsString(m_client);
+                    break;
+                case "complement" : MongoCursor<Complement> m_complement = MongoAccess.request(collection, new ObjectId(id)).as(Complement.class);
+                    stringResult = mapper.writeValueAsString(m_complement);
+                    break;
             }
 
             return ok(new ObjectMapper().readTree(stringResult));
@@ -171,6 +183,18 @@ public class GetElements extends Controller {
                 case "produit" : Produit m = MongoAccess.request(collection, champ, valeur).as(Produit.class);
                     stringResult = mapper.writeValueAsString(m);
                     break;
+                case "commande" : Commande m_commande = MongoAccess.request(collection, champ, valeur).as(Commande.class);
+                    stringResult = mapper.writeValueAsString(m_commande);
+                    break;
+                case "auteur" : Auteur m_auteur = MongoAccess.request(collection, champ, valeur).as(Auteur.class);
+                    stringResult = mapper.writeValueAsString(m_auteur);
+                    break;
+                case "client" : Client m_client = MongoAccess.request(collection, champ, valeur).as(Client.class);
+                    stringResult = mapper.writeValueAsString(m_client);
+                    break;
+                case "complement" : Complement m_complement = MongoAccess.request(collection, champ, valeur).as(Complement.class);
+                    stringResult = mapper.writeValueAsString(m_complement);
+                    break;
             }
 
             return ok(new ObjectMapper().readTree(stringResult));
@@ -218,6 +242,18 @@ public class GetElements extends Controller {
             switch (collection){
                 case "produit" : MongoCursor<Produit> m = MongoAccess.requestAll(collection, champ, valeur).as(Produit.class);
                     stringResult = mapper.writeValueAsString(m);
+                    break;
+                case "commande" : MongoCursor<Commande> m_commande = MongoAccess.requestAll(collection, champ, valeur).as(Commande.class);
+                    stringResult = mapper.writeValueAsString(m_commande);
+                    break;
+                case "auteur" : MongoCursor<Auteur> m_auteur = MongoAccess.requestAll(collection, champ, valeur).as(Auteur.class);
+                    stringResult = mapper.writeValueAsString(m_auteur);
+                    break;
+                case "client" : MongoCursor<Client> m_client = MongoAccess.requestAll(collection, champ, valeur).as(Client.class);
+                    stringResult = mapper.writeValueAsString(m_client);
+                    break;
+                case "complement" : MongoCursor<Complement> m_complement = MongoAccess.requestAll(collection, champ, valeur).as(Complement.class);
+                    stringResult = mapper.writeValueAsString(m_complement);
                     break;
             }
 
