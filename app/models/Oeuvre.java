@@ -29,7 +29,7 @@ public class Oeuvre extends Commun{
 	               inscriptions_au_verso,
 	               format_de_conditionnement;
 	
-	private ObjectId auteur;
+	private String auteur;
 	
 	private Map<String, String> matieresUtilisees_id;
 	private Map<String, String> techniquesUtilisees_id;
@@ -201,11 +201,11 @@ public class Oeuvre extends Commun{
 		this.format_de_conditionnement = format_de_conditionnement;
 	}
 
-	public ObjectId getAuteur() {
+	public String getAuteur() {
 		return auteur;
 	}
 
-	public void setAuteur(ObjectId auteur) {
+	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
 

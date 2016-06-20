@@ -17,7 +17,7 @@ public class TacheTraitement extends Commun{
 	
 	private Progression fait_;
 	private Date date;
-	private ObjectId traitement_id;
+	private String traitement_id;
 	private String complement;
 	private Map<String, String> produitsLies;
     
@@ -96,10 +96,10 @@ public class TacheTraitement extends Commun{
 		this.complement = complement;
 	}
 
-	public ObjectId getTraitement_id() {
+	public String getTraitement_id() {
 		return traitement_id;
 	}
-	public void setTraitement_id(ObjectId traitement) {
+	public void setTraitement_id(String traitement) {
 		this.traitement_id = traitement;
 	}
 	

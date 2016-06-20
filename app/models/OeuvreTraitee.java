@@ -17,9 +17,9 @@ import javafx.scene.image.ImageView;
 
 public class OeuvreTraitee extends Commun {
 	
-	private ObjectId commande_id;
+	private String commande_id;
 	
-	private ObjectId oeuvre_id;
+	private String oeuvre_id;
 	
 	private Map<String, String> traitementsAttendus_id;
 
@@ -154,11 +154,11 @@ public class OeuvreTraitee extends Commun {
 		return MongoAccess.request("oeuvre", oeuvre_id).as(Oeuvre.class);
 	}
 
-	public ObjectId getOeuvre_id() {
+	public String getOeuvre_id() {
 		return oeuvre_id;
 	}
 
-	public void setOeuvre_id(ObjectId oeuvre_id) {
+	public void setOeuvre_id(String oeuvre_id) {
 		this.oeuvre_id = oeuvre_id;
 	}
 
@@ -170,11 +170,11 @@ public class OeuvreTraitee extends Commun {
 		this.fichiers_id = fichiers_id;
 	}
 
-	public ObjectId getCommande_id() {
+	public String getCommande_id() {
 		return commande_id;
 	}
 
-	public void setCommande_id(ObjectId commande_id) {
+	public void setCommande_id(String commande_id) {
 		this.commande_id = commande_id;
 	}
 

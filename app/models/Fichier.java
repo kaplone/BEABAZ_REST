@@ -12,7 +12,7 @@ public class Fichier extends Commun{
 	
 	private String legende;
 	
-	private ObjectId oeuvre_id;
+	private String oeuvre_id;
 	
 	public static void update(Fichier c){
 
@@ -56,11 +56,11 @@ public class Fichier extends Commun{
 		return Paths.get(this.fichierLie).getFileName().toString();
 	}
 
-	public ObjectId getOeuvre_id() {
+	public String getOeuvre_id() {
 		return oeuvre_id;
 	}
 
-	public void setOeuvre_id(ObjectId oeuvre_id) {
+	public void setOeuvre_id(String oeuvre_id) {
 		this.oeuvre_id = oeuvre_id;
 	}
 	
