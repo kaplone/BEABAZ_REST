@@ -34,16 +34,12 @@ public class Commande  extends Commun{
 	
 	private String remarques;
 
-	@JsonIgnore
 	private Date dateCommande;
 
-	@JsonIgnore
 	private Date dateDebutProjet;
 
-	@JsonIgnore
 	private Date dateFinProjet;
 
-	@JsonIgnore
 	private Model modele;
 	private String modele_id;
 
