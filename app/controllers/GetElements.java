@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
@@ -61,6 +62,10 @@ public class GetElements extends Controller {
 
             switch (collection){
 
+                /**
+                 *  mongoCursor vers mapper ?
+                 */
+
 
                 case "auteur" : MongoCursor<Auteur> m_auteur = MongoAccess.request(collection).as(Auteur.class);
                                  stringResult = mapper.writeValueAsString(m_auteur);
@@ -69,7 +74,11 @@ public class GetElements extends Controller {
                                  stringResult = mapper.writeValueAsString(m_client);
                                  break;
                 case "commande" : MongoCursor<Commande> m_commande = MongoAccess.request(collection).as(Commande.class);
-                                 stringResult = mapper.writeValueAsString(m_commande);
+                                  ArrayList<Commande> listeCommande = new ArrayList<>();
+                                  while (m_commande.hasNext()){
+                                      listeCommande.add(m_commande.next());
+                                  }
+                                 stringResult = mapper.writeValueAsString(listeCommande);
                                  break;
                 case "complement" : MongoCursor<Complement> m_complement = MongoAccess.request(collection).as(Complement.class);
                                  stringResult = mapper.writeValueAsString(m_complement);
@@ -99,6 +108,10 @@ public class GetElements extends Controller {
                                 stringResult = mapper.writeValueAsString(m_technique);
                                 break;
                 case "Traitement" : MongoCursor<Traitement> m_traitement = MongoAccess.request(collection).as(Traitement.class);
+                                ArrayList<Traitement> listeTraitement= new ArrayList<>();
+                                while (m_traitement.hasNext()){
+                                    listeTraitement.add(m_traitement.next());
+                                }
                                 stringResult = mapper.writeValueAsString(m_traitement);
                                 break;
             }
