@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -11,8 +12,11 @@ public class Commun {
 
 	private String _id;
 
+	@JsonIgnore
 	private Date created_at;
+	@JsonIgnore
 	private Date updated_at;
+	@JsonIgnore
 	private Date deleted_at;
 	
 	private String nom;
