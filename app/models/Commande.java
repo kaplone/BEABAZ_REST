@@ -154,6 +154,18 @@ public class Commande  extends Commun{
 		this.dateFinProjet = dateFinProjet;
 	}
 
+	public String getDateCommande() {
+		return dateCommande;
+	}
+
+	public String getDateDebutProjet() {
+		return dateDebutProjet;
+	}
+
+	public String getDateFinProjet() {
+		return dateFinProjet;
+	}
+
 	@JsonIgnore
 	public Path getModeleVertical() {
 		
