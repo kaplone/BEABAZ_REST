@@ -64,7 +64,7 @@ public class OeuvreTraitee extends Commun {
 		ArrayList<Fichier> fichiers = new ArrayList<>();
 		
 		for (String s : fichiers_id.keySet()) {
-			fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class).next());
+			fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class));
 		}
 		
 		return fichiers;
@@ -77,7 +77,7 @@ public class OeuvreTraitee extends Commun {
 		for (String s : fichiers_id.keySet()) {
 			
 			if (Normalize.normalizeDenormStringField(s).endsWith(".PR.1.JPG")){
-				fichier = MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class).next();
+				fichier = MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class);
 			}
 		}
 		
@@ -151,7 +151,7 @@ public class OeuvreTraitee extends Commun {
 	
 	public Oeuvre getOeuvre(){
 		
-		return MongoAccess.request("oeuvre", oeuvre_id).as(Oeuvre.class).next();
+		return MongoAccess.request("oeuvre", oeuvre_id).as(Oeuvre.class);
 	}
 
 	public ObjectId getOeuvre_id() {

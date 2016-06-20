@@ -54,7 +54,7 @@ public class TacheTraitement extends Commun{
     }
     
     public void addProduit(ObjectId id){
-    	Produit p_ = MongoAccess.request("produit", id).as(Produit.class).next();
+    	Produit p_ = MongoAccess.request("produit", id).as(Produit.class);
     	this.addProduit(p_);
     }
     
@@ -104,7 +104,7 @@ public class TacheTraitement extends Commun{
 	}
 	
 	public Traitement getTraitement(){
-		return MongoAccess.request("traitement", traitement_id).as(Traitement.class).next();
+		return MongoAccess.request("traitement", traitement_id).as(Traitement.class);
 	}
 	
 	public ImageView getIcone_progression() {

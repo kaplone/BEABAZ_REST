@@ -255,7 +255,6 @@ public class Oeuvre extends Commun{
                                           .stream()
                                           .map(a -> MongoAccess.request("technique", new ObjectId(a.getValue()))
                                                                .as(Technique.class)
-                                                               .next()
                                                                .getNom_complet())
                                           .collect(Collectors.joining(", "));
 	}
@@ -266,7 +265,6 @@ public class Oeuvre extends Commun{
                                         .stream()
                                         .map(a -> MongoAccess.request("matiere", new ObjectId(a.getValue()))
                                                              .as(Matiere.class)
-                                                             .next()
                                                              .getNom_complet())
                                         .collect(Collectors.joining(", "));
 	}
