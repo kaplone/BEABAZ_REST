@@ -107,7 +107,7 @@ public class GetElements extends Controller {
                 case "technique" : MongoCursor<Technique> m_technique = MongoAccess.request(collection).as(Technique.class);
                                 stringResult = mapper.writeValueAsString(m_technique);
                                 break;
-                case "Traitement" : MongoCursor<Traitement> m_traitement = MongoAccess.request(collection).as(Traitement.class);
+                case "traitement" : MongoCursor<Traitement> m_traitement = MongoAccess.request(collection).as(Traitement.class);
                                 ArrayList<Traitement> listeTraitement= new ArrayList<>();
                                 while (m_traitement.hasNext()){
                                     listeTraitement.add(m_traitement.next());
@@ -196,7 +196,7 @@ public class GetElements extends Controller {
                 case "technique" : Technique m_technique = MongoAccess.request(collection, new ObjectId(id)).as(Technique.class);
                     stringResult = mapper.writeValueAsString(m_technique);
                     break;
-                case "Traitement" : Traitement m_traitement = MongoAccess.request(collection, new ObjectId(id)).as(Traitement.class);
+                case "traitement" : Traitement m_traitement = MongoAccess.request(collection, new ObjectId(id)).as(Traitement.class);
                     stringResult = mapper.writeValueAsString(m_traitement);
                     break;
             }
@@ -281,7 +281,7 @@ public class GetElements extends Controller {
                 case "technique" : Technique m_technique = MongoAccess.request(collection, champ, valeur).as(Technique.class);
                     stringResult = mapper.writeValueAsString(m_technique);
                     break;
-                case "Traitement" : Traitement m_traitement = MongoAccess.request(collection, champ, valeur).as(Traitement.class);
+                case "traitement" : Traitement m_traitement = MongoAccess.request(collection, champ, valeur).as(Traitement.class);
                     stringResult = mapper.writeValueAsString(m_traitement);
                     break;
 
@@ -367,7 +367,7 @@ public class GetElements extends Controller {
                 case "technique" : MongoCursor<Technique> m_technique = MongoAccess.requestAll(collection, champ, valeur).as(Technique.class);
                     stringResult = mapper.writeValueAsString(m_technique);
                     break;
-                case "Traitement" : MongoCursor<Traitement> m_traitement = MongoAccess.requestAll(collection, champ, valeur).as(Traitement.class);
+                case "traitement" : MongoCursor<Traitement> m_traitement = MongoAccess.requestAll(collection, champ, valeur).as(Traitement.class);
                     stringResult = mapper.writeValueAsString(m_traitement);
                     break;
 
