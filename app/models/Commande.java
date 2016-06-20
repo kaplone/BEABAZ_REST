@@ -34,12 +34,13 @@ public class Commande  extends Commun{
 	
 	private String remarques;
 
-	private Date dateCommande;
+	private String dateCommande;
 
-	private Date dateDebutProjet;
+	private String dateDebutProjet;
 
-	private Date dateFinProjet;
+	private String dateFinProjet;
 
+	@JsonIgnore
 	private Model modele;
 	private String modele_id;
 
@@ -73,41 +74,41 @@ public class Commande  extends Commun{
 		this.remarques = remarques;
 	}
 
-	public LocalDate getDateCommande() {
-		Instant instant = Instant.ofEpochMilli(dateCommande.getTime());
-		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-		return res;
-	}
-
-	public void setDateCommande(LocalDate dateCommande) {
-		Instant instant = dateCommande.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-		Date res = Date.from(instant);
-		this.dateCommande = res;
-	}
-
-	public LocalDate getDateDebutProjet() {
-		Instant instant = Instant.ofEpochMilli(dateDebutProjet.getTime());
-		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-		return res;
-	}
-
-	public void setDateDebutProjet(LocalDate dateDebutProjet) {
-		Instant instant = dateDebutProjet.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-		Date res = Date.from(instant);
-		this.dateDebutProjet = res;
-	}
-
-	public LocalDate getDateFinProjet() {
-		Instant instant = Instant.ofEpochMilli(dateFinProjet.getTime());
-		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-		return res;
-	}
-
-	public void setDateFinProjet(LocalDate dateFinProjet) {
-		Instant instant = dateFinProjet.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-		Date res = Date.from(instant);
-		this.dateFinProjet = res;
-	}
+//	public LocalDate getDateCommande() {
+//		Instant instant = Instant.ofEpochMilli(dateCommande.getTime());
+//		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+//		return res;
+//	}
+//
+//	public void setDateCommande(LocalDate dateCommande) {
+//		Instant instant = dateCommande.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+//		Date res = Date.from(instant);
+//		this.dateCommande = res;
+//	}
+//
+//	public LocalDate getDateDebutProjet() {
+//		Instant instant = Instant.ofEpochMilli(dateDebutProjet.getTime());
+//		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+//		return res;
+//	}
+//
+//	public void setDateDebutProjet(LocalDate dateDebutProjet) {
+//		Instant instant = dateDebutProjet.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+//		Date res = Date.from(instant);
+//		this.dateDebutProjet = res;
+//	}
+//
+//	public LocalDate getDateFinProjet() {
+//		Instant instant = Instant.ofEpochMilli(dateFinProjet.getTime());
+//		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+//		return res;
+//	}
+//
+//	public void setDateFinProjet(LocalDate dateFinProjet) {
+//		Instant instant = dateFinProjet.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+//		Date res = Date.from(instant);
+//		this.dateFinProjet = res;
+//	}
 
 	public Map<String, String> getTraitements_attendus_id() {
 		return traitements_attendus_id;
@@ -141,15 +142,15 @@ public class Commande  extends Commun{
 		this.complement = complement;
 	}
 
-	public void setDateCommande(Date dateCommande) {
+	public void setDateCommande(String dateCommande) {
 		this.dateCommande = dateCommande;
 	}
 
-	public void setDateDebutProjet(Date dateDebutProjet) {
+	public void setDateDebutProjet(String dateDebutProjet) {
 		this.dateDebutProjet = dateDebutProjet;
 	}
 
-	public void setDateFinProjet(Date dateFinProjet) {
+	public void setDateFinProjet(String dateFinProjet) {
 		this.dateFinProjet = dateFinProjet;
 	}
 
