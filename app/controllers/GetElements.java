@@ -89,7 +89,7 @@ public class GetElements extends Controller {
                 case "matiere" : MongoCursor<Matiere> m_matiere = MongoAccess.request(collection).as(Matiere.class);
                                  stringResult = mapper.writeValueAsString(m_matiere);
                                  break;
-                case "modele" :  MongoCursor<Model> m_modele = MongoAccess.request(collection).as(Model.class);
+                case "model" :  MongoCursor<Model> m_modele = MongoAccess.request(collection).as(Model.class);
                                  stringResult = mapper.writeValueAsString(m_modele);
                                  break;
                 case "oeuvre" : MongoCursor<Oeuvre> m_oeuvre = MongoAccess.request(collection).as(Oeuvre.class);
@@ -112,7 +112,7 @@ public class GetElements extends Controller {
                                 while (m_traitement.hasNext()){
                                     listeTraitement.add(m_traitement.next());
                                 }
-                                stringResult = mapper.writeValueAsString(m_traitement);
+                                stringResult = mapper.writeValueAsString(listeTraitement);
                                 break;
             }
 
@@ -178,7 +178,7 @@ public class GetElements extends Controller {
                 case "matiere" : Matiere m_matiere = MongoAccess.request(collection, new ObjectId(id)).as(Matiere.class);
                     stringResult = mapper.writeValueAsString(m_matiere);
                     break;
-                case "modele" :  Model m_modele = MongoAccess.request(collection, new ObjectId(id)).as(Model.class);
+                case "model" :  Model m_modele = MongoAccess.request(collection, new ObjectId(id)).as(Model.class);
                     stringResult = mapper.writeValueAsString(m_modele);
                     break;
                 case "oeuvre" : Oeuvre m_oeuvre = MongoAccess.request(collection, new ObjectId(id)).as(Oeuvre.class);
@@ -263,7 +263,7 @@ public class GetElements extends Controller {
                 case "matiere" : Matiere m_matiere = MongoAccess.request(collection, champ, valeur).as(Matiere.class);
                     stringResult = mapper.writeValueAsString(m_matiere);
                     break;
-                case "modele" :  Model m_modele = MongoAccess.request(collection, champ, valeur).as(Model.class);
+                case "model" :  Model m_modele = MongoAccess.request(collection, champ, valeur).as(Model.class);
                     stringResult = mapper.writeValueAsString(m_modele);
                     break;
                 case "oeuvre" : Oeuvre m_oeuvre = MongoAccess.request(collection, champ, valeur).as(Oeuvre.class);
@@ -349,7 +349,7 @@ public class GetElements extends Controller {
                 case "matiere" : MongoCursor<Matiere> m_matiere = MongoAccess.requestAll(collection, champ, valeur).as(Matiere.class);
                     stringResult = mapper.writeValueAsString(m_matiere);
                     break;
-                case "modele" :  MongoCursor<Model> m_modele = MongoAccess.requestAll(collection, champ, valeur).as(Model.class);
+                case "model" :  MongoCursor<Model> m_modele = MongoAccess.requestAll(collection, champ, valeur).as(Model.class);
                     stringResult = mapper.writeValueAsString(m_modele);
                     break;
                 case "oeuvre" : MongoCursor<Oeuvre> m_oeuvre = MongoAccess.requestAll(collection, champ, valeur).as(Oeuvre.class);
