@@ -160,43 +160,43 @@ public class GetElements extends Controller {
 
             switch (collection){
 
-                case "auteur" : MongoCursor<Auteur> m_auteur = MongoAccess.request(collection, new ObjectId(id)).as(Auteur.class);
+                case "auteur" : Auteur m_auteur = MongoAccess.request(collection, new ObjectId(id)).as(Auteur.class);
                     stringResult = mapper.writeValueAsString(m_auteur);
                     break;
-                case "client" : MongoCursor<Client> m_client = MongoAccess.request(collection, new ObjectId(id)).as(Client.class);
+                case "client" : Client m_client = MongoAccess.request(collection, new ObjectId(id)).as(Client.class);
                     stringResult = mapper.writeValueAsString(m_client);
                     break;
-                case "commande" : MongoCursor<Commande> m_commande = MongoAccess.request(collection, new ObjectId(id)).as(Commande.class);
+                case "commande" : Commande m_commande = MongoAccess.request(collection, new ObjectId(id)).as(Commande.class);
                     stringResult = mapper.writeValueAsString(m_commande);
                     break;
-                case "complement" : MongoCursor<Complement> m_complement = MongoAccess.request(collection, new ObjectId(id)).as(Complement.class);
+                case "complement" : Complement m_complement = MongoAccess.request(collection, new ObjectId(id)).as(Complement.class);
                     stringResult = mapper.writeValueAsString(m_complement);
                     break;
-                case "fichier" : MongoCursor<Fichier> m_fichier = MongoAccess.request(collection, new ObjectId(id)).as(Fichier.class);
+                case "fichier" : Fichier m_fichier = MongoAccess.request(collection, new ObjectId(id)).as(Fichier.class);
                     stringResult = mapper.writeValueAsString(m_fichier);
                     break;
-                case "matiere" : MongoCursor<Matiere> m_matiere = MongoAccess.request(collection, new ObjectId(id)).as(Matiere.class);
+                case "matiere" : Matiere m_matiere = MongoAccess.request(collection, new ObjectId(id)).as(Matiere.class);
                     stringResult = mapper.writeValueAsString(m_matiere);
                     break;
-                case "modele" :  MongoCursor<Model> m_modele = MongoAccess.request(collection, new ObjectId(id)).as(Model.class);
+                case "modele" :  Model m_modele = MongoAccess.request(collection, new ObjectId(id)).as(Model.class);
                     stringResult = mapper.writeValueAsString(m_modele);
                     break;
-                case "oeuvre" : MongoCursor<Oeuvre> m_oeuvre = MongoAccess.request(collection, new ObjectId(id)).as(Oeuvre.class);
+                case "oeuvre" : Oeuvre m_oeuvre = MongoAccess.request(collection, new ObjectId(id)).as(Oeuvre.class);
                     stringResult = mapper.writeValueAsString(m_oeuvre);
                     break;
-                case "oeuvreTraitee" : MongoCursor<OeuvreTraitee> m_oeuvreTraitee = MongoAccess.request(collection, new ObjectId(id)).as(OeuvreTraitee.class);
+                case "oeuvreTraitee" : OeuvreTraitee m_oeuvreTraitee = MongoAccess.request(collection, new ObjectId(id)).as(OeuvreTraitee.class);
                     stringResult = mapper.writeValueAsString(m_oeuvreTraitee);
                     break;
-                case "produit" : MongoCursor<Produit> m_produit = MongoAccess.request(collection, new ObjectId(id)).as(Produit.class);
+                case "produit" : Produit m_produit = MongoAccess.request(collection, new ObjectId(id)).as(Produit.class);
                     stringResult = mapper.writeValueAsString(m_produit);
                     break;
-                case "tacheTraitement" : MongoCursor<TacheTraitement> m_tacheTraitement = MongoAccess.request(collection, new ObjectId(id)).as(TacheTraitement.class);
+                case "tacheTraitement" : TacheTraitement m_tacheTraitement = MongoAccess.request(collection, new ObjectId(id)).as(TacheTraitement.class);
                     stringResult = mapper.writeValueAsString(m_tacheTraitement);
                     break;
-                case "technique" : MongoCursor<Technique> m_technique = MongoAccess.request(collection, new ObjectId(id)).as(Technique.class);
+                case "technique" : Technique m_technique = MongoAccess.request(collection, new ObjectId(id)).as(Technique.class);
                     stringResult = mapper.writeValueAsString(m_technique);
                     break;
-                case "Traitement" : MongoCursor<Traitement> m_traitement = MongoAccess.request(collection, new ObjectId(id)).as(Traitement.class);
+                case "Traitement" : Traitement m_traitement = MongoAccess.request(collection, new ObjectId(id)).as(Traitement.class);
                     stringResult = mapper.writeValueAsString(m_traitement);
                     break;
             }

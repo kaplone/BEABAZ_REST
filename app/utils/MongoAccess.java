@@ -75,11 +75,11 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, ObjectId id) {	
+    public static FindOne request(String table, ObjectId id) {
 		
-		Find find = null;
+		FindOne find = null;
 		collec = jongo.getCollection(table);
-		find = collec.find("{_id :  #}", id);
+		find = collec.findOne("{_id :  #}", id);
 
 		return find;
 	}
