@@ -103,6 +103,21 @@ public class Commande  extends Commun{
 		this.complement = complement;
 	}
 
+	public void setDateCommande(LocalDate dateCommande) {
+		this.dateCommande = dateCommande;
+		;//.format(DateTimeFormatter.ISO_INSTANT);
+	}
+
+	public void setDateDebutProjet(LocalDate dateDebutProjet) {
+		this.dateDebutProjet = dateDebutProjet;
+		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
+
+	}
+
+	public void setDateFinProjet(LocalDate dateFinProjet) {
+		this.dateFinProjet = dateFinProjet;
+	}
+
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		;//.format(DateTimeFormatter.ISO_INSTANT);
