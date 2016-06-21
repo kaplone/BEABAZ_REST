@@ -31,11 +31,11 @@ public class Commande  extends Commun{
 	
 	private String remarques;
 
-	private LocalDate dateCommande;
+	private String dateCommande;
 
-	private LocalDate dateDebutProjet;
+	private String dateDebutProjet;
 
-	private LocalDate dateFinProjet;
+	private String dateFinProjet;
 
 	@JsonIgnore
 	private Model modele;
@@ -103,49 +103,52 @@ public class Commande  extends Commun{
 		this.complement = complement;
 	}
 
+	//
+	//Caused by: java.lang.IllegalArgumentException: Can not set java.time.LocalDate field models.Commande.dateCommande to java.util.Date
+    //
+
 	public void setDateCommande(LocalDate dateCommande) {
-		this.dateCommande = dateCommande;
-		;//.format(DateTimeFormatter.ISO_INSTANT);
+		this.dateCommande = dateCommande.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public void setDateDebutProjet(LocalDate dateDebutProjet) {
-		this.dateDebutProjet = dateDebutProjet;
+		this.dateDebutProjet = dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
 		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
 
 	}
 
 	public void setDateFinProjet(LocalDate dateFinProjet) {
-		this.dateFinProjet = dateFinProjet;
+		this.dateFinProjet = dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
-	public void setDateCommande(Date dateCommande) {
-		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		;//.format(DateTimeFormatter.ISO_INSTANT);
-	}
-
-	public void setDateDebutProjet(Date dateDebutProjet) {
-		this.dateDebutProjet = dateDebutProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
-
-	}
-
-	public void setDateFinProjet(Date dateFinProjet) {
-		this.dateFinProjet = dateFinProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-	}
+//	public void setDateCommande(Date dateCommande) {
+//		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//		;//.format(DateTimeFormatter.ISO_INSTANT);
+//	}
+//
+//	public void setDateDebutProjet(Date dateDebutProjet) {
+//		this.dateDebutProjet = dateDebutProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
+//
+//	}
+//
+//	public void setDateFinProjet(Date dateFinProjet) {
+//		this.dateFinProjet = dateFinProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//	}
 
 	public String getDateCommande() {
 
-		return dateCommande.format(DateTimeFormatter.ISO_INSTANT);
+		return dateCommande;//.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public String getDateDebutProjet() {
 
-		return dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
+		return dateDebutProjet;//.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public String getDateFinProjet() {
 
-		return dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
+		return dateFinProjet;//.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	@JsonIgnore
