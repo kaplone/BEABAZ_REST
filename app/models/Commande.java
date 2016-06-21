@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -142,16 +143,16 @@ public class Commande  extends Commun{
 		this.complement = complement;
 	}
 
-	public void setDateCommande(String dateCommande) {
-		this.dateCommande = dateCommande;
+	public void setDateCommande(LocalDate dateCommande) {
+		this.dateCommande = dateCommande.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
-	public void setDateDebutProjet(String dateDebutProjet) {
-		this.dateDebutProjet = dateDebutProjet;
+	public void setDateDebutProjet(LocalDate dateDebutProjet) {
+		this.dateDebutProjet = dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
-	public void setDateFinProjet(String dateFinProjet) {
-		this.dateFinProjet = dateFinProjet;
+	public void setDateFinProjet(LocalDate dateFinProjet) {
+		this.dateFinProjet = dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public String getDateCommande() {
