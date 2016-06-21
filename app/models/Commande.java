@@ -35,11 +35,11 @@ public class Commande  extends Commun{
 	
 	private String remarques;
 
-	private String dateCommande;
+	private LocalDate dateCommande;
 
-	private String dateDebutProjet;
+	private LocalDate dateDebutProjet;
 
-	private String dateFinProjet;
+	private LocalDate dateFinProjet;
 
 	@JsonIgnore
 	private Model modele;
@@ -144,29 +144,32 @@ public class Commande  extends Commun{
 	}
 
 	public void setDateCommande(LocalDate dateCommande) {
-		this.dateCommande = dateCommande.format(DateTimeFormatter.ISO_INSTANT);
+		this.dateCommande = dateCommande;//.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public void setDateDebutProjet(LocalDate dateDebutProjet) {
-		this.dateDebutProjet = dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
+		this.dateDebutProjet = dateDebutProjet;//.format(DateTimeFormatter.ISO_INSTANT);
 		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
 
 	}
 
 	public void setDateFinProjet(LocalDate dateFinProjet) {
-		this.dateFinProjet = dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
+		this.dateFinProjet = dateFinProjet;//.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public String getDateCommande() {
-		return dateCommande;
+
+		return dateCommande.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public String getDateDebutProjet() {
-		return dateDebutProjet;
+
+		return dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	public String getDateFinProjet() {
-		return dateFinProjet;
+
+		return dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
 	@JsonIgnore
