@@ -1,17 +1,13 @@
 package models;
 
 import java.nio.file.Path;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.time.ZoneId;
 
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -75,42 +71,6 @@ public class Commande  extends Commun{
 		this.remarques = remarques;
 	}
 
-//	public LocalDate getDateCommande() {
-//		Instant instant = Instant.ofEpochMilli(dateCommande.getTime());
-//		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-//		return res;
-//	}
-//
-//	public void setDateCommande(LocalDate dateCommande) {
-//		Instant instant = dateCommande.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-//		Date res = Date.from(instant);
-//		this.dateCommande = res;
-//	}
-//
-//	public LocalDate getDateDebutProjet() {
-//		Instant instant = Instant.ofEpochMilli(dateDebutProjet.getTime());
-//		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-//		return res;
-//	}
-//
-//	public void setDateDebutProjet(LocalDate dateDebutProjet) {
-//		Instant instant = dateDebutProjet.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-//		Date res = Date.from(instant);
-//		this.dateDebutProjet = res;
-//	}
-//
-//	public LocalDate getDateFinProjet() {
-//		Instant instant = Instant.ofEpochMilli(dateFinProjet.getTime());
-//		LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-//		return res;
-//	}
-//
-//	public void setDateFinProjet(LocalDate dateFinProjet) {
-//		Instant instant = dateFinProjet.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-//		Date res = Date.from(instant);
-//		this.dateFinProjet = res;
-//	}
-
 	public Map<String, String> getTraitements_attendus_id() {
 		return traitements_attendus_id;
 	}
@@ -143,18 +103,19 @@ public class Commande  extends Commun{
 		this.complement = complement;
 	}
 
-	public void setDateCommande(LocalDate dateCommande) {
-		this.dateCommande = dateCommande;//.format(DateTimeFormatter.ISO_INSTANT);
+	public void setDateCommande(Date dateCommande) {
+		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		;//.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
-	public void setDateDebutProjet(LocalDate dateDebutProjet) {
-		this.dateDebutProjet = dateDebutProjet;//.format(DateTimeFormatter.ISO_INSTANT);
+	public void setDateDebutProjet(Date dateDebutProjet) {
+		this.dateDebutProjet = dateDebutProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
 
 	}
 
-	public void setDateFinProjet(LocalDate dateFinProjet) {
-		this.dateFinProjet = dateFinProjet;//.format(DateTimeFormatter.ISO_INSTANT);
+	public void setDateFinProjet(Date dateFinProjet) {
+		this.dateFinProjet = dateFinProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 
 	public String getDateCommande() {
