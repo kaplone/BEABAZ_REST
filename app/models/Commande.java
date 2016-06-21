@@ -149,6 +149,8 @@ public class Commande  extends Commun{
 
 	public void setDateDebutProjet(LocalDate dateDebutProjet) {
 		this.dateDebutProjet = dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
+		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
+
 	}
 
 	public void setDateFinProjet(LocalDate dateFinProjet) {
