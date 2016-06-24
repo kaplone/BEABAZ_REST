@@ -121,10 +121,10 @@ public class Commande  extends Commun{
 		this.dateFinProjet = dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
 	}
 
-//	public void setDateCommande(Date dateCommande) {
-//		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//		;//.format(DateTimeFormatter.ISO_INSTANT);
-//	}
+	public void setDateCommande(Date dateCommande) {
+		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(DateTimeFormatter.ISO_INSTANT);
+		;//.format(DateTimeFormatter.ISO_INSTANT);
+	}
 //
 //	public void setDateDebutProjet(Date dateDebutProjet) {
 //		this.dateDebutProjet = dateDebutProjet.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
