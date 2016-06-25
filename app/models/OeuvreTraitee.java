@@ -62,11 +62,13 @@ public class OeuvreTraitee extends Commun {
 	public ArrayList<Fichier> getFichiers() {
 		
 		ArrayList<Fichier> fichiers = new ArrayList<>();
-		
-		for (String s : fichiers_id.keySet()) {
-			fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class));
+
+		if (fichiers_id != null){
+			for (String s : fichiers_id.keySet()) {
+				fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class));
+			}
 		}
-		
+
 		return fichiers;
 	}
 	
