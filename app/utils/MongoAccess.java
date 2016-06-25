@@ -187,7 +187,17 @@ public class MongoAccess {
 
 		Find find = null;
 		collec = jongo.getCollection(table);
-		find = collec.find(String.format("{\"%s\" : \"%s\"}", field, valeur));
+
+		if (field.contains("_id")) {
+
+			ObjectId valeur_id = new ObjectId(valeur);
+			System.out.println("cas avec _id = " + valeur_id);
+
+			find = collec.find(String.format("{\"%s\" : %s}", field, valeur_id));
+		}
+		else {
+			find = collec.find(String.format("{\"%s\" : \"%s\"}", field, valeur));
+		}
 
 		return find;
 	}
