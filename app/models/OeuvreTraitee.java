@@ -115,17 +115,17 @@ public class OeuvreTraitee extends Commun {
 		this.traitementsAttendus_id.put(nom, id);
 	}
 
-	public ImageView getIcone_progression() {
-		
-        Image image = new Image(progressionOeuvreTraitee.getUsedImage());
-        
-        ImageView usedImage = new ImageView();
-        usedImage.setFitHeight(15);
-        usedImage.setPreserveRatio(true);
-        usedImage.setImage(image);
-		
-		return usedImage;
-	}
+//	public ImageView getIcone_progression() {
+//
+//        Image image = new Image(progressionOeuvreTraitee.getUsedImage());
+//
+//        ImageView usedImage = new ImageView();
+//        usedImage.setFitHeight(15);
+//        usedImage.setPreserveRatio(true);
+//        usedImage.setImage(image);
+//
+//		return usedImage;
+//	}
 	public ArrayList<String> getAlterations() {
 		return alterations;
 	}
