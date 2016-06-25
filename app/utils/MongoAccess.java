@@ -195,7 +195,7 @@ public class MongoAccess {
 
 		Find find = null;
 		collec = jongo.getCollection(table);
-		find = collec.find(String.format("{\"%s\" : \"%s\"}", field, objectId));
+		find = collec.find(String.format("{\"%s\" : %s}", field, objectId));
 
 		return find;
 	}
