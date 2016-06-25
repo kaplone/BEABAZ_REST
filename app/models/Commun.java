@@ -5,6 +5,9 @@ import org.bson.types.ObjectId;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Commun {
 
     public Commun(){
@@ -12,11 +15,11 @@ public class Commun {
 
 	private String _id;
 
-	@JsonIgnore
+	//@JsonIgnore
 	private Date created_at;
-	@JsonIgnore
+	//@JsonIgnore
 	private Date updated_at;
-	@JsonIgnore
+	//@JsonIgnore
 	private Date deleted_at;
 	
 	private String nom;
