@@ -1,10 +1,6 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.bson.types.ObjectId;
 
@@ -68,6 +64,9 @@ public class OeuvreTraitee extends Commun {
 				fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class));
 			}
 		}
+		else {
+			System.out.println(this);
+		}
 
 		return fichiers;
 	}
@@ -94,7 +93,13 @@ public class OeuvreTraitee extends Commun {
 		return fichiers_id;
 	}
 	public Set<String> getFichiers_names() {
-		return fichiers_id.keySet();
+		if (fichiers_id != null){
+			return fichiers_id.keySet();
+		}
+		else {
+			return new HashSet<>();
+		}
+
 	}
 	public void setFichiers(ArrayList<Fichier> fichiers) {
 		this.fichiers = fichiers;
