@@ -191,6 +191,15 @@ public class MongoAccess {
 
 		return find;
 	}
+	public static Find requestAll(String table, String field, ObjectId objectId) {
+
+		Find find = null;
+		collec = jongo.getCollection(table);
+		find = collec.find(String.format("{\"%s\" : \"%s\"}", field, objectId));
+
+		return find;
+	}
+
 	
     public static FindOne request(String table, String field1, String valeur1, String field2, String valeur2) {	
 		
