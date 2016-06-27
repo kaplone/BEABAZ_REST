@@ -4,10 +4,12 @@
 
 GET     /COUNT                          controllers.CountController.count
 
-GET     /:collection                    controllers.GetElements.getAll(collection: String)
-GET     /:collection/:id                controllers.GetElements.getId(collection: String, id: String)
-GET     /:collection/:champ/:valeur     controllers.GetElements.getField(collection: String, champ: String, valeur: String)
-GET     /:collection/:champ/:valeur/all controllers.GetElements.getFieldAll(collection: String, champ: String, valeur: String)
+GET     /:collection                                    controllers.GetElements.getAll(collection: String)
+GET     /:collection/:id                                controllers.GetElements.getId(collection: String, id: String)
+GET     /:collection/:champ/:valeur                     controllers.GetElements.getField(collection: String, champ: String, valeur: String)
+GET     /:collection/:champ/:valeur/all                 controllers.GetElements.getFieldAll(collection: String, champ: String, valeur: String)
+GET     /:collection/:champ/:valeur/:regex              controllers.GetElements.getField(collection: String, champ: String, valeur: String, regex: String)
+#GET     /:collection/:champ1/:valeur1/:champ2/:valeur2  controllers.GetElements.getField(collection: String, champ1: String, valeur1: String, champ2: String, valeur2: String)
 
 POST    /ajout/:collection              controllers.AddElement.addOne(collection :String)
 

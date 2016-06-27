@@ -383,4 +383,105 @@ public class GetElements extends Controller {
 
     }
 
+    public Result getField(String collection, String champ, String valeur, String regex) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+
+        LoadConfig.loadSettings();
+
+        String key = Settings.getKey();
+
+        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
+
+        System.out.println("Encrypted : " + new String(encrypted));
+
+        cipher.init(Cipher.DECRYPT_MODE, aesKey);
+        String decrypted = new String(cipher.doFinal(encrypted));
+
+        System.out.println("Decrypted : " + decrypted);
+
+
+        Settings.setLogin(decrypted.split(" ")[0].trim());
+        Settings.setPass(decrypted.split(" ")[1].trim());
+        Settings.setBase(decrypted.split(" ")[2].trim());
+
+        MongoAccess.connect();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String stringResult = "";
+
+        boolean regex_bool = Boolean.valueOf(regex);
+
+        try {
+
+            switch (collection) {
+
+                case "auteur":
+                    Auteur m_auteur = MongoAccess.request(collection, champ, valeur, regex_bool).as(Auteur.class);
+                    stringResult = mapper.writeValueAsString(m_auteur);
+                    break;
+                case "client":
+                    Client m_client = MongoAccess.request(collection, champ, valeur, regex_bool).as(Client.class);
+                    stringResult = mapper.writeValueAsString(m_client);
+                    break;
+                case "commande":
+                    Commande m_commande = MongoAccess.request(collection, champ, valeur, regex_bool).as(Commande.class);
+                    stringResult = mapper.writeValueAsString(m_commande);
+                    break;
+                case "complement":
+                    Complement m_complement = MongoAccess.request(collection, champ, valeur, regex_bool).as(Complement.class);
+                    stringResult = mapper.writeValueAsString(m_complement);
+                    break;
+                case "fichier":
+                    Fichier m_fichier = MongoAccess.request(collection, champ, valeur, regex_bool).as(Fichier.class);
+                    stringResult = mapper.writeValueAsString(m_fichier);
+                    break;
+                case "matiere":
+                    Matiere m_matiere = MongoAccess.request(collection, champ, valeur, regex_bool).as(Matiere.class);
+                    stringResult = mapper.writeValueAsString(m_matiere);
+                    break;
+                case "model":
+                    Model m_modele = MongoAccess.request(collection, champ, valeur, regex_bool).as(Model.class);
+                    stringResult = mapper.writeValueAsString(m_modele);
+                    break;
+                case "oeuvre":
+                    Oeuvre m_oeuvre = MongoAccess.request(collection, champ, valeur, regex_bool).as(Oeuvre.class);
+                    stringResult = mapper.writeValueAsString(m_oeuvre);
+                    break;
+                case "oeuvreTraitee":
+                    OeuvreTraitee m_oeuvreTraitee = MongoAccess.request(collection, champ, valeur, regex_bool).as(OeuvreTraitee.class);
+                    stringResult = mapper.writeValueAsString(m_oeuvreTraitee);
+                    break;
+                case "produit":
+                    Produit m_produit = MongoAccess.request(collection, champ, valeur, regex_bool).as(Produit.class);
+                    stringResult = mapper.writeValueAsString(m_produit);
+                    break;
+                case "tacheTraitement":
+                    TacheTraitement m_tacheTraitement = MongoAccess.request(collection, champ, valeur, regex_bool).as(TacheTraitement.class);
+                    stringResult = mapper.writeValueAsString(m_tacheTraitement);
+                    break;
+                case "technique":
+                    Technique m_technique = MongoAccess.request(collection, champ, valeur, regex_bool).as(Technique.class);
+                    stringResult = mapper.writeValueAsString(m_technique);
+                    break;
+                case "traitement":
+                    Traitement m_traitement = MongoAccess.request(collection, champ, valeur, regex_bool).as(Traitement.class);
+                    stringResult = mapper.writeValueAsString(m_traitement);
+                    break;
+
+            }
+
+            return ok(new ObjectMapper().readTree(stringResult));
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return badRequest();
+
+
+        }
+    }
+
 }
