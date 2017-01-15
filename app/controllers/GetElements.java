@@ -526,8 +526,9 @@ public class GetElements extends Controller {
                     stringResult = mapper.writeValueAsString(m_client);
                     break;
                 case "commande":
-                    Commande m_commande = MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).as(Commande.class);
-                    stringResult = mapper.writeValueAsString(m_commande);
+//                    Commande m_commande = MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).as(Commande.class);
+//                    stringResult = mapper.writeValueAsString(m_commande);
+                    stringResult = MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).toString();
                     break;
                 case "complement":
                     Complement m_complement = MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).as(Complement.class);
