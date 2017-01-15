@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Commande  extends Commun{
+
+
 	
 	private String nom_affichage;
 	
@@ -34,16 +36,18 @@ public class Commande  extends Commun{
 
 	private String dateFinProjet;
 
-	private Map<String, Object> modele;
     @JsonIgnore
-	private Model modeleObj;
+    private Model modeleObj;
+
+	private Map<String, Object> modele;
 	private String modele_string;
 	private String modele_id;
 	private Entry<String,String> modele_map;
 
-	private Map<String, Object> auteur;
     @JsonIgnore
-	private Auteur auteurObj;
+    private Auteur auteurObj;
+
+	private Map<String, Object> auteur;
 	private String auteur_string;
 	private String auteur_id;
 	private Entry<String,String> auteur_map;
@@ -51,6 +55,11 @@ public class Commande  extends Commun{
 	private List<Map<String, Object>> oeuvresTraitees;
 
 	private List<Map<String, Object>> traitements_attendus;
+
+    public Commande(){
+        super();
+        System.out.println("Constructeur vide de Models.Commande");
+    }
 	
 	public static void update(Commande c){
 		MongoAccess.update("commande", c);
