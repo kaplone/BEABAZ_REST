@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
@@ -33,24 +34,23 @@ public class Commande  extends Commun{
 
 	private String dateFinProjet;
 
-//	@JsonIgnore
-//	private Model modele;
-
 	private Map<String, Object> modele;
+    @JsonIgnore
 	private Model modeleObj;
 	private String modele_string;
 	private String modele_id;
 	private Entry<String,String> modele_map;
 
 	private Map<String, Object> auteur;
+    @JsonIgnore
 	private Auteur auteurObj;
 	private String auteur_string;
 	private String auteur_id;
 	private Entry<String,String> auteur_map;
 
-	private Map<String, String> oeuvresTraitees_id;
+	private List<Map<String, Object>> oeuvresTraitees;
 
-	private Map<String, String> traitements_attendus_id;
+	private List<Map<String, Object>> traitements_attendus;
 	
 	public static void update(Commande c){
 		MongoAccess.update("commande", c);
@@ -76,12 +76,15 @@ public class Commande  extends Commun{
 		this.remarques = remarques;
 	}
 
-	public Map<String, String> getTraitements_attendus_id() {
-		return traitements_attendus_id;
+	public List<Map<String, Object>> getTraitements_attendus_id() {
+
+        return traitements_attendus;
 	}
 
-	public void setTraitements_attendus_id(Map<String, String> traitements_attendus_id) {
-		this.traitements_attendus_id = traitements_attendus_id;
+	public void setTraitements_attendus(List<Map<String, Object>> traitements_attendus) {
+		this.traitements_attendus = traitements_attendus;
+        System.out.println(this.traitements_attendus);
+
 	}
 
 	public String getNom_affichage() {
@@ -175,6 +178,7 @@ public class Commande  extends Commun{
 		this.modele = modele;
 		this.modele_id = modele.get("modele_id").toString();
 		this.modele_string = modele.get("modele_string").toString();
+        this.modeleObj = MongoAccess.request("modele", this.modele_id).as(Model.class);
 
         System.out.println(this.modele.toString());
         System.out.println(this.modele_string);
@@ -186,39 +190,42 @@ public class Commande  extends Commun{
 		this.auteur = auteur;
 		this.auteur_id = auteur.get("auteur_id").toString();
 		this.auteur_string = auteur.get("auteur_string").toString();
+        this.auteurObj = MongoAccess.request("auteur", this.auteur_id).as(Auteur.class);
+
+        System.out.println(this.auteur.toString());
+        System.out.println(this.auteur_string);
+        System.out.println(this.auteur_id);
+
 	}
 
 	public String getModele_id() {
-		return modele_id;
+
+        return modele_id;
 	}
 
 	public void setModele_id(ObjectId modele_id) {
+
 		this.modele_id = modele_id.toString();
-		this.modeleObj = MongoAccess.request("modele", this.modele_id).as(Model.class);
+        System.out.println(this.modele_id);
 	}
 
 	public String getAuteur_id() {
-		return auteur_id;
+
+        return auteur_id;
 	}
 
 	public void setAuteur_id(ObjectId auteur_id) {
-		this.auteur_id = auteur_id.toString();
+
+        this.auteur_id = auteur_id.toString();
 	}
 
 
-	public Map<String, String> getOeuvresTraitees_id() {
-		return oeuvresTraitees_id;
+	public List<Map<String, Object>> getOeuvresTraitees() {
+		return oeuvresTraitees;
 	}
 
-	public void setOeuvresTraitees_id(Map<String, String> oeuvresTraitees_id) {
-		this.oeuvresTraitees_id = oeuvresTraitees_id;
+	public void setOeuvresTraitees(List<Map<String, Object>> oeuvresTraitees) {
+		this.oeuvresTraitees = oeuvresTraitees;
+        System.out.println(this.oeuvresTraitees);
 	}
-//
-//
-//    public List<String> getOeuvresTraitees_string() {
-//        return oeuvresTraitees_id.keySet()
-//                                 .stream()
-//                                 .sorted()
-//                                 .collect(Collectors.toList());
-//    }
 }
