@@ -5,16 +5,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.ZoneId;
-
 import java.util.Map;
-
+import java.util.Map.Entry;
+import java.util.AbstractMap.SimpleEntry;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 import org.bson.types.ObjectId;
-
-
 import utils.MongoAccess;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,11 +33,20 @@ public class Commande  extends Commun{
 
 	private String dateFinProjet;
 
-	@JsonIgnore
-	private Model modele;
-	private String modele_id;
+//	@JsonIgnore
+//	private Model modele;
 
+	private Map<String, Object> modele;
+	private Model modeleObj;
+	private String modele_string;
+	private String modele_id;
+	private Entry<String,String> modele_map;
+
+	private Map<String, Object> auteur;
+	private Auteur auteurObj;
+	private String auteur_string;
 	private String auteur_id;
+	private Entry<String,String> auteur_map;
 
 	private Map<String, String> oeuvresTraitees_id;
 
@@ -153,9 +158,11 @@ public class Commande  extends Commun{
 
 	@JsonIgnore
 	public Path getModeleVertical() {
+
+		Model modelObj = new Model(); // faire une vraie requete sur l'objet
 		
-		Path base = modele.getCheminVersModel().getParent();
-		String name = modele.getCheminVersModel().getFileName().toString();
+		Path base = modelObj.getCheminVersModel().getParent();
+		String name = modelObj.getCheminVersModel().getFileName().toString();
 		
 		String nameVertical = name.split("\\.")[0] + "_vertical." + name.split("\\.")[1];
 		
@@ -163,14 +170,22 @@ public class Commande  extends Commun{
 		return base.resolve(nameVertical);
 	}
 
-	public void setModele(Model modele) {
+	public void setModele(Map<String, Object> modele) {
 
 		this.modele = modele;
-		this.modele_id = modele.get_id().toString();
+		this.modele_id = modele.get("modele_id").toString();
+		this.modele_string = modele.get("modele_string").toString();
+
+        System.out.println(this.modele.toString());
+        System.out.println(this.modele_string);
+        System.out.println(this.modele_id);
 	}
 
-	public void setAuteur(Auteur auteur) {
-		this.auteur_id = auteur.get_id().toString();
+	public void setAuteur(Map<String, Object> auteur) {
+
+		this.auteur = auteur;
+		this.auteur_id = auteur.get("auteur_id").toString();
+		this.auteur_string = auteur.get("auteur_string").toString();
 	}
 
 	public String getModele_id() {
@@ -179,7 +194,7 @@ public class Commande  extends Commun{
 
 	public void setModele_id(ObjectId modele_id) {
 		this.modele_id = modele_id.toString();
-		this.modele = MongoAccess.request("modele", this.modele_id).as(Model.class);
+		this.modeleObj = MongoAccess.request("modele", this.modele_id).as(Model.class);
 	}
 
 	public String getAuteur_id() {
