@@ -2,8 +2,6 @@
 # This file defines all application atomic routes (Higher priority routes first)
 # ~~~~
 
-GET     /COUNT                          controllers.CountController.count
-
 GET     /:collection                                    controllers.GetElements.getAll(collection: String)
 GET     /:collection/:id                                controllers.GetElements.getId(collection: String, id: String)
 GET     /:collection/:champ/:valeur                     controllers.GetElements.getField(collection: String, champ: String, valeur: String)
