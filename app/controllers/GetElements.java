@@ -2,6 +2,7 @@ package controllers;
 
 import models.*;
 import org.bson.types.ObjectId;
+import org.jongo.Find;
 import org.jongo.MongoCursor;
 import play.mvc.*;
 
@@ -54,7 +55,7 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
 
-        return ok(new ObjectMapper().readTree(MongoAccess.request(collection).toString()));
+        return ok(new ObjectMapper().readTree(mapping(MongoAccess.request(collection), collection).toString()));
 
     }
 
@@ -204,6 +205,68 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
         return ok(new ObjectMapper().readTree(MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).toString()));
+
+    }
+
+    public String mapping(Find find, String collection){
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String stringResult = "";
+
+        try {
+
+            switch (collection){
+
+                case "auteur" : MongoCursor<Auteur> m_auteur = find.as(Auteur.class);
+                    stringResult = mapper.writeValueAsString(m_auteur);
+                    break;
+                case "client" : MongoCursor<Client> m_client = find.as(Client.class);
+                    stringResult = mapper.writeValueAsString(m_client);
+                    break;
+                case "commande" : MongoCursor<Commande> m_commande = find.as(Commande.class);
+                    stringResult = mapper.writeValueAsString(m_commande);
+                    break;
+                case "complement" : MongoCursor<Complement> m_complement = find.as(Complement.class);
+                    stringResult = mapper.writeValueAsString(m_complement);
+                    break;
+                case "fichier" : MongoCursor<Fichier> m_fichier = find.as(Fichier.class);
+                    stringResult = mapper.writeValueAsString(m_fichier);
+                    break;
+                case "matiere" : MongoCursor<Matiere> m_matiere = find.as(Matiere.class);
+                    stringResult = mapper.writeValueAsString(m_matiere);
+                    break;
+                case "model" :  MongoCursor<Model> m_modele = find.as(Model.class);
+                    stringResult = mapper.writeValueAsString(m_modele);
+                    break;
+                case "oeuvre" : MongoCursor<Oeuvre> m_oeuvre = find.as(Oeuvre.class);
+                    stringResult = mapper.writeValueAsString(m_oeuvre);
+                    break;
+                case "oeuvreTraitee" : MongoCursor<OeuvreTraitee> m_oeuvreTraitee = find.as(OeuvreTraitee.class);
+                    stringResult = mapper.writeValueAsString(m_oeuvreTraitee);
+                    break;
+                case "produit" : MongoCursor<Produit> m_produit = find.as(Produit.class);
+                    stringResult = mapper.writeValueAsString(m_produit);
+                    break;
+                case "tacheTraitement" : MongoCursor<TacheTraitement> m_tacheTraitement = find.as(TacheTraitement.class);
+                    stringResult = mapper.writeValueAsString(m_tacheTraitement);
+                    break;
+                case "technique" : MongoCursor<Technique> m_technique = find.as(Technique.class);
+                    stringResult = mapper.writeValueAsString(m_technique);
+                    break;
+                case "traitement" : MongoCursor<Traitement> m_traitement = find.as(Traitement.class);
+                    stringResult = mapper.writeValueAsString(m_traitement);
+                    break;
+
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            //return badRequest();
+        }
+
+            return stringResult;
 
     }
 
