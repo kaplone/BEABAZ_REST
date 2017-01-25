@@ -52,7 +52,7 @@ public class Commande  extends Commun{
 	private String auteur_id;
 	private Entry<String,String> auteur_map;
 
-	private List<Map<String, Object>> oeuvresTraitees;
+	private List<Map<String, String>> oeuvresTraitees;
 
 	private List<Map<String, Object>> traitements_attendus;
 
@@ -229,11 +229,11 @@ public class Commande  extends Commun{
 	}
 
 
-	public List<Map<String, Object>> getOeuvresTraitees() {
+	public List<Map<String, String>> getOeuvresTraitees() {
 		return oeuvresTraitees;
 	}
 
-	public void setOeuvresTraitees(List<Map<String, Object>> oeuvresTraitees) {
+	public void setOeuvresTraitees(List<Map<String, String>> oeuvresTraitees) {
 		this.oeuvresTraitees = oeuvresTraitees;
         System.out.println(this.oeuvresTraitees);
 	}
