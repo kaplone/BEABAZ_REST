@@ -54,7 +54,7 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
 
-        return ok(MongoAccess.request(collection).toString());
+        return ok(new ObjectMapper().readTree(MongoAccess.request(collection).toString()));
 
     }
 
@@ -83,7 +83,7 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
 
-        return ok(MongoAccess.request(collection, new ObjectId(id)).toString());
+        return ok(new ObjectMapper().readTree(MongoAccess.request(collection, new ObjectId(id)).toString()));
 
 
     }
@@ -113,7 +113,7 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
 
-        return ok(MongoAccess.request(collection, champ, valeur).toString());
+        return ok(new ObjectMapper().readTree(MongoAccess.request(collection, champ, valeur).toString()));
 
     }
 
@@ -142,7 +142,7 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
 
-        return ok(MongoAccess.requestAll(collection, champ, valeur).toString());
+        return ok(new ObjectMapper().readTree(MongoAccess.requestAll(collection, champ, valeur).toString()));
 
 
     }
@@ -174,7 +174,7 @@ public class GetElements extends Controller {
 
         MongoAccess.connect();
 
-        return  ok(MongoAccess.request(collection, champ, valeur, regex_bool).toString());
+        return  ok(new ObjectMapper().readTree(MongoAccess.request(collection, champ, valeur, regex_bool).toString()));
 
 
     }
@@ -203,7 +203,7 @@ public class GetElements extends Controller {
         Settings.setBase(decrypted.split(" ")[2].trim());
 
         MongoAccess.connect();
-        return ok(MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).toString());
+        return ok(new ObjectMapper().readTree(MongoAccess.request(collection, champ1, valeur1, champ2, valeur2).toString()));
 
     }
 
