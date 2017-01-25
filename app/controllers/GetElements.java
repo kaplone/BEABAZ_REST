@@ -92,6 +92,8 @@ public class GetElements extends Controller {
 
     public Result getField(String collection, String champ, String valeur) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
+        valeur = valeur.replace("%20", " ");
+
         LoadConfig.loadSettings();
 
         String key = Settings.getKey();
@@ -120,6 +122,8 @@ public class GetElements extends Controller {
     }
 
     public Result getFieldAll(String collection, String champ, String valeur) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+
+        valeur = valeur.replace("%20", " ");
 
         LoadConfig.loadSettings();
 
@@ -150,6 +154,8 @@ public class GetElements extends Controller {
     }
 
     public Result getFieldRegex(String collection, String champ, String valeur, String regex) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+
+        valeur = valeur.replace("%20", " ");
 
         LoadConfig.loadSettings();
 
@@ -182,6 +188,9 @@ public class GetElements extends Controller {
     }
 
     public Result getFields(String collection, String champ1, String valeur1, String champ2, String valeur2) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+
+        valeur1 = valeur1.replace("%20", " ");
+        valeur2 = valeur2.replace("%20", " ");
 
         LoadConfig.loadSettings();
 
