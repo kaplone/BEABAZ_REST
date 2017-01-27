@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
 
@@ -17,15 +18,14 @@ public class OeuvreTraitee extends Commun {
 	
 	private String oeuvre_id;
 	
-	private Map<String, String> traitementsAttendus_id;
+	private List<Map<String, String>> traitementsAttendus;
 
 	private EtatFinal etat;
 	private String complement_etat;
 	
-	private ArrayList<String> alterations;
+	private List<String> alterations;
 	
-	private ArrayList<Fichier> fichiers;
-	private Map<String, String> fichiers_id;
+	private List<Map<String, String>> fichiers;
 	
 	private Progression progressionOeuvreTraitee;
 	
@@ -38,7 +38,7 @@ public class OeuvreTraitee extends Commun {
     
     public OeuvreTraitee(){
     	
-    	traitementsAttendus_id = new HashMap<>();
+    	traitementsAttendus = new ArrayList<>();
     	alterations = new ArrayList<>();
     	fichiers = new ArrayList<>();
     	
@@ -55,53 +55,30 @@ public class OeuvreTraitee extends Commun {
 	public void setEtat(EtatFinal etat) {
 		this.etat = etat;
 	}
-	public ArrayList<Fichier> getFichiers() {
-		
-		ArrayList<Fichier> fichiers = new ArrayList<>();
 
-		if (fichiers_id != null){
-			for (String s : fichiers_id.keySet()) {
-				fichiers.add(MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class));
-			}
-		}
-		else {
-			System.out.println(this);
-		}
+	public List<Map<String, String>> getFichiers() {
 
 		return fichiers;
 	}
 	
 	public Fichier getFichierAffiche () {
-		
-		Fichier fichier = null;
 
-		if (fichiers_id != null){
-			for (String s : fichiers_id.keySet()) {
+    	String fichier_id = null;
 
-				if (Normalize.normalizeDenormStringField(s).endsWith(".PR.1.JPG")){
-					fichier = MongoAccess.request("fichier", new ObjectId(fichiers_id.get(s))).as(Fichier.class);
-				}
+    	for (Map<String, String> file : fichiers){
+    		if (file.get("fichier_string").endsWith("_PR_1_JPG")){
+				fichier_id = file.get("fichier_id");
 			}
 		}
+		
+		Fichier fichier = MongoAccess.request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
 
 		
 		return fichier;
 		
 	}
-	
-	public Map<String, String> getFichiers_id() {
-		return fichiers_id;
-	}
-	public Set<String> getFichiers_names() {
-		if (fichiers_id != null){
-			return fichiers_id.keySet();
-		}
-		else {
-			return new HashSet<>();
-		}
 
-	}
-	public void setFichiers(ArrayList<Fichier> fichiers) {
+	public void setFichiers(List<Map<String, String>> fichiers) {
 		this.fichiers = fichiers;
 	}
 
@@ -113,33 +90,29 @@ public class OeuvreTraitee extends Commun {
 		this.progressionOeuvreTraitee = progressionOeuvreTraitee;
 	}
 	public Set<String> getTraitementsAttendus_names() {
-		return traitementsAttendus_id.keySet();
-	}
-	public Collection<String> getTraitementsAttendus_id() {
-		return traitementsAttendus_id.values();
-	}
-	public void addTraitementAttendu(Traitement traitementAttendu) {
-		this.traitementsAttendus_id.put(traitementAttendu.getNom(), traitementAttendu.get_id());
-	}
-	public void addTraitementAttendu(String nom, String id) {
-		this.traitementsAttendus_id.put(nom, id);
+
+    	return traitementsAttendus.stream()
+				                  .map(a -> a.get("traitementAttendu_string"))
+				                  .collect(Collectors.toSet());
 	}
 
-//	public ImageView getIcone_progression() {
-//
-//        Image image = new Image(progressionOeuvreTraitee.getUsedImage());
-//
-//        ImageView usedImage = new ImageView();
-//        usedImage.setFitHeight(15);
-//        usedImage.setPreserveRatio(true);
-//        usedImage.setImage(image);
-//
-//		return usedImage;
-//	}
-	public ArrayList<String> getAlterations() {
+
+	public void addTraitementAttendu(Traitement traitementAttendu) {
+		this.addTraitementAttendu(traitementAttendu.getNom(), traitementAttendu.get_id());
+	}
+	public void addTraitementAttendu(String nom, String id) {
+
+    	Map<String, String> map = new HashMap<>();
+    	map.put("traitementAttendu_id", id);
+    	map.put("traitementAttendu_string", nom);
+
+    	this.traitementsAttendus.add(map);
+	}
+
+	public List<String> getAlterations_string() {
 		return alterations;
 	}
-	public void setAlterations(ArrayList<String> alterations) {
+	public void setAlterations_string(ArrayList<String> alterations) {
 		this.alterations = alterations;
 	}
 	public EtatFinal getEtat() {
@@ -172,12 +145,12 @@ public class OeuvreTraitee extends Commun {
 		this.oeuvre_id = oeuvre_id;
 	}
 
-	public void setTraitementsAttendus_id(Map<String, String> traitementsAttendus_id) {
-		this.traitementsAttendus_id = traitementsAttendus_id;
+	public void setTraitementsAttendus(List<Map<String, String>> traitementsAttendus) {
+		this.traitementsAttendus = traitementsAttendus;
 	}
 
-	public void setFichiers_id(Map<String, String> fichiers_id) {
-		this.fichiers_id = fichiers_id;
+	public void setFichiers_id(List<Map<String, String>> fichiers) {
+		this.fichiers = fichiers;
 	}
 
 	public String getCommande_id() {
