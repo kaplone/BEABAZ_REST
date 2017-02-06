@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import utils.MongoAccess;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import org.bson.types.ObjectId;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Commande  extends Commun{
@@ -42,7 +42,6 @@ public class Commande  extends Commun{
 
     public Commande(){
         super();
-        System.out.println("Constructeur vide de Models.Commande");
     }
 	
 	public static void update(Commande c){
@@ -76,8 +75,6 @@ public class Commande  extends Commun{
 
 	public void setTraitements_attendus(List<Map<String, Object>> traitements_attendus) {
 		this.traitements_attendus = traitements_attendus;
-        System.out.println(this.traitements_attendus);
-
 	}
 
 	public String getNom_affichage() {
@@ -107,7 +104,6 @@ public class Commande  extends Commun{
 
 	public void setDateDebutProjet(String dateDebutProjet) {
 		this.dateDebutProjet = dateDebutProjet;
-        System.out.println("setDate : " + dateDebutProjet);
 	}
 
 	public void setDateFinProjet(String dateFinProjet) {
@@ -124,7 +120,6 @@ public class Commande  extends Commun{
 	}
 
 	public String getDateDebutProjet() {
-        System.out.println("getDate : " + dateDebutProjet);
 		return dateDebutProjet;
 	}
 
@@ -147,10 +142,13 @@ public class Commande  extends Commun{
 		return base.resolve(nameVertical);
 	}
 
-	public void setModele(Map<String, String> modele) {
-		String modele_id = modele.get("modele_id").toString();
+	public void setModele(Map<String, Object> modele) {
 		String modele_string = modele.get("modele_string").toString();
+		System.out.println(modele_string);
+		ObjectId modele_id = (ObjectId) modele.get("modele_id");
+        System.out.println(modele_id);
 		Model modeleObj = MongoAccess.request("modele", modele_id).as(Model.class);
+        System.out.println(modeleObj.getCheminVersModel());
 		Map<String, Model> map = new HashMap<>();
 		map.put(modele_string, modeleObj);
 		this.modele = map;
@@ -158,7 +156,7 @@ public class Commande  extends Commun{
 
 
 	public void setAuteur(Map<String, Object> auteur) {
-		String auteur_id = auteur.get("auteur_id").toString();
+		ObjectId auteur_id = (ObjectId) auteur.get("auteur_id");
 		String auteur_string = auteur.get("auteur_string").toString();
 		Auteur auteurObj = MongoAccess.request("auteur", auteur_id).as(Auteur.class);
 		Map<String, Auteur> map = new HashMap<>();
@@ -173,6 +171,5 @@ public class Commande  extends Commun{
 
 	public void setOeuvresTraitees(List<Map<String, String>> oeuvresTraitees) {
 		this.oeuvresTraitees = oeuvresTraitees;
-        System.out.println(this.oeuvresTraitees);
 	}
 }
