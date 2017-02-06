@@ -120,32 +120,10 @@ public class Commande  extends Commun{
 		this.complement = complement;
 	}
 
-	//
-	//Caused by: java.lang.IllegalArgumentException: Can not set java.time.LocalDate field models.Commande.dateCommande to java.util.Date
-    //
-
-//	public void setDateCommande(LocalDate dateCommande) {
-//		this.dateCommande = dateCommande.format(DateTimeFormatter.ISO_INSTANT);
-//	}
-//
-//	public void setDateDebutProjet(LocalDate dateDebutProjet) {
-//		this.dateDebutProjet = dateDebutProjet.format(DateTimeFormatter.ISO_INSTANT);
-//		System.out.println("this.dateDebutProjet : " + this.dateDebutProjet);
-//
-//	}
-//
-//	public void setDateFinProjet(LocalDate dateFinProjet) {
-//		this.dateFinProjet = dateFinProjet.format(DateTimeFormatter.ISO_INSTANT);
-//	}
-//
-//	public void setDateCommande(Date dateCommande) {
-//		this.dateCommande = dateCommande.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(DateTimeFormatter.ISO_INSTANT);
-//		;//.format(DateTimeFormatter.ISO_INSTANT);
-//	}
 
 	public void setDateDebutProjet(String dateDebutProjet) {
 		this.dateDebutProjet = dateDebutProjet;
-
+        System.out.println("setDate : " + dateDebutProjet);
 	}
 
 	public void setDateFinProjet(String dateFinProjet) {
@@ -158,17 +136,17 @@ public class Commande  extends Commun{
 
 	public String getDateCommande() {
 
-		return dateCommande;//.format(DateTimeFormatter.ISO_INSTANT);
+		return dateCommande;
 	}
 
 	public String getDateDebutProjet() {
-
-		return dateDebutProjet;//.format(DateTimeFormatter.ISO_INSTANT);
+        System.out.println("getDate : " + dateDebutProjet);
+		return dateDebutProjet;
 	}
 
 	public String getDateFinProjet() {
 
-		return dateFinProjet;//.format(DateTimeFormatter.ISO_INSTANT);
+		return dateFinProjet;
 	}
 
 	@JsonIgnore
