@@ -37,8 +37,6 @@ public class Commande  extends Commun{
 
 	private List<Map<String, Object>> traitements_attendus;
 
-	private List<Map<String, Traitement>> traitements_attendusObj;
-
     public Commande(){
         super();
     }
@@ -55,29 +53,23 @@ public class Commande  extends Commun{
 		return this;
 	}
 
-	public List<Map<String, Object>> getTraitements_attendus() {
+	public List<Map<String, Traitement>> getTraitements_attendus() {
 
-    	return traitements_attendus;
+        List<Map<String, Traitement>> traitements_attendusObj = new ArrayList<>();
+
+        for(Map<String, Object> m : traitements_attendus){
+            String traitement_attendu_string = m.get("traitement_attendu_string").toString();
+            String traitement_attendu_id = m.get("traitement_attendu_id").toString();
+            Traitement traitement_attenduObj = MongoAccess.request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
+            Map<String, Traitement> map = new HashMap<>();
+            map.put(traitement_attendu_string, traitement_attenduObj);
+            traitements_attendusObj.add(map);
+        }
+    	return traitements_attendusObj;
 	}
 
 	public void setTraitements_attendus(List<Map<String, Object>> traitements_attendus) {
-
-		traitements_attendusObj = new ArrayList<>();
-
-    	for(Map<String, Object> m : traitements_attendus){
-			String traitement_attendu_string = m.get("traitement_attendu_string").toString();
-			String traitement_attendu_id = m.get("traitement_attendu_id").toString();
-			Traitement traitement_attenduObj = MongoAccess.request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
-			Map<String, Traitement> map = new HashMap<>();
-			map.put(traitement_attendu_string, traitement_attenduObj);
-			traitements_attendusObj.add(map);
-		}
 		this.traitements_attendus = traitements_attendus;
-	}
-
-	public List<Map<String, Traitement>> getTraitements_attendusObj() {
-
-		return traitements_attendusObj;
 	}
 
 	public String getNom_affichage() {
