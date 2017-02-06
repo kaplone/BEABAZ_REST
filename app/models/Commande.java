@@ -137,7 +137,7 @@ public class Commande  extends Commun{
 		System.out.println(modele_string);
 		String modele_id = modele.get("modele_id").toString();
 		System.out.println(modele_id);
-		Model modeleObj = MongoAccess.request("modele", new ObjectId(modele_id)).as(Model.class);
+		Model modeleObj = MongoAccess.request("model", new ObjectId(modele_id)).as(Model.class);
 		System.out.println(modeleObj.getCheminVersModel());
 		Map<String, Model> map = new HashMap<>();
 		map.put(modele_string, modeleObj);
