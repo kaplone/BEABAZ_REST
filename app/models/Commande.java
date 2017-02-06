@@ -14,8 +14,6 @@ import org.bson.types.ObjectId;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Commande  extends Commun{
 
-
-	
 	private String nom_affichage;
 	
 	private String nom_complet;
@@ -30,10 +28,10 @@ public class Commande  extends Commun{
 
 	private String dateFinProjet;
 
-    @JsonIgnore
+    //@JsonIgnore
 	private Map<String, Model> modele;
 
-    @JsonIgnore
+    //@JsonIgnore
 	private Map<String, Auteur> auteur;
 
 	private List<Map<String, String>> oeuvresTraitees;
@@ -55,21 +53,8 @@ public class Commande  extends Commun{
     public Commande get(){
 		return this;
 	}
-    
-    public String toString(){
-    	return this.getNom();
-    }
 
-	public String getRemarques() {
-		return remarques;
-	}
-
-	public void setRemarques(String remarques) {
-		this.remarques = remarques;
-	}
-
-	public List<Map<String, Object>> getTraitements_attendus_id() {
-
+	public List<Map<String, Object>> getTraitements_attendus() {
         return traitements_attendus;
 	}
 
@@ -143,6 +128,9 @@ public class Commande  extends Commun{
 	}
 
 	public void setModele(Map<String, Object> modele) {
+
+    	System.out.println("dans setModele() ");
+
 		String modele_string = modele.get("modele_string").toString();
 		System.out.println(modele_string);
 		ObjectId modele_id = (ObjectId) modele.get("modele_id");
@@ -154,8 +142,16 @@ public class Commande  extends Commun{
 		this.modele = map;
 	}
 
+	public Map<String, Model> getModele() {
+		System.out.println("dans getModele() ");
+		return this.modele;
+	}
+
 
 	public void setAuteur(Map<String, Object> auteur) {
+
+		System.out.println("dans setAuteur() ");
+
 		ObjectId auteur_id = (ObjectId) auteur.get("auteur_id");
 		String auteur_string = auteur.get("auteur_string").toString();
 		Auteur auteurObj = MongoAccess.request("auteur", auteur_id).as(Auteur.class);
@@ -164,6 +160,13 @@ public class Commande  extends Commun{
 		this.auteur = map;
 
 	}
+
+	public Map<String, Auteur> getAuteur() {
+		System.out.println("dans getAuteur;() ");
+    	return this.auteur;
+	}
+
+
 
 	public List<Map<String, String>> getOeuvresTraitees() {
 		return oeuvresTraitees;
