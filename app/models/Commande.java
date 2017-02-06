@@ -19,8 +19,6 @@ public class Commande  extends Commun{
 	private String nom_complet;
 	
 	private String complement;
-	
-	private String remarques;
 
 	private String dateCommande;
 
@@ -29,10 +27,10 @@ public class Commande  extends Commun{
 	private String dateFinProjet;
 
     //@JsonIgnore
-	private Map<String, Model> modele;
+	private Map<String, Object> modele;
 
     //@JsonIgnore
-	private Map<String, Auteur> auteur;
+	private Map<String, Object> auteur;
 
 	private List<Map<String, String>> oeuvresTraitees;
 
@@ -128,42 +126,44 @@ public class Commande  extends Commun{
 	}
 
 	public void setModele(Map<String, Object> modele) {
-
     	System.out.println("dans setModele() ");
-
-		String modele_string = modele.get("modele_string").toString();
-		System.out.println(modele_string);
-		ObjectId modele_id = (ObjectId) modele.get("modele_id");
-        System.out.println(modele_id);
-		Model modeleObj = MongoAccess.request("modele", modele_id).as(Model.class);
-        System.out.println(modeleObj.getCheminVersModel());
-		Map<String, Model> map = new HashMap<>();
-		map.put(modele_string, modeleObj);
-		this.modele = map;
+    	this.modele = modele;
 	}
 
 	public Map<String, Model> getModele() {
 		System.out.println("dans getModele() ");
-		return this.modele;
+
+		String modele_string = modele.get("modele_string").toString();
+		System.out.println(modele_string);
+		ObjectId modele_id = (ObjectId) modele.get("modele_id");
+		System.out.println(modele_id);
+		Model modeleObj = MongoAccess.request("modele", modele_id).as(Model.class);
+		System.out.println(modeleObj.getCheminVersModel());
+		Map<String, Model> map = new HashMap<>();
+		map.put(modele_string, modeleObj);
+
+		return map;
 	}
 
 
 	public void setAuteur(Map<String, Object> auteur) {
-
 		System.out.println("dans setAuteur() ");
-
-		ObjectId auteur_id = (ObjectId) auteur.get("auteur_id");
-		String auteur_string = auteur.get("auteur_string").toString();
-		Auteur auteurObj = MongoAccess.request("auteur", auteur_id).as(Auteur.class);
-		Map<String, Auteur> map = new HashMap<>();
-		map.put(auteur_string, auteurObj);
-		this.auteur = map;
-
+        this.auteur = auteur;
 	}
 
 	public Map<String, Auteur> getAuteur() {
 		System.out.println("dans getAuteur;() ");
-    	return this.auteur;
+
+		String auteur_string = auteur.get("auteur_string").toString();
+		System.out.println(auteur_string);
+		ObjectId auteur_id = (ObjectId) auteur.get("auteur_id");
+		System.out.println(auteur_id);
+		Auteur auteurObj = MongoAccess.request("auteur", auteur_id).as(Auteur.class);
+		System.out.println(auteurObj.getNom());
+		Map<String, Auteur> map = new HashMap<>();
+		map.put(auteur_string, auteurObj);
+
+    	return map;
 	}
 
 
