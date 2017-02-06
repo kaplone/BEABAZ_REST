@@ -1,6 +1,7 @@
 package models;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -36,6 +37,8 @@ public class Commande  extends Commun{
 
 	private List<Map<String, Object>> traitements_attendus;
 
+	private List<Map<String, Traitement>> traitements_attendusObj;
+
     public Commande(){
         super();
     }
@@ -53,11 +56,28 @@ public class Commande  extends Commun{
 	}
 
 	public List<Map<String, Object>> getTraitements_attendus() {
-        return traitements_attendus;
+
+    	return traitements_attendus;
 	}
 
 	public void setTraitements_attendus(List<Map<String, Object>> traitements_attendus) {
+
+		traitements_attendusObj = new ArrayList<>();
+
+    	for(Map<String, Object> m : traitements_attendus){
+			String traitement_attendu_string = m.get("traitement_attendu_string").toString();
+			String traitement_attendu_id = m.get("traitement_attendu_id").toString();
+			Traitement traitement_attenduObj = MongoAccess.request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
+			Map<String, Traitement> map = new HashMap<>();
+			map.put(traitement_attendu_string, traitement_attenduObj);
+			traitements_attendusObj.add(map);
+		}
 		this.traitements_attendus = traitements_attendus;
+	}
+
+	public List<Map<String, Traitement>> getTraitements_attendusObj() {
+
+		return traitements_attendusObj;
 	}
 
 	public String getNom_affichage() {
@@ -126,19 +146,14 @@ public class Commande  extends Commun{
 	}
 
 	public void setModele(Map<String, Object> modele) {
-    	System.out.println("dans setModele() ");
     	this.modele = modele;
 	}
 
 	public Map<String, Model> getModele() {
-		System.out.println("dans getModele() ");
 
 		String modele_string = modele.get("modele_string").toString();
-		System.out.println(modele_string);
 		String modele_id = modele.get("modele_id").toString();
-		System.out.println(modele_id);
 		Model modeleObj = MongoAccess.request("model", new ObjectId(modele_id)).as(Model.class);
-		System.out.println(modeleObj.getCheminVersModel());
 		Map<String, Model> map = new HashMap<>();
 		map.put(modele_string, modeleObj);
 
@@ -147,19 +162,14 @@ public class Commande  extends Commun{
 
 
 	public void setAuteur(Map<String, Object> auteur) {
-		System.out.println("dans setAuteur() ");
         this.auteur = auteur;
 	}
 
 	public Map<String, Auteur> getAuteur() {
-		System.out.println("dans getAuteur;() ");
 
 		String auteur_string = auteur.get("auteur_string").toString();
-		System.out.println(auteur_string);
 		String auteur_id = auteur.get("auteur_id").toString();
-		System.out.println(auteur_id);
 		Auteur auteurObj = MongoAccess.request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
-		System.out.println(auteurObj.getNom());
 		Map<String, Auteur> map = new HashMap<>();
 		map.put(auteur_string, auteurObj);
 
