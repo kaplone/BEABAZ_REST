@@ -1,17 +1,11 @@
 package models;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.AbstractMap.SimpleEntry;
+import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.bson.types.ObjectId;
 import utils.MongoAccess;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,20 +31,10 @@ public class Commande  extends Commun{
 	private String dateFinProjet;
 
     @JsonIgnore
-    private Model modeleObj;
-
-	private Map<String, Object> modele;
-	private String modele_string;
-	private String modele_id;
-	private Entry<String,String> modele_map;
+	private Map<String, Model> modele;
 
     @JsonIgnore
-    private Auteur auteurObj;
-
-	private Map<String, Object> auteur;
-	private String auteur_string;
-	private String auteur_id;
-	private Entry<String,String> auteur_map;
+	private Map<String, Auteur> auteur;
 
 	private List<Map<String, String>> oeuvresTraitees;
 
@@ -163,52 +147,25 @@ public class Commande  extends Commun{
 		return base.resolve(nameVertical);
 	}
 
-	public void setModele(Map<String, Object> modele) {
-
-		this.modele = modele;
-		this.modele_id = modele.get("modele_id").toString();
-		this.modele_string = modele.get("modele_string").toString();
-        this.modeleObj = MongoAccess.request("modele", this.modele_id).as(Model.class);
-
-        System.out.println(this.modele.toString());
-        System.out.println(this.modele_string);
-        System.out.println(this.modele_id);
+	public void setModele(Map<String, String> modele) {
+		String modele_id = modele.get("modele_id").toString();
+		String modele_string = modele.get("modele_string").toString();
+		Model modeleObj = MongoAccess.request("modele", modele_id).as(Model.class);
+		Map<String, Model> map = new HashMap<>();
+		map.put(modele_string, modeleObj);
+		this.modele = map;
 	}
+
 
 	public void setAuteur(Map<String, Object> auteur) {
-
-		this.auteur = auteur;
-		this.auteur_id = auteur.get("auteur_id").toString();
-		this.auteur_string = auteur.get("auteur_string").toString();
-        this.auteurObj = MongoAccess.request("auteur", this.auteur_id).as(Auteur.class);
-
-        System.out.println(this.auteur.toString());
-        System.out.println(this.auteur_string);
-        System.out.println(this.auteur_id);
+		String auteur_id = auteur.get("auteur_id").toString();
+		String auteur_string = auteur.get("auteur_string").toString();
+		Auteur auteurObj = MongoAccess.request("auteur", auteur_id).as(Auteur.class);
+		Map<String, Auteur> map = new HashMap<>();
+		map.put(auteur_string, auteurObj);
+		this.auteur = map;
 
 	}
-
-	public String getModele_id() {
-
-        return modele_id;
-	}
-
-	public void setModele_id(ObjectId modele_id) {
-
-		this.modele_id = modele_id.toString();
-        System.out.println(this.modele_id);
-	}
-
-	public String getAuteur_id() {
-
-        return auteur_id;
-	}
-
-	public void setAuteur_id(ObjectId auteur_id) {
-
-        this.auteur_id = auteur_id.toString();
-	}
-
 
 	public List<Map<String, String>> getOeuvresTraitees() {
 		return oeuvresTraitees;
