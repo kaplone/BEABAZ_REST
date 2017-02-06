@@ -135,9 +135,9 @@ public class Commande  extends Commun{
 
 		String modele_string = modele.get("modele_string").toString();
 		System.out.println(modele_string);
-		ObjectId modele_id = (ObjectId) modele.get("modele_id");
+		String modele_id = modele.get("modele_id").toString();
 		System.out.println(modele_id);
-		Model modeleObj = MongoAccess.request("modele", modele_id).as(Model.class);
+		Model modeleObj = MongoAccess.request("modele", new ObjectId(modele_id)).as(Model.class);
 		System.out.println(modeleObj.getCheminVersModel());
 		Map<String, Model> map = new HashMap<>();
 		map.put(modele_string, modeleObj);
@@ -156,9 +156,9 @@ public class Commande  extends Commun{
 
 		String auteur_string = auteur.get("auteur_string").toString();
 		System.out.println(auteur_string);
-		ObjectId auteur_id = (ObjectId) auteur.get("auteur_id");
+		String auteur_id = auteur.get("auteur_id").toString();
 		System.out.println(auteur_id);
-		Auteur auteurObj = MongoAccess.request("auteur", auteur_id).as(Auteur.class);
+		Auteur auteurObj = MongoAccess.request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
 		System.out.println(auteurObj.getNom());
 		Map<String, Auteur> map = new HashMap<>();
 		map.put(auteur_string, auteurObj);
