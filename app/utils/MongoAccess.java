@@ -82,9 +82,9 @@ public class MongoAccess {
     
     public Find request(String table, String field, ObjectId objectId) {	
     	
-    	System.out.println("table : " + table);
-    	System.out.println("field : " + field);
-    	System.out.println("objectId : " + objectId);
+//    	System.out.println("table : " + table);
+//    	System.out.println("field : " + field);
+//    	System.out.println("objectId : " + objectId);
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -96,9 +96,9 @@ public class MongoAccess {
     
     public Distinct distinct(String table, String distinct, String field, ObjectId objectId) {	
     	
-    	System.out.println("table : " + table);
-    	System.out.println("field : " + field);
-    	System.out.println("objectId : " + objectId);
+//    	System.out.println("table : " + table);
+//    	System.out.println("field : " + field);
+//    	System.out.println("objectId : " + objectId);
 		
 		Distinct find = null;
 		collec = jongo.getCollection(table);
@@ -111,10 +111,10 @@ public class MongoAccess {
     
     public Find request(String table, String field, ObjectId objectId, String object) {	
     	
-    	System.out.println("table : " + table);
-    	System.out.println("field : " + field);
-    	System.out.println("objectId : " + objectId);
-    	System.out.println("object : " + object);
+//    	System.out.println("table : " + table);
+//    	System.out.println("field : " + field);
+//    	System.out.println("objectId : " + objectId);
+//    	System.out.println("object : " + object);
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -125,7 +125,7 @@ public class MongoAccess {
     
     public Find request(String table, String field, Commande commande) {	
     	
-    	System.out.println(field);
+//    	System.out.println(field);
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -208,16 +208,16 @@ public class MongoAccess {
 		String query = String.format("{%s : #}", field);
 		String reg = String.format("^%s.PR.1.JPG", valeur);
 
-		System.out.println(query);
-		System.out.println(reg);
+//		System.out.println(query);
+//		System.out.println(reg);
 
 
 		one = collec.findOne(query, Pattern.compile(reg));
 		//{$regex: #}}", "jo.*"
 
-		System.out.println(one);
-		System.out.println(one.as(Fichier.class));
-		System.out.println(one.as(Fichier.class).getFichierLie());
+//		System.out.println(one);
+//		System.out.println(one.as(Fichier.class));
+//		System.out.println(one.as(Fichier.class).getFichierLie());
 
 		return one;
 	}
@@ -230,14 +230,14 @@ public class MongoAccess {
 	
 	public Commun save (String table, Commun m) {
 
-		System.out.println("dans mongoaccess");
-		System.out.println(jongo);
+//		System.out.println("dans mongoaccess");
+//		System.out.println(jongo);
 		collec = jongo.getCollection(table);
-		System.out.println("dans mongoaccess getCollection()");
+//		System.out.println("dans mongoaccess getCollection()");
 
 		collec.save(m);
 
-		System.out.println("_id dans MongoAccess : " + m.get_id());
+//		System.out.println("_id dans MongoAccess : " + m.get_id());
 
 		return m;
 		
@@ -250,7 +250,7 @@ public class MongoAccess {
 
 	public void update(String table, Commun c) {
 		collec = jongo.getCollection(table);	
-		System.out.println("mise a jour _id : " + c.get_id());
+//		System.out.println("mise a jour _id : " + c.get_id());
 		collec.update("{_id : #}", c.get_id()).with(c);
 	}
 

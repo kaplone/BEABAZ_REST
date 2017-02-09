@@ -36,12 +36,12 @@ public class Connexion {
             Base64.Decoder decoder = Base64.getDecoder();
             byte[] encrypted = decoder.decode(bytes);
 
-            System.out.println("Encrypted : " + new String(encrypted));
+            //System.out.println("Encrypted : " + new String(encrypted));
 
             cipher.init(Cipher.DECRYPT_MODE, aesKey);
             String decrypted = new String(cipher.doFinal(encrypted));
 
-            System.out.println("Decrypted : " + decrypted);
+            //System.out.println("Decrypted : " + decrypted);
 
 
             Settings.setLogin(decrypted.split(" ")[0].trim());

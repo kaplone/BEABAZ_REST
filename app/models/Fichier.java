@@ -24,10 +24,7 @@ public class Fichier extends Commun{
     
     @Override
     public String toString(){
-    	
-    	System.out.println("this.fichierLie : " + this.fichierLie);
-    	System.out.println("Paths.get(this.fichierLie).getFileName() : " + Paths.get(this.fichierLie).getFileName());
-    	
+
     	return Paths.get(this.fichierLie).getFileName().toString();
     	
     }
