@@ -61,16 +61,18 @@ public class OeuvreTraitee extends Commun {
 	public Fichier getFichierAffiche () {
 
     	String fichier_id = null;
+		Fichier fichier = null;
 
     	for (Map<String, String> file : fichiers){
     		if (file.get("fichier_string").endsWith("_PR_1_JPG")){
 				fichier_id = file.get("fichier_id");
 			}
 		}
-		
-		Fichier fichier = Connexion.getConnetion().request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
 
-		
+		if (fichier_id != null){
+			fichier = Connexion.getConnetion().request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
+		}
+
 		return fichier;
 		
 	}
