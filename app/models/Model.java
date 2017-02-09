@@ -2,9 +2,7 @@ package models;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-
-import utils.MongoAccess;
+import utils.Connexion;
 
 public class Model extends Commun{
 	
@@ -12,12 +10,12 @@ public class Model extends Commun{
     
     public static void update(Model c){
 
-		MongoAccess.update("model", c);
+		Connexion.getConnetion().update("model", c);
 	}
 	
     public static void save(Model c){
 		
-		MongoAccess.save("model", c);
+		Connexion.getConnetion().save("model", c);
 		
 	}
 

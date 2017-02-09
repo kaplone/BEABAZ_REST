@@ -1,10 +1,6 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.bson.types.ObjectId;
-
 import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

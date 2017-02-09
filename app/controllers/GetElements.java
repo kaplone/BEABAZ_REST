@@ -7,7 +7,7 @@ import org.jongo.FindOne;
 import org.jongo.MongoCursor;
 import play.mvc.*;
 
-import utils.LoadConfig;
+import utils.Connexion;
 import utils.MongoAccess;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,77 +15,36 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Created by kaplone on 01/05/16.
  */
 public class GetElements extends Controller {
 
+    private MongoAccess access = null;
+
     public Result getAll(String collection) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
-        LoadConfig.loadSettings();
+        byte[] bytes = request().getHeader("monToken").getBytes();
 
-        String key = Settings.getKey();
+        access = Connexion.getConnetion(bytes);
 
-        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        Base64.Decoder decoder = Base64.getDecoder();
-        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
-
-        System.out.println("Encrypted : " + new String(encrypted));
-
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted = new String(cipher.doFinal(encrypted));
-
-        System.out.println("Decrypted : " + decrypted);
-
-
-        Settings.setLogin(decrypted.split(" ")[0].trim());
-        Settings.setPass(decrypted.split(" ")[1].trim());
-        Settings.setBase(decrypted.split(" ")[2].trim());
-
-        MongoAccess.connect();
-
-        return ok(new ObjectMapper().readTree(mapping(MongoAccess.request(collection), collection).toString()));
+        return ok(new ObjectMapper().readTree(mapping(access.request(collection), collection).toString()));
 
     }
 
     public Result getId(String collection, String id) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
-        LoadConfig.loadSettings();
+        byte[] bytes = request().getHeader("monToken").getBytes();
 
-        String key = Settings.getKey();
+        access = Connexion.getConnetion(bytes);
 
-        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        Base64.Decoder decoder = Base64.getDecoder();
-        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
-
-        System.out.println("Encrypted : " + new String(encrypted));
-
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted = new String(cipher.doFinal(encrypted));
-
-        System.out.println("Decrypted : " + decrypted);
-
-
-        Settings.setLogin(decrypted.split(" ")[0].trim());
-        Settings.setPass(decrypted.split(" ")[1].trim());
-        Settings.setBase(decrypted.split(" ")[2].trim());
-
-        MongoAccess.connect();
-
-        return ok(new ObjectMapper().readTree(mapping(MongoAccess.request(collection, new ObjectId(id)), collection).toString()));
+        return ok(new ObjectMapper().readTree(mapping(access.request(collection, new ObjectId(id)), collection).toString()));
 
 
     }
@@ -94,30 +53,11 @@ public class GetElements extends Controller {
 
         valeur = valeur.replace("%20", " ");
 
-        LoadConfig.loadSettings();
+        byte[] bytes = request().getHeader("monToken").getBytes();
 
-        String key = Settings.getKey();
+        access = Connexion.getConnetion(bytes);
 
-        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        Base64.Decoder decoder = Base64.getDecoder();
-        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
-
-        System.out.println("Encrypted : " + new String(encrypted));
-
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted = new String(cipher.doFinal(encrypted));
-
-        System.out.println("Decrypted : " + decrypted);
-
-
-        Settings.setLogin(decrypted.split(" ")[0].trim());
-        Settings.setPass(decrypted.split(" ")[1].trim());
-        Settings.setBase(decrypted.split(" ")[2].trim());
-
-        MongoAccess.connect();
-
-        return ok(new ObjectMapper().readTree(mapping(MongoAccess.request(collection, champ, valeur), collection).toString()));
+        return ok(new ObjectMapper().readTree(mapping(access.request(collection, champ, valeur), collection).toString()));
 
     }
 
@@ -125,30 +65,11 @@ public class GetElements extends Controller {
 
         valeur = valeur.replace("%20", " ");
 
-        LoadConfig.loadSettings();
+        byte[] bytes = request().getHeader("monToken").getBytes();
 
-        String key = Settings.getKey();
+        access = Connexion.getConnetion(bytes);
 
-        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        Base64.Decoder decoder = Base64.getDecoder();
-        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
-
-        System.out.println("Encrypted : " + new String(encrypted));
-
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted = new String(cipher.doFinal(encrypted));
-
-        System.out.println("Decrypted : " + decrypted);
-
-
-        Settings.setLogin(decrypted.split(" ")[0].trim());
-        Settings.setPass(decrypted.split(" ")[1].trim());
-        Settings.setBase(decrypted.split(" ")[2].trim());
-
-        MongoAccess.connect();
-
-        return ok(new ObjectMapper().readTree(mapping(MongoAccess.requestAll(collection, champ, valeur), collection).toString()));
+        return ok(new ObjectMapper().readTree(mapping(access.requestAll(collection, champ, valeur), collection).toString()));
 
 
     }
@@ -157,32 +78,13 @@ public class GetElements extends Controller {
 
         valeur = valeur.replace("%20", " ");
 
-        LoadConfig.loadSettings();
+        byte[] bytes = request().getHeader("monToken").getBytes();
 
-        String key = Settings.getKey();
-
-        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        Base64.Decoder decoder = Base64.getDecoder();
-        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
-
-        System.out.println("Encrypted : " + new String(encrypted));
-
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted = new String(cipher.doFinal(encrypted));
-
-        System.out.println("Decrypted : " + decrypted);
-
-
-        Settings.setLogin(decrypted.split(" ")[0].trim());
-        Settings.setPass(decrypted.split(" ")[1].trim());
-        Settings.setBase(decrypted.split(" ")[2].trim());
+        access = Connexion.getConnetion(bytes);
 
         boolean regex_bool = Boolean.valueOf(regex);
 
-        MongoAccess.connect();
-
-        return  ok(new ObjectMapper().readTree(mapping(MongoAccess.request(collection, champ, valeur, regex_bool), collection).toString()));
+        return  ok(new ObjectMapper().readTree(mapping(access.request(collection, champ, valeur, regex_bool), collection).toString()));
 
 
     }
@@ -192,29 +94,11 @@ public class GetElements extends Controller {
         valeur1 = valeur1.replace("%20", " ");
         valeur2 = valeur2.replace("%20", " ");
 
-        LoadConfig.loadSettings();
+        byte[] bytes = request().getHeader("monToken").getBytes();
 
-        String key = Settings.getKey();
+        access = Connexion.getConnetion(bytes);
 
-        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        Base64.Decoder decoder = Base64.getDecoder();
-        byte[] encrypted = decoder.decode(request().getHeader("monToken").getBytes());
-
-        System.out.println("Encrypted : " + new String(encrypted));
-
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
-        String decrypted = new String(cipher.doFinal(encrypted));
-
-        System.out.println("Decrypted : " + decrypted);
-
-
-        Settings.setLogin(decrypted.split(" ")[0].trim());
-        Settings.setPass(decrypted.split(" ")[1].trim());
-        Settings.setBase(decrypted.split(" ")[2].trim());
-
-        MongoAccess.connect();
-        return ok(new ObjectMapper().readTree(mapping(MongoAccess.request(collection, champ1, valeur1, champ2, valeur2), collection).toString()));
+        return ok(new ObjectMapper().readTree(mapping(access.request(collection, champ1, valeur1, champ2, valeur2), collection).toString()));
 
     }
 

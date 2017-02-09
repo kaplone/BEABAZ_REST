@@ -1,6 +1,6 @@
 package models;
 
-import utils.MongoAccess;
+import utils.Connexion;
 
 public class Technique extends Commun{
 	
@@ -8,18 +8,18 @@ public class Technique extends Commun{
 	
 	public static void update(Technique t){
 
-		MongoAccess.update("technique", t);
+		Connexion.getConnetion().update("technique", t);
 	}
 	
     public static void save(Technique t){
 		
-		MongoAccess.save("technique", t);
+		Connexion.getConnetion().save("technique", t);
 		
 	}
     
     public static void insert(Technique t){
 		
-		MongoAccess.insert("technique", t);
+		Connexion.getConnetion().insert("technique", t);
 		
 	}
 

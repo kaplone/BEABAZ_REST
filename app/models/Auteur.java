@@ -1,15 +1,7 @@
 package models;
 
-import java.util.ArrayList;
-
-import org.bson.types.ObjectId;
-import org.jongo.marshall.jackson.oid.MongoObjectId;
-
-import utils.MongoAccess;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
+import utils.Connexion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Auteur extends Commun{
@@ -18,12 +10,12 @@ public class Auteur extends Commun{
 	
 	public static void update(Auteur c){
 
-		MongoAccess.update("auteur", c);
+		Connexion.getConnetion().update("auteur", c);
 	}
 	
     public static void save(Auteur c){
 		
-		MongoAccess.save("auteur", c);
+		Connexion.getConnetion().save("auteur", c);
 		
 	}
 

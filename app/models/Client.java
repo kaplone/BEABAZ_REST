@@ -1,16 +1,8 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Map;
-
-import org.bson.types.ObjectId;
-import org.jongo.marshall.jackson.oid.MongoObjectId;
-
-import utils.MongoAccess;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
+import utils.Connexion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Client extends Commun{
@@ -27,12 +19,12 @@ public class Client extends Commun{
 
 	public static void update(Client c){
 
-		MongoAccess.update("client", c);
+		Connexion.getConnetion().update("client", c);
 	}
 	
     public static void save(Client c){
 		
-		MongoAccess.save("client", c);
+		Connexion.getConnetion().save("client", c);
 		
 	}
     

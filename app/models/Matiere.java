@@ -1,6 +1,6 @@
 package models;
 
-import utils.MongoAccess;
+import utils.Connexion;
 
 public class Matiere extends Commun {
 	
@@ -8,18 +8,18 @@ public class Matiere extends Commun {
 	
 	public static void update(Matiere t){
 
-		MongoAccess.update("matiere", t);
+		Connexion.getConnetion().update("matiere", t);
 	}
 	
     public static void save(Matiere t){
 		
-		MongoAccess.save("matiere", t);
+		Connexion.getConnetion().save("matiere", t);
 		
 	}
     
     public static void insert(Matiere t){
 		
-		MongoAccess.insert("matiere", t);
+		Connexion.getConnetion().insert("matiere", t);
 		
 	}
 	

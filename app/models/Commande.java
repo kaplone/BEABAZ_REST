@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import utils.MongoAccess;
+import utils.Connexion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.bson.types.ObjectId;
@@ -42,11 +42,11 @@ public class Commande  extends Commun{
     }
 	
 	public static void update(Commande c){
-		MongoAccess.update("commande", c);
+		Connexion.getConnetion().update("commande", c);
 	}
 	
     public static void save(Commande c){
-		MongoAccess.save("commande", c);
+		Connexion.getConnetion().save("commande", c);
 	}
     
     public Commande get(){
@@ -60,7 +60,7 @@ public class Commande  extends Commun{
         for(Map<String, Object> m : traitements_attendus){
             String traitement_attendu_string = m.get("traitement_attendu_string").toString();
             String traitement_attendu_id = m.get("traitement_attendu_id").toString();
-            Traitement traitement_attenduObj = MongoAccess.request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
+            Traitement traitement_attenduObj = Connexion.getConnetion().request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
             Map<String, Traitement> map = new HashMap<>();
             map.put(traitement_attendu_string, traitement_attenduObj);
             traitements_attendusObj.add(map);
@@ -145,7 +145,7 @@ public class Commande  extends Commun{
 
 		String modele_string = modele.get("modele_string").toString();
 		String modele_id = modele.get("modele_id").toString();
-		Model modeleObj = MongoAccess.request("model", new ObjectId(modele_id)).as(Model.class);
+		Model modeleObj = Connexion.getConnetion().request("model", new ObjectId(modele_id)).as(Model.class);
 		Map<String, Model> map = new HashMap<>();
 		map.put(modele_string, modeleObj);
 
@@ -161,7 +161,7 @@ public class Commande  extends Commun{
 
 		String auteur_string = auteur.get("auteur_string").toString();
 		String auteur_id = auteur.get("auteur_id").toString();
-		Auteur auteurObj = MongoAccess.request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
+		Auteur auteurObj = Connexion.getConnetion().request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
 		Map<String, Auteur> map = new HashMap<>();
 		map.put(auteur_string, auteurObj);
 

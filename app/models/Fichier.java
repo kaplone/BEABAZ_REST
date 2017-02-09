@@ -1,10 +1,7 @@
 package models;
 
 import java.nio.file.Paths;
-
-import org.bson.types.ObjectId;
-
-import utils.MongoAccess;
+import utils.Connexion;
 
 public class Fichier extends Commun{
 	
@@ -16,12 +13,12 @@ public class Fichier extends Commun{
 	
 	public static void update(Fichier c){
 
-		MongoAccess.update("fichier", c);
+		Connexion.getConnetion().update("fichier", c);
 	}
 	
     public static void save(Fichier c){
 		
-		MongoAccess.save("fichier", c);
+		Connexion.getConnetion().save("fichier", c);
 		
 	}
     

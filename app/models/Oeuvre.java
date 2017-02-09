@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
-import utils.MongoAccess;
+import utils.Connexion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -67,12 +67,12 @@ public class Oeuvre extends Commun{
 	
 	public static void update(Oeuvre c){
 
-		MongoAccess.update("oeuvre", c);
+		Connexion.getConnetion().update("oeuvre", c);
 	}
 	
     public static void save(Oeuvre c){
 		
-		MongoAccess.save("oeuvre", c);
+		Connexion.getConnetion().save("oeuvre", c);
 		
 	}
     
@@ -253,7 +253,7 @@ public class Oeuvre extends Commun{
 		
 		return getTechniquesUtilisees_id().entrySet()
                                           .stream()
-                                          .map(a -> MongoAccess.request("technique", new ObjectId(a.getValue()))
+                                          .map(a -> Connexion.getConnetion().request("technique", new ObjectId(a.getValue()))
                                                                .as(Technique.class)
                                                                .getNom_complet())
                                           .collect(Collectors.joining(", "));
@@ -263,7 +263,7 @@ public class Oeuvre extends Commun{
 		
 		return getMatieresUtilisees_id().entrySet()
                                         .stream()
-                                        .map(a -> MongoAccess.request("matiere", new ObjectId(a.getValue()))
+                                        .map(a -> Connexion.getConnetion().request("matiere", new ObjectId(a.getValue()))
                                                              .as(Matiere.class)
                                                              .getNom_complet())
                                         .collect(Collectors.joining(", "));

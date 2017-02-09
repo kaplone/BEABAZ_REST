@@ -1,15 +1,9 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.jongo.marshall.jackson.oid.MongoObjectId;
-
-import utils.MongoAccess;
-
+import utils.Connexion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Traitement extends Commun{
@@ -27,18 +21,18 @@ public class Traitement extends Commun{
 	
 	public static void update(Traitement t){
 
-		MongoAccess.update("traitement", t);
+		Connexion.getConnetion().update("traitement", t);
 	}
 	
     public static void save(Traitement t){
 		
-		MongoAccess.save("traitement", t);
+		Connexion.getConnetion().save("traitement", t);
 		
 	}
     
     public static void insert(Traitement t){
 		
-		MongoAccess.insert("traitement", t);
+		Connexion.getConnetion().insert("traitement", t);
 		
 	}
     

@@ -1,6 +1,6 @@
 package models;
 
-import utils.MongoAccess;
+import utils.Connexion;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //
@@ -14,16 +14,16 @@ public class Produit extends Commun {
 	}
 	
 	public static void update(Produit t){
-		MongoAccess.update("produit", t);
+		Connexion.getConnetion().update("produit", t);
 	}
 	
     public static Produit save(Produit t){
-		t = (Produit) MongoAccess.save("produit", t);
+		t = (Produit) Connexion.getConnetion().save("produit", t);
 		return t;
 	}
     
     public static void insert(Produit t){
-		MongoAccess.insert("produit", t);
+		Connexion.getConnetion().insert("produit", t);
 	}
 
 	public String getNom_complet() {

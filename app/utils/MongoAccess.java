@@ -1,65 +1,41 @@
 package utils;
 
-import java.net.UnknownHostException;
-
-import org.bson.types.ObjectId;
-import org.jongo.Distinct;
-import org.jongo.Find;
-import org.jongo.FindOne;
-import org.jongo.Jongo;
-import org.jongo.MongoCollection;
-import org.jongo.MongoCursor;
-import org.jongo.Update;
-
-import models.Fichier;
-import models.Client;
-import models.Commande;
-import models.Commun;
-import models.Settings;
-import models.Traitement;
-
-import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import enums.Classes;
+import models.*;
+import org.bson.types.ObjectId;
+import org.jongo.*;
 
 import java.util.regex.Pattern;
 
-import enums.Classes;
-
 public class MongoAccess {
-	
-	static MongoClient mc;
-	static DB db;
-	static Jongo jongo;
-	static MongoCollection collec;
-	
-	public static void connect(){
-	
-//		try {
 
-		LoadConfig.loadSettings();
+	DB db;
+	Jongo jongo;
+	MongoCollection collec;
+	
+	public Jongo connect(){
 
-		MongoClientURI uri  = new MongoClientURI(String.format("mongodb://%s:%s@%s:%s/%s",
-				Settings.getLogin(),
-				Settings.getPass(),
-				Settings.getAdresse(),
-				Settings.getPort(),
-				Settings.getBase()));
+		if (jongo == null){
+			LoadConfig.loadSettings();
 
-		//MongoClientURI uri  = new MongoClientURI("mongodb://127.0.0.1/test4");
+			MongoClientURI uri  = new MongoClientURI(String.format("mongodb://%s:%s@%s:%s/%s",
+					Settings.getLogin(),
+					Settings.getPass(),
+					Settings.getAdresse(),
+					Settings.getPort(),
+					Settings.getBase()));
+
 			MongoClient client = new MongoClient(uri);
-			db = client.getDB(uri.getDatabase());	
+			db = client.getDB(uri.getDatabase());
 			jongo = new Jongo(db);
-
-//		}
-//		catch (UnknownHostException UHE){
-//					System.out.println("erreur " + UHE);
-//		}
+		}
+		return jongo;
 	}
 	
-	public static boolean checkIfExists (String table, String field, String valeur) {
+	public boolean checkIfExists (String table, String field, String valeur) {
 
 		collec = jongo.getCollection(table);
 		return  collec.findOne(String.format("{\"%s\" : \"%s\"}", field, valeur)).as(Classes.valueOf(table).getUsedClass()) != null;
@@ -68,7 +44,7 @@ public class MongoAccess {
 		
 	}
 	
-    public static Find request(String table) {	
+    public Find request(String table) {	
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -77,7 +53,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static FindOne request(String table, ObjectId id) {
+    public FindOne request(String table, ObjectId id) {
 		
 		FindOne find = null;
 		collec = jongo.getCollection(table);
@@ -86,7 +62,7 @@ public class MongoAccess {
 		return find;
 	}
 
-	public static FindOne request(String table, String id) {
+	public FindOne request(String table, String id) {
 
 		FindOne find = null;
 		collec = jongo.getCollection(table);
@@ -95,7 +71,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, Commande commande) {	
+    public Find request(String table, Commande commande) {	
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -104,7 +80,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, String field, ObjectId objectId) {	
+    public Find request(String table, String field, ObjectId objectId) {	
     	
     	System.out.println("table : " + table);
     	System.out.println("field : " + field);
@@ -118,7 +94,7 @@ public class MongoAccess {
 	}
     
     
-    public static Distinct distinct(String table, String distinct, String field, ObjectId objectId) {	
+    public Distinct distinct(String table, String distinct, String field, ObjectId objectId) {	
     	
     	System.out.println("table : " + table);
     	System.out.println("field : " + field);
@@ -133,7 +109,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, String field, ObjectId objectId, String object) {	
+    public Find request(String table, String field, ObjectId objectId, String object) {	
     	
     	System.out.println("table : " + table);
     	System.out.println("field : " + field);
@@ -147,7 +123,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, String field, Commande commande) {	
+    public Find request(String table, String field, Commande commande) {	
     	
     	System.out.println(field);
 		
@@ -158,7 +134,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, Client client) {	
+    public Find request(String table, Client client) {	
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -167,7 +143,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public static Find request(String table, Traitement traitement) {	
+    public Find request(String table, Traitement traitement) {	
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -176,7 +152,7 @@ public class MongoAccess {
 		return find;
 	}
 	
-	public static FindOne request(String table, String field, String valeur) {	
+	public FindOne request(String table, String field, String valeur) {	
 		
 		FindOne one = null;
 		collec = jongo.getCollection(table);
@@ -191,7 +167,7 @@ public class MongoAccess {
 		return one;
 	}
 
-	public static Find requestAll(String table, String field, String valeur) {
+	public Find requestAll(String table, String field, String valeur) {
 
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -205,7 +181,7 @@ public class MongoAccess {
 
 		return find;
 	}
-	public static Find requestAll(String table, String field, ObjectId objectId) {
+	public Find requestAll(String table, String field, ObjectId objectId) {
 
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -215,7 +191,7 @@ public class MongoAccess {
 	}
 
 	
-    public static FindOne request(String table, String field1, String valeur1, String field2, String valeur2) {	
+    public FindOne request(String table, String field1, String valeur1, String field2, String valeur2) {	
 		
 		FindOne one = null;
 		collec = jongo.getCollection(table);
@@ -224,7 +200,7 @@ public class MongoAccess {
 		return one;
 	}
 
-	public static FindOne request(String table, String field, String valeur, boolean regex) {
+	public FindOne request(String table, String field, String valeur, boolean regex) {
 
 		FindOne one = null;
 		collec = jongo.getCollection(table);
@@ -246,13 +222,13 @@ public class MongoAccess {
 		return one;
 	}
 	
-	public static void insert (String table, Object m) {
+	public void insert (String table, Object m) {
 		collec = jongo.getCollection(table);
 		collec.insert(m);
 		
 	}
 	
-	public static Commun save (String table, Commun m) {
+	public Commun save (String table, Commun m) {
 
 		System.out.println("dans mongoaccess");
 		System.out.println(jongo);
@@ -267,12 +243,12 @@ public class MongoAccess {
 		
 	}
 
-	public static void drop() {
+	public void drop() {
 		collec.drop();
 		
 	}
 
-	public static void update(String table, Commun c) {
+	public void update(String table, Commun c) {
 		collec = jongo.getCollection(table);	
 		System.out.println("mise a jour _id : " + c.get_id());
 		collec.update("{_id : #}", c.get_id()).with(c);

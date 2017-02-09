@@ -1,12 +1,9 @@
 package controllers;
 
 import models.Produit;
-
 import play.mvc.*;
 import play.libs.Json;
-
-import utils.MongoAccess;
-
+import utils.Connexion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -19,7 +16,7 @@ public class AddElement extends Controller {
 
     public Result addOne(String collection) {
 
-        MongoAccess.connect();
+        Connexion.getConnetion().connect();
 
         ObjectMapper mapper = new ObjectMapper();
 

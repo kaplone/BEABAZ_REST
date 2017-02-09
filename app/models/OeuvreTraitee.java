@@ -7,10 +7,7 @@ import org.bson.types.ObjectId;
 
 import enums.EtatFinal;
 import enums.Progression;
-import utils.MongoAccess;
-import utils.Normalize;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import utils.Connexion;
 
 public class OeuvreTraitee extends Commun {
 	
@@ -45,11 +42,11 @@ public class OeuvreTraitee extends Commun {
     }
 
 	public static void update(OeuvreTraitee c){
-		MongoAccess.update("oeuvreTraitee", c);
+		Connexion.getConnetion().update("oeuvreTraitee", c);
 	}
 	
     public static void save(OeuvreTraitee c){		
-		MongoAccess.save("oeuvreTraitee", c);	
+		Connexion.getConnetion().save("oeuvreTraitee", c);	
 	}
 
 	public void setEtat(EtatFinal etat) {
@@ -71,7 +68,7 @@ public class OeuvreTraitee extends Commun {
 			}
 		}
 		
-		Fichier fichier = MongoAccess.request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
+		Fichier fichier = Connexion.getConnetion().request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
 
 		
 		return fichier;
@@ -134,7 +131,7 @@ public class OeuvreTraitee extends Commun {
 	
 	public Oeuvre getOeuvre(){
 		
-		return MongoAccess.request("oeuvre", oeuvre_id).as(Oeuvre.class);
+		return Connexion.getConnetion().request("oeuvre", oeuvre_id).as(Oeuvre.class);
 	}
 
 	public String getOeuvre_id() {

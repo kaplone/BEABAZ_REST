@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.bson.types.ObjectId;
-import utils.MongoAccess;
+import utils.Connexion;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,12 +29,12 @@ public class TacheTraitement extends Commun{
     
     public static void update(TacheTraitement c){
 
-		MongoAccess.update("tacheTraitement", c);
+		Connexion.getConnetion().update("tacheTraitement", c);
 	}
 	
     public static void save(TacheTraitement c){
 		
-		MongoAccess.save("tacheTraitement", c);
+		Connexion.getConnetion().save("tacheTraitement", c);
 		
 	}
     
@@ -48,13 +48,13 @@ public class TacheTraitement extends Commun{
     
     public void addProduit(String p){
     	
-    	Produit p_ = MongoAccess.request("produit", "nom", p).as(Produit.class);
+    	Produit p_ = Connexion.getConnetion().request("produit", "nom", p).as(Produit.class);
     	this.addProduit(p_);
     	
     }
     
     public void addProduit(ObjectId id){
-    	Produit p_ = MongoAccess.request("produit", id).as(Produit.class);
+    	Produit p_ = Connexion.getConnetion().request("produit", id).as(Produit.class);
     	this.addProduit(p_);
     }
     
@@ -104,7 +104,7 @@ public class TacheTraitement extends Commun{
 	}
 	
 	public Traitement getTraitement(){
-		return MongoAccess.request("traitement", traitement_id).as(Traitement.class);
+		return Connexion.getConnetion().request("traitement", traitement_id).as(Traitement.class);
 	}
 	
 	public ImageView getIcone_progression() {
