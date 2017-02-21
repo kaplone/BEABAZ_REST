@@ -56,7 +56,7 @@ public class Connexion {
         LoadConfig.loadSettings();
         String key = Settings.getKey();
         Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, aesKey);
         String decrypted = new String(cipher.doFinal(bytes));
 
