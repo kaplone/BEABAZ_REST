@@ -236,7 +236,10 @@ public class GetElements extends Controller {
                     stringResult = mapper.writeValueAsString(m_tacheTraitement);
                     break;
                 case "technique" : MongoCursor<Technique> m_technique = find.as(Technique.class);
+                    System.out.println(m_technique.count());
                     stringResult = mapper.writeValueAsString(m_technique);
+                    System.out.println(m_technique.count());
+                    System.out.println(m_technique.hasNext());
                     break;
                 case "traitement" : MongoCursor<Traitement> m_traitement = find.as(Traitement.class);
                     stringResult = mapper.writeValueAsString(m_traitement);
