@@ -40,7 +40,7 @@ public class AddElement extends Controller {
 
             switch (collection){
                 case "produit" : Produit m = Json.fromJson(json, Produit.class);
-                                 Produit.save(m);
+                                 m.save();
                                  stringResult = mapper.writeValueAsString(m);
                                  break;
             }

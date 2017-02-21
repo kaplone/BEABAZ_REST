@@ -13,18 +13,17 @@ public class Produit extends Commun {
 
 	}
 	
-//	public static void update(Produit t){
-//		Connexion.getConnetion().update("produit", t);
-//	}
-//
-//    public static Produit save(Produit t){
-//		t = (Produit) Connexion.getConnetion().save("produit", t);
-//		return t;
-//	}
-//
-//    public static void insert(Produit t){
-//		Connexion.getConnetion().insert("produit", t);
-//	}
+	public void update(){
+		Connexion.getConnetion(getToken()).update("produit", this);
+	}
+
+    public Produit save(){
+		return (Produit) Connexion.getConnetion(getToken()).save("produit", this);
+	}
+
+    public void insert(Produit t){
+		Connexion.getConnetion(getToken()).insert("produit", this);
+	}
 
 	public String getNom_complet() {
 		return nom_complet;
