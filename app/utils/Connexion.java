@@ -8,6 +8,7 @@ import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.jongo.*;
+import sun.misc.BASE64Decoder;
 
 /**
  * Created by kaplone on 09/02/17.
@@ -62,7 +64,9 @@ public class Connexion {
         byte[] ivByte = new byte[cipher.getBlockSize()];
         IvParameterSpec ivParamsSpec = new IvParameterSpec(ivByte);
         cipher.init(Cipher.DECRYPT_MODE, aesKey, ivParamsSpec);
-        String decrypted = new String(cipher.doFinal(bytes));
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] encrypted = decoder.decode(bytes);
+        String decrypted = new String(cipher.doFinal(encrypted));
 
         MongoAccess access_temp = new MongoAccess();
         Jongo connect_temp = access_temp.connect(
