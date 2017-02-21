@@ -16,11 +16,9 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.jongo.*;
-import sun.misc.BASE64Decoder;
 
 /**
  * Created by kaplone on 09/02/17.
@@ -60,10 +58,8 @@ public class Connexion {
         LoadConfig.loadSettings();
         String key = Settings.getKey();
         Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        byte[] ivByte = new byte[cipher.getBlockSize()];
-        IvParameterSpec ivParamsSpec = new IvParameterSpec(ivByte);
-        cipher.init(Cipher.DECRYPT_MODE, aesKey, ivParamsSpec);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, aesKey);
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] encrypted = decoder.decode(bytes);
         String decrypted = new String(cipher.doFinal(encrypted));
