@@ -71,6 +71,7 @@ public class OeuvreTraitee extends Commun {
 
 		if (fichier_id != null){
 			fichier = Connexion.getConnetion(getToken()).request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
+			fichier.setToken(getToken());
 		}
 
 		return fichier;
@@ -132,8 +133,11 @@ public class OeuvreTraitee extends Commun {
 	}
 	
 	public Oeuvre getOeuvre(){
+
+    	Oeuvre oeuvre_temp = Connexion.getConnetion(getToken()).request("oeuvre", oeuvre_id).as(Oeuvre.class);
+    	oeuvre_temp.setToken(getToken());
 		
-		return Connexion.getConnetion(getToken()).request("oeuvre", oeuvre_id).as(Oeuvre.class);
+		return oeuvre_temp;
 	}
 
 	public String getOeuvre_id() {

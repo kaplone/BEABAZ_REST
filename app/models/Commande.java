@@ -61,6 +61,7 @@ public class Commande  extends Commun{
             String traitement_attendu_string = m.get("traitement_attendu_string").toString();
             String traitement_attendu_id = m.get("traitement_attendu_id").toString();
             Traitement traitement_attenduObj = Connexion.getConnetion(getToken()).request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
+            traitement_attenduObj.setToken(getToken());
             Map<String, Traitement> map = new HashMap<>();
             map.put(traitement_attendu_string, traitement_attenduObj);
             traitements_attendusObj.add(map);
@@ -146,6 +147,7 @@ public class Commande  extends Commun{
 		String modele_string = modele.get("modele_string").toString();
 		String modele_id = modele.get("modele_id").toString();
 		Model modeleObj = Connexion.getConnetion(getToken()).request("model", new ObjectId(modele_id)).as(Model.class);
+		modeleObj.setToken(getToken());
 		Map<String, Model> map = new HashMap<>();
 		map.put(modele_string, modeleObj);
 
@@ -162,6 +164,7 @@ public class Commande  extends Commun{
 		String auteur_string = auteur.get("auteur_string").toString();
 		String auteur_id = auteur.get("auteur_id").toString();
 		Auteur auteurObj = Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
+		auteurObj.setToken(getToken());
 		Map<String, Auteur> map = new HashMap<>();
 		map.put(auteur_string, auteurObj);
 

@@ -49,12 +49,14 @@ public class TacheTraitement extends Commun{
     public void addProduit(String p){
     	
     	Produit p_ = Connexion.getConnetion(getToken()).request("produit", "nom", p).as(Produit.class);
+    	p_.setToken(getToken());
     	this.addProduit(p_);
     	
     }
     
     public void addProduit(ObjectId id){
     	Produit p_ = Connexion.getConnetion(getToken()).request("produit", id).as(Produit.class);
+    	p_.setToken(getToken());
     	this.addProduit(p_);
     }
     
@@ -104,7 +106,9 @@ public class TacheTraitement extends Commun{
 	}
 	
 	public Traitement getTraitement(){
-		return Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
+    	Traitement t_ = Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
+    	t_.setToken(getToken());
+    	 return t_;
 	}
 	
 	public ImageView getIcone_progression() {

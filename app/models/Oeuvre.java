@@ -253,9 +253,12 @@ public class Oeuvre extends Commun{
 		
 		return getTechniquesUtilisees_id().entrySet()
                                           .stream()
-                                          .map(a -> Connexion.getConnetion(getToken()).request("technique", new ObjectId(a.getValue()))
-                                                               .as(Technique.class)
-                                                               .getNom_complet())
+                                          .map(a -> {
+                                          	  Technique t_ = Connexion.getConnetion(getToken()).request("technique", new ObjectId(a.getValue()))
+                                                               .as(Technique.class);
+                                          	  t_.setToken(getToken());
+                                          	  return t_.getNom_complet();
+                                          })
                                           .collect(Collectors.joining(", "));
 	}
 	
@@ -263,9 +266,12 @@ public class Oeuvre extends Commun{
 		
 		return getMatieresUtilisees_id().entrySet()
                                         .stream()
-                                        .map(a -> Connexion.getConnetion(getToken()).request("matiere", new ObjectId(a.getValue()))
-                                                             .as(Matiere.class)
-                                                             .getNom_complet())
+                                        .map(a -> {
+                                        	Matiere m_ = Connexion.getConnetion(getToken()).request("matiere", new ObjectId(a.getValue()))
+													.as(Matiere.class);
+                                        	m_.setToken(getToken());
+											return m_.getNom_complet();
+										})
                                         .collect(Collectors.joining(", "));
 	}
 
