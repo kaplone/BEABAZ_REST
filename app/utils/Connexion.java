@@ -3,6 +3,7 @@ package utils;
 import models.Settings;
 
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -14,6 +15,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.jongo.*;
@@ -36,7 +38,7 @@ public class Connexion {
         accessMap = new HashMap<>();
     }
 
-    public static MongoAccess getConnetion(byte [] bytes) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+    public static MongoAccess getConnetion(byte [] bytes) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
         String token = new String(bytes);
 
@@ -57,7 +59,9 @@ public class Connexion {
         String key = Settings.getKey();
         Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE, aesKey);
+        byte[] ivByte = new byte[cipher.getBlockSize()];
+        IvParameterSpec ivParamsSpec = new IvParameterSpec(ivByte);
+        cipher.init(Cipher.DECRYPT_MODE, aesKey, ivParamsSpec);
         String decrypted = new String(cipher.doFinal(bytes));
 
         MongoAccess access_temp = new MongoAccess();
@@ -84,7 +88,7 @@ public class Connexion {
         try {
             return getConnetion(bytes.getBytes());
         }
-        catch (UnsupportedOperationException | IOException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e){
+        catch (InvalidAlgorithmParameterException |UnsupportedOperationException | IOException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e){
             return null;
         }
 
