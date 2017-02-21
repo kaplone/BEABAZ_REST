@@ -68,6 +68,8 @@ public class Connexion {
         byte[] encrypted = decoder.decode(bytes);
         String decrypted = new String(cipher.doFinal(encrypted));
 
+        System.out.println(decrypted);
+
         MongoAccess access_temp = new MongoAccess();
         Jongo connect_temp = access_temp.connect(
                 decrypted.split(" ")[0].trim(),
