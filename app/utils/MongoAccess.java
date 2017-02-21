@@ -16,17 +16,17 @@ public class MongoAccess {
 	Jongo jongo;
 	MongoCollection collec;
 	
-	public Jongo connect(){
+	public Jongo connect(String login, String pass, String base){
 
 		if (jongo == null){
 			LoadConfig.loadSettings();
 
 			MongoClientURI uri  = new MongoClientURI(String.format("mongodb://%s:%s@%s:%s/%s",
-					Settings.getLogin(),
-					Settings.getPass(),
+					login,
+					pass,
 					Settings.getAdresse(),
 					Settings.getPort(),
-					Settings.getBase()));
+					base));
 
 			MongoClient client = new MongoClient(uri);
 			db = client.getDB(uri.getDatabase());

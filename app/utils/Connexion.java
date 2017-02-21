@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -21,43 +23,76 @@ import org.jongo.*;
  */
 public class Connexion {
 
-    private static Jongo connect = null;
-    private static MongoAccess access = null;
+    private static final int dureeLimite = 10 * 60 ;
+
+    private Jongo connect = null;
+    private MongoAccess access = null;
+    private Instant limiteValidite;
+
+    private static Map<String, Connexion> accessMap;
+
+    {
+        accessMap = new HashMap<>();
+    }
 
     public static MongoAccess getConnetion(byte [] bytes) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
-        if (connect == null){
-            LoadConfig.loadSettings();
+        String token = new String(bytes);
 
-            String key = Settings.getKey();
+        if (accessMap.containsKey(token)){
 
-            Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            Base64.Decoder decoder = Base64.getDecoder();
-            byte[] encrypted = decoder.decode(bytes);
+            if (accessMap.get(token).getLimiteValidite().isBefore(Instant.now())){
 
-            //System.out.println("Encrypted : " + new String(encrypted));
-
-            cipher.init(Cipher.DECRYPT_MODE, aesKey);
-            String decrypted = new String(cipher.doFinal(encrypted));
-
-            //System.out.println("Decrypted : " + decrypted);
-
-
-            Settings.setLogin(decrypted.split(" ")[0].trim());
-            Settings.setPass(decrypted.split(" ")[1].trim());
-            Settings.setBase(decrypted.split(" ")[2].trim());
-
-            access = new MongoAccess();
-
-            connect = access.connect();
+                System.out.println("accès depuis le Map");
+                return accessMap.get(token).getAccess();
+            }
+            else {
+                System.out.println("entrée Map périmée");
+                accessMap.remove(token);
+            }
         }
 
+        LoadConfig.loadSettings();
+        String key = Settings.getKey();
+        Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, aesKey);
+        String decrypted = new String(cipher.doFinal(bytes));
+
+        MongoAccess access_temp = new MongoAccess();
+        Jongo connect_temp = access_temp.connect(
+                decrypted.split(" ")[0].trim(),
+                decrypted.split(" ")[1].trim(),
+                decrypted.split(" ")[2].trim()
+        );
+
+        Connexion connexion_temp = new Connexion();
+        connexion_temp.setAccess(access_temp);
+        connexion_temp.setConnect(connect_temp);
+
+        accessMap.put(token, connexion_temp);
+
+        System.out.println("nouvelle entrée Map");
+        return access_temp;
+    }
+
+    public Jongo getConnect(){
+        return connect;
+    }
+
+    public void setConnect(Jongo jongo){
+        connect = jongo;
+    }
+
+    public MongoAccess getAccess(){
         return access;
     }
 
-    public static MongoAccess getConnetion(){
-        return access;
+    public void setAccess(MongoAccess mongoAccess){
+        access = mongoAccess;
     }
 
+    public Instant getLimiteValidite(){
+        return limiteValidite.plusSeconds(dureeLimite);
     }
+}
