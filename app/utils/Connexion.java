@@ -32,7 +32,7 @@ public class Connexion {
 
     private static Map<String, Connexion> accessMap;
 
-    {
+    static {
         accessMap = new HashMap<>();
     }
 
