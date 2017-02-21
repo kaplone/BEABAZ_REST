@@ -28,6 +28,7 @@ public class Connexion {
     private Jongo connect = null;
     private MongoAccess access = null;
     private Instant limiteValidite;
+    private String token;
 
     private static Map<String, Connexion> accessMap;
 
@@ -63,12 +64,14 @@ public class Connexion {
         Jongo connect_temp = access_temp.connect(
                 decrypted.split(" ")[0].trim(),
                 decrypted.split(" ")[1].trim(),
-                decrypted.split(" ")[2].trim()
+                decrypted.split(" ")[2].trim(),
+                token
         );
 
         Connexion connexion_temp = new Connexion();
         connexion_temp.setAccess(access_temp);
         connexion_temp.setConnect(connect_temp);
+        connexion_temp.setToken(token);
 
         accessMap.put(token, connexion_temp);
 
@@ -76,7 +79,18 @@ public class Connexion {
         return access_temp;
     }
 
-    public Jongo getConnect(){
+    public static MongoAccess getConnetion(String bytes) {
+
+        try {
+            return getConnetion(bytes.getBytes());
+        }
+        catch (UnsupportedOperationException | IOException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e){
+            return null;
+        }
+
+    }
+
+        public Jongo getConnect(){
         return connect;
     }
 
@@ -94,5 +108,13 @@ public class Connexion {
 
     public Instant getLimiteValidite(){
         return limiteValidite.plusSeconds(dureeLimite);
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

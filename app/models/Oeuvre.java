@@ -65,16 +65,16 @@ public class Oeuvre extends Commun{
 		
 	}
 	
-	public static void update(Oeuvre c){
-
-		Connexion.getConnetion().update("oeuvre", c);
-	}
-	
-    public static void save(Oeuvre c){
-		
-		Connexion.getConnetion().save("oeuvre", c);
-		
-	}
+//	public static void update(Oeuvre c){
+//
+//		Connexion.getConnetion().update("oeuvre", c);
+//	}
+//
+//    public static void save(Oeuvre c){
+//
+//		Connexion.getConnetion().save("oeuvre", c);
+//
+//	}
     
     public void addMatiere(String m, String oid){
     	
@@ -253,7 +253,7 @@ public class Oeuvre extends Commun{
 		
 		return getTechniquesUtilisees_id().entrySet()
                                           .stream()
-                                          .map(a -> Connexion.getConnetion().request("technique", new ObjectId(a.getValue()))
+                                          .map(a -> Connexion.getConnetion(getToken()).request("technique", new ObjectId(a.getValue()))
                                                                .as(Technique.class)
                                                                .getNom_complet())
                                           .collect(Collectors.joining(", "));
@@ -263,7 +263,7 @@ public class Oeuvre extends Commun{
 		
 		return getMatieresUtilisees_id().entrySet()
                                         .stream()
-                                        .map(a -> Connexion.getConnetion().request("matiere", new ObjectId(a.getValue()))
+                                        .map(a -> Connexion.getConnetion(getToken()).request("matiere", new ObjectId(a.getValue()))
                                                              .as(Matiere.class)
                                                              .getNom_complet())
                                         .collect(Collectors.joining(", "));

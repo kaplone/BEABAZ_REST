@@ -6,17 +6,27 @@ import play.libs.Json;
 import utils.Connexion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
+import utils.MongoAccess;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by kaplone on 01/05/16.
  */
 public class AddElement extends Controller {
 
-    public Result addOne(String collection) {
+    private MongoAccess access = null;
 
-        Connexion.getConnetion().connect();
+    public Result addOne(String collection) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+
+        byte[] bytes = request().getHeader("monToken").getBytes();
+
+        access = Connexion.getConnetion(bytes);
 
         ObjectMapper mapper = new ObjectMapper();
 

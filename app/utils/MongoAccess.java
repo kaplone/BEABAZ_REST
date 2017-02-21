@@ -15,23 +15,25 @@ public class MongoAccess {
 	DB db;
 	Jongo jongo;
 	MongoCollection collec;
-	
-	public Jongo connect(String login, String pass, String base){
+	String token;
 
-		if (jongo == null){
-			LoadConfig.loadSettings();
+	public Jongo connect(String login, String pass, String base, String token) {
 
-			MongoClientURI uri  = new MongoClientURI(String.format("mongodb://%s:%s@%s:%s/%s",
-					login,
-					pass,
-					Settings.getAdresse(),
-					Settings.getPort(),
-					base));
+		this.token = token;
 
-			MongoClient client = new MongoClient(uri);
-			db = client.getDB(uri.getDatabase());
-			jongo = new Jongo(db);
-		}
+		LoadConfig.loadSettings();
+
+		MongoClientURI uri = new MongoClientURI(String.format("mongodb://%s:%s@%s:%s/%s",
+				login,
+				pass,
+				Settings.getAdresse(),
+				Settings.getPort(),
+				base));
+
+		MongoClient client = new MongoClient(uri);
+		db = client.getDB(uri.getDatabase());
+		jongo = new Jongo(db);
+
 		return jongo;
 	}
 	
@@ -252,6 +254,10 @@ public class MongoAccess {
 		collec = jongo.getCollection(table);	
 //		System.out.println("mise a jour _id : " + c.get_id());
 		collec.update("{_id : #}", c.get_id()).with(c);
+	}
+
+	public String getToken() {
+		return token;
 	}
 
 

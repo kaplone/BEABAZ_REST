@@ -1,6 +1,8 @@
 package models;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,6 +19,9 @@ public class Commun {
 	private Date updated_at;
 	//@JsonIgnore
 	private Date deleted_at;
+
+	@JsonIgnore
+	private String token;
 	
 	private String nom;
 	private String remarques;
@@ -67,6 +72,14 @@ public class Commun {
 	
 	public String toString(){
 		return this.nom;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

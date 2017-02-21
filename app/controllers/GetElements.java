@@ -119,6 +119,7 @@ public class GetElements extends Controller {
                     stringResult = mapper.writeValueAsString(m_client);
                     break;
                 case "commande" : Commande m_commande = find.as(Commande.class);
+                    m_commande.setToken(access.getToken());
                     stringResult = mapper.writeValueAsString(m_commande);
                     break;
                 case "complement" : Complement m_complement = find.as(Complement.class);

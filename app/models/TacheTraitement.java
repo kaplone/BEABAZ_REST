@@ -27,16 +27,16 @@ public class TacheTraitement extends Commun{
     	produitsLies = new HashMap<>();
     }
     
-    public static void update(TacheTraitement c){
-
-		Connexion.getConnetion().update("tacheTraitement", c);
-	}
-	
-    public static void save(TacheTraitement c){
-		
-		Connexion.getConnetion().save("tacheTraitement", c);
-		
-	}
+//    public static void update(TacheTraitement c){
+//
+//		Connexion.getConnetion().update("tacheTraitement", c);
+//	}
+//
+//    public static void save(TacheTraitement c){
+//
+//		Connexion.getConnetion().save("tacheTraitement", c);
+//
+//	}
     
     public void addProduit(Produit p){
     	
@@ -48,13 +48,13 @@ public class TacheTraitement extends Commun{
     
     public void addProduit(String p){
     	
-    	Produit p_ = Connexion.getConnetion().request("produit", "nom", p).as(Produit.class);
+    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", "nom", p).as(Produit.class);
     	this.addProduit(p_);
     	
     }
     
     public void addProduit(ObjectId id){
-    	Produit p_ = Connexion.getConnetion().request("produit", id).as(Produit.class);
+    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", id).as(Produit.class);
     	this.addProduit(p_);
     }
     
@@ -104,7 +104,7 @@ public class TacheTraitement extends Commun{
 	}
 	
 	public Traitement getTraitement(){
-		return Connexion.getConnetion().request("traitement", traitement_id).as(Traitement.class);
+		return Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
 	}
 	
 	public ImageView getIcone_progression() {

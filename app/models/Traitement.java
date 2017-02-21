@@ -19,22 +19,22 @@ public class Traitement extends Commun{
 		this.complements = new HashMap<>();
 	}
 	
-	public static void update(Traitement t){
-
-		Connexion.getConnetion().update("traitement", t);
-	}
-	
-    public static void save(Traitement t){
-		
-		Connexion.getConnetion().save("traitement", t);
-		
-	}
-    
-    public static void insert(Traitement t){
-		
-		Connexion.getConnetion().insert("traitement", t);
-		
-	}
+//	public static void update(Traitement t){
+//
+//		Connexion.getConnetion().update("traitement", t);
+//	}
+//
+//    public static void save(Traitement t){
+//
+//		Connexion.getConnetion().save("traitement", t);
+//
+//	}
+//
+//    public static void insert(Traitement t){
+//
+//		Connexion.getConnetion().insert("traitement", t);
+//
+//	}
     
     public void addProduit(Produit p){
     	

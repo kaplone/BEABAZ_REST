@@ -41,13 +41,13 @@ public class OeuvreTraitee extends Commun {
     	
     }
 
-	public static void update(OeuvreTraitee c){
-		Connexion.getConnetion().update("oeuvreTraitee", c);
-	}
-	
-    public static void save(OeuvreTraitee c){		
-		Connexion.getConnetion().save("oeuvreTraitee", c);	
-	}
+//	public static void update(OeuvreTraitee c){
+//		Connexion.getConnetion().update("oeuvreTraitee", c);
+//	}
+//
+//    public static void save(OeuvreTraitee c){
+//		Connexion.getConnetion().save("oeuvreTraitee", c);
+//	}
 
 	public void setEtat(EtatFinal etat) {
 		this.etat = etat;
@@ -70,7 +70,7 @@ public class OeuvreTraitee extends Commun {
 		}
 
 		if (fichier_id != null){
-			fichier = Connexion.getConnetion().request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
+			fichier = Connexion.getConnetion(getToken()).request("fichier", new ObjectId(fichier_id)).as(Fichier.class);
 		}
 
 		return fichier;
@@ -133,7 +133,7 @@ public class OeuvreTraitee extends Commun {
 	
 	public Oeuvre getOeuvre(){
 		
-		return Connexion.getConnetion().request("oeuvre", oeuvre_id).as(Oeuvre.class);
+		return Connexion.getConnetion(getToken()).request("oeuvre", oeuvre_id).as(Oeuvre.class);
 	}
 
 	public String getOeuvre_id() {

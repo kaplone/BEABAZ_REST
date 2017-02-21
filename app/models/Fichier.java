@@ -11,16 +11,16 @@ public class Fichier extends Commun{
 	
 	private String oeuvre_id;
 	
-	public static void update(Fichier c){
-
-		Connexion.getConnetion().update("fichier", c);
-	}
-	
-    public static void save(Fichier c){
-		
-		Connexion.getConnetion().save("fichier", c);
-		
-	}
+//	public static void update(Fichier c){
+//
+//		Connexion.getConnetion().update("fichier", c);
+//	}
+//
+//    public static void save(Fichier c){
+//
+//		Connexion.getConnetion().save("fichier", c);
+//
+//	}
     
     @Override
     public String toString(){
