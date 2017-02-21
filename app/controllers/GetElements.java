@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,7 +29,7 @@ public class GetElements extends Controller {
 
     private MongoAccess access = null;
 
-    public Result getAll(String collection) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+    public Result getAll(String collection) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
         byte[] bytes = request().getHeader("monToken").getBytes();
 
@@ -38,7 +39,7 @@ public class GetElements extends Controller {
 
     }
 
-    public Result getId(String collection, String id) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+    public Result getId(String collection, String id) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
         byte[] bytes = request().getHeader("monToken").getBytes();
 
@@ -49,7 +50,7 @@ public class GetElements extends Controller {
 
     }
 
-    public Result getField(String collection, String champ, String valeur) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+    public Result getField(String collection, String champ, String valeur) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
         valeur = valeur.replace("%20", " ");
 
@@ -61,7 +62,7 @@ public class GetElements extends Controller {
 
     }
 
-    public Result getFieldAll(String collection, String champ, String valeur) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+    public Result getFieldAll(String collection, String champ, String valeur) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
         valeur = valeur.replace("%20", " ");
 
@@ -74,7 +75,7 @@ public class GetElements extends Controller {
 
     }
 
-    public Result getFieldRegex(String collection, String champ, String valeur, String regex) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+    public Result getFieldRegex(String collection, String champ, String valeur, String regex) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
 
         valeur = valeur.replace("%20", " ");
 
@@ -89,7 +90,7 @@ public class GetElements extends Controller {
 
     }
 
-    public Result getFields(String collection, String champ1, String valeur1, String champ2, String valeur2) throws UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+    public Result getFields(String collection, String champ1, String valeur1, String champ2, String valeur2) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
 
         valeur1 = valeur1.replace("%20", " ");
         valeur2 = valeur2.replace("%20", " ");
