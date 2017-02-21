@@ -78,6 +78,7 @@ public class Connexion {
         connexion_temp.setAccess(access_temp);
         connexion_temp.setConnect(connect_temp);
         connexion_temp.setToken(token);
+        connexion_temp.setLimiteValidite(Instant.now());
 
         accessMap.put(token, connexion_temp);
 
@@ -114,6 +115,10 @@ public class Connexion {
 
     public Instant getLimiteValidite(){
         return limiteValidite.plusSeconds(dureeLimite);
+    }
+
+    public void setLimiteValidite(Instant l){
+        limiteValidite = l;
     }
 
     public String getToken() {
