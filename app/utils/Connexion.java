@@ -47,7 +47,7 @@ public class Connexion {
             System.out.println("getLimiteValidite() : " + accessMap.get(token).getLimiteValidite());
             System.out.println("now()               : " + Instant.now());
 
-            if (accessMap.get(token).getLimiteValidite().isBefore(Instant.now())){
+            if (accessMap.get(token).getLimiteValidite().isAfter(Instant.now())){
 
                 System.out.println("accès depuis le Map");
                 return accessMap.get(token).getAccess();
