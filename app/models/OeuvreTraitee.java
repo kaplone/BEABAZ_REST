@@ -96,6 +96,32 @@ public class OeuvreTraitee extends Commun {
 				                  .collect(Collectors.toSet());
 	}
 
+	public Set<String> getTraitementsAttendus_id() {
+
+		return traitementsAttendus.stream()
+								  .map(a -> a.get("traitementAttendu_id"))
+				                  .collect(Collectors.toSet());
+	}
+
+	public Set<TacheTraitement> getTraitementsAttendus_obj() {
+
+		return traitementsAttendus.stream()
+				.map(a -> retrouveTacheTraitement(a.get("traitementAttendu_id")))
+				.collect(Collectors.toSet());
+	}
+
+	public TacheTraitement retrouveTacheTraitement(ObjectId id){
+
+		TacheTraitement tt = Connexion.getConnetion(getToken()).request("tacheTraitement", id).as(TacheTraitement.class);
+		tt.setToken(getToken());
+		return tt;
+	}
+
+	public TacheTraitement retrouveTacheTraitement(String id){
+
+		return retrouveTacheTraitement(new ObjectId(id));
+	}
+
 
 	public void addTraitementAttendu(Traitement traitementAttendu) {
 		this.addTraitementAttendu(traitementAttendu.getNom(), traitementAttendu.get_id());

@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import enums.Progression;
+import utils.MongoAccess;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TacheTraitement extends Commun{
@@ -162,7 +163,5 @@ public class TacheTraitement extends Commun{
 	public void setProduitsLies(Map<String, String> produitsLies) {
 		this.produitsLies = produitsLies;
 	}
-	
-	
 
 }
