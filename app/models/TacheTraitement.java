@@ -39,47 +39,47 @@ public class TacheTraitement extends Commun{
 //
 //	}
     
-    public void addProduit(Produit p){
-    	
-    	if (! produitsLies.keySet().contains(p.getNom())){
-    		produitsLies.put(p.getNom(), p.get_id());
-    	}
-    	
-    }
-    
-    public void addProduit(String p){
-    	
-    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", "nom", p).as(Produit.class);
-    	p_.setToken(getToken());
-    	this.addProduit(p_);
-    	
-    }
-    
-    public void addProduit(ObjectId id){
-    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", id).as(Produit.class);
-    	p_.setToken(getToken());
-    	this.addProduit(p_);
-    }
-    
-    public void deleteProduit(Produit p){
-
-    	for (String p_ : produitsLies.keySet()){
-    		if (p.getNom().equals(p_)){
-    			produitsLies.remove(p_);
-    			break;
-    		}
-    	} 	
-    }
-    
-    public void deleteProduit(String p){
-
-    	for (String p_ : produitsLies.keySet()){
-    		if (p_.equals(p)){
-    			produitsLies.remove(p_);
-    			break;
-    		}
-    	} 	
-    }
+//    public void addProduit(Produit p){
+//
+//    	if (! produitsLies.keySet().contains(p.getNom())){
+//    		produitsLies.put(p.getNom(), p.get_id());
+//    	}
+//
+//    }
+//
+//    public void addProduit(String p){
+//
+//    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", "nom", p).as(Produit.class);
+//    	p_.setToken(getToken());
+//    	this.addProduit(p_);
+//
+//    }
+//
+//    public void addProduit(ObjectId id){
+//    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", id).as(Produit.class);
+//    	p_.setToken(getToken());
+//    	this.addProduit(p_);
+//    }
+//
+//    public void deleteProduit(Produit p){
+//
+//    	for (String p_ : produitsLies.keySet()){
+//    		if (p.getNom().equals(p_)){
+//    			produitsLies.remove(p_);
+//    			break;
+//    		}
+//    	}
+//    }
+//
+//    public void deleteProduit(String p){
+//
+//    	for (String p_ : produitsLies.keySet()){
+//    		if (p_.equals(p)){
+//    			produitsLies.remove(p_);
+//    			break;
+//    		}
+//    	}
+//    }
 
 	public String getFait() {
 		return fait_.toString();
@@ -112,18 +112,18 @@ public class TacheTraitement extends Commun{
     	 return t_;
 	}
 	
-	public ImageView getIcone_progression() {
-		
-		
-        Image image = new Image(fait_.getUsedImage());
-        
-        ImageView usedImage = new ImageView();
-        usedImage.setFitHeight(15);
-        usedImage.setPreserveRatio(true);
-        usedImage.setImage(image);
-		
-		return usedImage;
-	}
+//	public ImageView getIcone_progression() {
+//
+//
+//        Image image = new Image(fait_.getUsedImage());
+//
+//        ImageView usedImage = new ImageView();
+//        usedImage.setFitHeight(15);
+//        usedImage.setPreserveRatio(true);
+//        usedImage.setImage(image);
+//
+//		return usedImage;
+//	}
 
 	public boolean isSupp() {
 		return supp;
