@@ -218,7 +218,7 @@ public class MongoAccess {
 
 		collec = jongo.getCollection(table);
 		System.out.println("retour après save :" + collec.save(m));
-		//System.out.println("_id dans MongoAccess : " + m.get_id());
+		System.out.println("_id dans MongoAccess : " + m.get_id());
 
 		return m;
 		
