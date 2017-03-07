@@ -27,11 +27,11 @@ public class Commande  extends Commun{
 
 	private String dateFinProjet;
 
-    //@JsonIgnore
-	private Map<String, Object> modele;
+	//@JsonIgnore
+	private Map<String, String> modele;
 
-    //@JsonIgnore
-	private Map<String, Object> auteur;
+	//@JsonIgnore
+	private Map<String, String> auteur;
 
 	private List<Map<String, String>> oeuvresTraitees;
 
@@ -141,7 +141,7 @@ public class Commande  extends Commun{
 		return base.resolve(nameVertical);
 	}
 
-	public void setModele(Map<String, Object> modele) {
+	public void setModele(Map<String, String> modele) {
     	this.modele = modele;
 	}
 
@@ -158,7 +158,7 @@ public class Commande  extends Commun{
 	}
 
 
-	public void setAuteur(Map<String, Object> auteur) {
+	public void setAuteur(Map<String, String> auteur) {
         this.auteur = auteur;
 	}
 
