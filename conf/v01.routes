@@ -10,6 +10,7 @@ GET     /:collection/:champ/:valeur/:regex              controllers.GetElements.
 GET     /:collection/:champ1/:valeur1/:champ2/:valeur2  controllers.GetElements.getFields(collection: String, champ1: String, valeur1: String, champ2: String, valeur2: String)
 
 POST    /ajout/:collection                              controllers.AddElement.addOne(collection :String)
+POST    /update/:collection                             controllers.UpdateElement.updateOne(collection :String)
 
 
 # Map static resources from the /public folder to the /assets URL path

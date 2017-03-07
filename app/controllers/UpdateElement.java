@@ -75,7 +75,7 @@ public class UpdateElement extends Controller {
             }
 
             m.setToken(access.getToken());
-            m.setUpdated_at(new Date());
+            m.setUpdated_at(new Date().toString());
             m.update();
             stringResult = mapper.writeValueAsString(m);
 

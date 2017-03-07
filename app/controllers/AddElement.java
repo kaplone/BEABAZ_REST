@@ -77,7 +77,7 @@ public class AddElement extends Controller {
             }
 
             m.setToken(access.getToken());
-            m.setCreated_at(new Date());
+            m.setCreated_at(new Date().toString());
             m = m.save();
             stringResult = mapper.writeValueAsString(m);
 

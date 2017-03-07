@@ -18,11 +18,11 @@ public abstract class Commun {
 	private String _id;
 
 	//@JsonIgnore
-	private Date created_at;
+	private String created_at;
 	//@JsonIgnore
-	private Date updated_at;
+	private String updated_at;
 	//@JsonIgnore
-	private Date deleted_at;
+	private String deleted_at;
 
 	@JsonIgnore
 	private String token;
@@ -34,27 +34,27 @@ public abstract class Commun {
         return _id.toString();
     }
 
-	public Date getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 
-	public Date getUpdated_at() {
+	public String getUpdated_at() {
 		return updated_at;
 	}
 
-	public void setUpdated_at(Date updated_at) {
+	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
 
-	public Date getDeleted_at() {
+	public String getDeleted_at() {
 		return deleted_at;
 	}
 
-	public void setDeleted_at(Date deleted_at) {
+	public void setDeleted_at(String deleted_at) {
 		this.deleted_at = deleted_at;
 	}
 
