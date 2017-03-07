@@ -11,22 +11,19 @@ public class Fichier extends Commun{
 	
 	private String oeuvre_id;
 	
-//	public static void update(Fichier c){
-//
-//		Connexion.getConnetion().update("fichier", c);
-//	}
-//
-//    public static void save(Fichier c){
-//
-//		Connexion.getConnetion().save("fichier", c);
-//
-//	}
+	public void update(){
+
+		Connexion.getConnetion(getToken()).update("fichier", this);
+	}
+
+    public Fichier save(){
+
+		return (Fichier) Connexion.getConnetion(getToken()).save("fichier", this);
+	}
     
     @Override
     public String toString(){
-
     	return Paths.get(this.fichierLie).getFileName().toString();
-    	
     }
 
 	public String getFichierLie() {

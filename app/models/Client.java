@@ -17,25 +17,21 @@ public class Client extends Commun{
 	
 	private Map<String, String> commandes_id;
 
-//	public static void update(Client c){
-//
-//		Connexion.getConnetion().update("client", c);
-//	}
-//
-//    public static void save(Client c){
-//
-//		Connexion.getConnetion().save("client", c);
-//
-//	}
+	public void update(){
+
+		Connexion.getConnetion(getToken()).update("client", this);
+	}
+
+    public Client save(){
+
+		return (Client) Connexion.getConnetion(getToken()).save("client", this);
+	}
     
     public Client get(){
-		
 		return this;
-		
 	}
     
     public String toString(){
-    	
     	return this.getNom();
     }
 

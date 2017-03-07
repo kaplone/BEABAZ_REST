@@ -41,13 +41,13 @@ public class OeuvreTraitee extends Commun {
     	
     }
 
-//	public static void update(OeuvreTraitee c){
-//		Connexion.getConnetion().update("oeuvreTraitee", c);
-//	}
-//
-//    public static void save(OeuvreTraitee c){
-//		Connexion.getConnetion().save("oeuvreTraitee", c);
-//	}
+	public void update(){
+		Connexion.getConnetion(getToken()).update("oeuvreTraitee", this);
+	}
+
+    public OeuvreTraitee save(){
+		return (OeuvreTraitee) Connexion.getConnetion(getToken()).save("oeuvreTraitee", this);
+	}
 
 	public void setEtat(EtatFinal etat) {
 		this.etat = etat;

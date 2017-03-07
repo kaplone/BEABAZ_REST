@@ -28,16 +28,16 @@ public class TacheTraitement extends Commun{
     	produitsLies = new HashMap<>();
     }
     
-//    public static void update(TacheTraitement c){
-//
-//		Connexion.getConnetion().update("tacheTraitement", c);
-//	}
-//
-//    public static void save(TacheTraitement c){
-//
-//		Connexion.getConnetion().save("tacheTraitement", c);
-//
-//	}
+    public void update(){
+
+		Connexion.getConnetion(getToken()).update("tacheTraitement", this);
+	}
+
+    public TacheTraitement save(){
+
+		return (TacheTraitement) Connexion.getConnetion(getToken()).save("tacheTraitement", this);
+
+	}
     
 //    public void addProduit(Produit p){
 //

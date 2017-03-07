@@ -9,9 +9,7 @@ public class Produit extends Commun {
 
 	private String nom_complet;
 
-	public Produit(){
-
-	}
+	public Produit(){}
 	
 	public void update(){
 		Connexion.getConnetion(getToken()).update("produit", this);

@@ -6,22 +6,17 @@ public class Matiere extends Commun {
 	
 	private String nom_complet;
 	
-//	public static void update(Matiere t){
-//
-//		Connexion.getConnetion().update("matiere", t);
-//	}
-//
-//    public static void save(Matiere t){
-//
-//		Connexion.getConnetion().save("matiere", t);
-//
-//	}
-//
-//    public static void insert(Matiere t){
-//
-//		Connexion.getConnetion().insert("matiere", t);
-//
-//	}
+	public void update(){
+
+		Connexion.getConnetion(getToken()).update("matiere", this);
+	}
+
+    public Matiere save(){
+
+		return (Matiere) Connexion.getConnetion(getToken()).save("matiere", this);
+
+	}
+
 	
 	public String getNom_complet() {
 		return nom_complet;

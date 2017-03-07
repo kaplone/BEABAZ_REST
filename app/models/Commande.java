@@ -40,14 +40,17 @@ public class Commande  extends Commun{
     public Commande(){
         super();
     }
-	
-//	public static void update(Commande c){
-//		Connexion.getConnetion().update("commande", c);
-//	}
-//
-//    public static void save(Commande c){
-//		Connexion.getConnetion().save("commande", c);
-//	}
+
+    @Override
+	public void update(){
+
+    	//Connexion.getConnetion(getToken()).update("commande", this);
+	}
+	@Override
+    public Commande save(){
+
+		return (Commande) Connexion.getConnetion(getToken()).save("commande", this);
+	}
     
     public Commande get(){
 		return this;

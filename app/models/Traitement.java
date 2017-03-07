@@ -19,43 +19,16 @@ public class Traitement extends Commun{
 		this.complements = new HashMap<>();
 	}
 	
-//	public static void update(Traitement t){
-//
-//		Connexion.getConnetion().update("traitement", t);
-//	}
-//
-//    public static void save(Traitement t){
-//
-//		Connexion.getConnetion().save("traitement", t);
-//
-//	}
-//
-//    public static void insert(Traitement t){
-//
-//		Connexion.getConnetion().insert("traitement", t);
-//
-//	}
-    
-    public void addProduit(Produit p){
-    	
-    	if (! produits.keySet().contains(p.getNom())){
-    		produits.put(p.getNom(), p.get_id().toString());
-    	}
-    	
-    }
-    
-    public void deleteProduit(Produit p){
-    	
-    	String produit_ = null;
-    	
-    	for (String p_ : produits.keySet()){
-    		if (p.getNom().equals(p_)){
-    			produit_ = p_;
-    			break;
-    		}
-    	}
-    	produits.remove(produit_);
-    }
+	public void update(){
+
+		Connexion.getConnetion(getToken()).update("traitement", this);
+	}
+
+    public Traitement save(){
+
+		return (Traitement) Connexion.getConnetion(getToken()).save("traitement", this);
+	}
+
 
 	public String getNom_complet() {
 		return nom_complet;
@@ -71,5 +44,13 @@ public class Traitement extends Commun{
 
 	public void setProduits(Map<String, String> complements) {
 		this.produits = complements;
+	}
+
+	public Map<String, String> getComplements() {
+		return complements;
+	}
+
+	public void setComplements(Map<String, String> complements) {
+		this.complements = complements;
 	}
 }

@@ -82,11 +82,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public Find request(String table, String field, ObjectId objectId) {	
-    	
-//    	System.out.println("table : " + table);
-//    	System.out.println("field : " + field);
-//    	System.out.println("objectId : " + objectId);
+    public Find request(String table, String field, ObjectId objectId) {
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -96,11 +92,7 @@ public class MongoAccess {
 	}
     
     
-    public Distinct distinct(String table, String distinct, String field, ObjectId objectId) {	
-    	
-//    	System.out.println("table : " + table);
-//    	System.out.println("field : " + field);
-//    	System.out.println("objectId : " + objectId);
+    public Distinct distinct(String table, String distinct, String field, ObjectId objectId) {
 		
 		Distinct find = null;
 		collec = jongo.getCollection(table);
@@ -111,12 +103,7 @@ public class MongoAccess {
 		return find;
 	}
     
-    public Find request(String table, String field, ObjectId objectId, String object) {	
-    	
-//    	System.out.println("table : " + table);
-//    	System.out.println("field : " + field);
-//    	System.out.println("objectId : " + objectId);
-//    	System.out.println("object : " + object);
+    public Find request(String table, String field, ObjectId objectId, String object) {
 		
 		Find find = null;
 		collec = jongo.getCollection(table);
@@ -217,9 +204,6 @@ public class MongoAccess {
 		one = collec.findOne(query, Pattern.compile(reg));
 		//{$regex: #}}", "jo.*"
 
-//		System.out.println(one);
-//		System.out.println(one.as(Fichier.class));
-//		System.out.println(one.as(Fichier.class).getFichierLie());
 
 		return one;
 	}
@@ -232,14 +216,9 @@ public class MongoAccess {
 	
 	public Commun save (String table, Commun m) {
 
-//		System.out.println("dans mongoaccess");
-//		System.out.println(jongo);
 		collec = jongo.getCollection(table);
-//		System.out.println("dans mongoaccess getCollection()");
-
 		collec.save(m);
-
-//		System.out.println("_id dans MongoAccess : " + m.get_id());
+		System.out.println("_id dans MongoAccess : " + m.get_id());
 
 		return m;
 		
@@ -251,8 +230,7 @@ public class MongoAccess {
 	}
 
 	public void update(String table, Commun c) {
-		collec = jongo.getCollection(table);	
-//		System.out.println("mise a jour _id : " + c.get_id());
+		collec = jongo.getCollection(table);
 		collec.update("{_id : #}", c.get_id()).with(c);
 	}
 

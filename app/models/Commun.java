@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Commun {
+public abstract class Commun {
 
     public Commun(){
     }
@@ -82,4 +82,6 @@ public class Commun {
 		this.token = token;
 	}
 
+	public abstract Commun save();
+	public abstract void update();
 }

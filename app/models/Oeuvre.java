@@ -65,16 +65,16 @@ public class Oeuvre extends Commun{
 		
 	}
 	
-//	public static void update(Oeuvre c){
-//
-//		Connexion.getConnetion().update("oeuvre", c);
-//	}
-//
-//    public static void save(Oeuvre c){
-//
-//		Connexion.getConnetion().save("oeuvre", c);
-//
-//	}
+	public void update(){
+
+		Connexion.getConnetion(getToken()).update("oeuvre", this);
+	}
+
+    public Oeuvre save(){
+
+		return (Oeuvre) Connexion.getConnetion(getToken()).save("oeuvre", this);
+
+	}
     
     public void addMatiere(String m, String oid){
     	

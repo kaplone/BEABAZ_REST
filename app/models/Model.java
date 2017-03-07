@@ -8,16 +8,16 @@ public class Model extends Commun{
 	
     private String cheminVersModelSTR;
     
-//    public static void update(Model c){
-//
-//		Connexion.getConnetion().update("model", c);
-//	}
-//
-//    public static void save(Model c){
-//
-//		Connexion.getConnetion().save("model", c);
-//
-//	}
+    public void update(){
+
+		Connexion.getConnetion(getToken()).update("model", this);
+	}
+
+    public Model save(){
+
+		return (Model) Connexion.getConnetion(getToken()).save("model", this);
+
+	}
 
 	public Path getCheminVersModel() {
 		return Paths.get(cheminVersModelSTR);
