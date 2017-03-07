@@ -11,18 +11,12 @@ import org.jongo.marshall.jackson.oid.MongoObjectId;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Commun {
 
-    public Commun(){
-    }
-
 	@MongoId// auto
 	@MongoObjectId
 	private String _id;
 
-	//@JsonIgnore
 	private String created_at;
-	//@JsonIgnore
 	private String updated_at;
-	//@JsonIgnore
 	private String deleted_at;
 
 	@JsonIgnore
@@ -39,6 +33,7 @@ public abstract class Commun {
         this._id = _id;
     }
 
+	@JsonIgnore
 	public ObjectId get_id_obj() {
 		return new ObjectId(_id);
 	}
@@ -82,15 +77,18 @@ public abstract class Commun {
 	public void setRemarques(String remarques) {
 		this.remarques = remarques;
 	}
-	
+
+	@JsonIgnore
 	public String toString(){
 		return this.nom;
 	}
 
+	@JsonIgnore
 	public String getToken() {
 		return token;
 	}
 
+	@JsonIgnore
 	public void setToken(String token) {
 		this.token = token;
 	}
