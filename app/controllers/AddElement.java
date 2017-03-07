@@ -1,6 +1,9 @@
 package controllers;
 
+import com.typesafe.config.ConfigException;
 import models.*;
+import play.api.http.HttpErrorHandlerExceptions;
+import play.api.http.HttpErrorHandlerExceptions$;
 import play.mvc.*;
 import play.libs.Json;
 import utils.Connexion;
@@ -83,6 +86,10 @@ public class AddElement extends Controller {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return badRequest();
+        }
+        catch (ConfigException.Null npe){
+            npe.printStackTrace();
             return badRequest();
         }
     }
