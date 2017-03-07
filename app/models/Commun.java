@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.jongo.marshall.jackson.oid.MongoId;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Commun {
@@ -11,6 +13,8 @@ public abstract class Commun {
     public Commun(){
     }
 
+	@MongoId// auto
+	@MongoObjectId
 	private String _id;
 
 	//@JsonIgnore
