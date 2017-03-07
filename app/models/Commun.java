@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.bson.types.ObjectId;
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
@@ -30,9 +31,13 @@ public abstract class Commun {
 	private String nom;
 	private String remarques;
 
-    public String get_id() {
-        return _id.toString();
+    public String get_id_str() {
+        return _id;
     }
+
+	public ObjectId get_id() {
+		return new ObjectId(_id);
+	}
 
 	public String getCreated_at() {
 		return created_at;

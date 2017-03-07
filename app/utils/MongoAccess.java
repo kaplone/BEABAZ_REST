@@ -227,7 +227,10 @@ public class MongoAccess {
 	}
 
 	public void update(String table, Commun c) {
+	    System.out.println("Dans MongoAccess.update()");
+        System.out.println("Dans MongoAccess.update()" + ((Auteur) c).getNom_complet());
 		collec = jongo.getCollection(table);
+
 		collec.update("{_id : #}", c.get_id()).with(c);
 	}
 
