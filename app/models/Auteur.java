@@ -19,4 +19,11 @@ public class Auteur extends Commun{
 
 	}
 
+	public String getNom_complet() {
+		return nom_complet;
+	}
+
+	public void setNom_complet(String nom_complet) {
+		this.nom_complet = nom_complet;
+	}
 }
