@@ -31,11 +31,11 @@ public abstract class Commun {
 	private String nom;
 	private String remarques;
 
-    public String get_id_str() {
+    public String get_id() {
         return _id;
     }
 
-	public ObjectId get_id() {
+	public ObjectId get_id_obj() {
 		return new ObjectId(_id);
 	}
 
