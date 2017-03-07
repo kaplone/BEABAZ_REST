@@ -217,7 +217,7 @@ public class MongoAccess {
 	public Commun save (String table, Commun m) {
 
 		collec = jongo.getCollection(table);
-		System.out.println("retour après save :" + collec.save(m));
+		System.out.println("retour après insert :" + collec.insert(m));
 		System.out.println("_id dans MongoAccess : " + m.get_id());
 
 		return m;
