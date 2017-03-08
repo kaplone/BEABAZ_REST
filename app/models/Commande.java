@@ -146,13 +146,28 @@ public class Commande  extends Commun{
 
 	public Map<String, Model> getModele_obj() {
 
-		String modele_string = modele.get("modele_string").toString();
-		String modele_id = modele.get("modele_id").toString();
-		Model modeleObj = Connexion.getConnetion(getToken()).request("model", new ObjectId(modele_id)).as(Model.class);
-		modeleObj.setToken(getToken());
-		modele_obj = new HashMap<>();
-        modele_obj.put(modele_string, modeleObj);
+        modele_obj = new HashMap<>();
+        Model modeleObj = null;
 
+        try{
+            String modele_string = modele.get("modele_string").toString();
+            if (modele.containsKey("modele_id")){
+                String modele_id = modele.get("modele_id").toString();
+                modeleObj = Connexion.getConnetion(getToken()).request("model", new ObjectId(modele_id)).as(Model.class);
+            }
+            else {
+                modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", modele_string).as(Model.class);
+                String modele_id = modeleObj.get_id();
+                modele.put("modele_id", modele_id);
+            }
+
+
+            modeleObj.setToken(getToken());
+            modele_obj.put(modele_string, modeleObj);
+        }
+        catch (NullPointerException npe) {
+
+        }
 		return modele_obj;
 	}
 
@@ -166,13 +181,28 @@ public class Commande  extends Commun{
 
 	public Map<String, Auteur> getAuteur_obj() {
 
-		String auteur_string = auteur.get("auteur_string").toString();
-		String auteur_id = auteur.get("auteur_id").toString();
-		Auteur auteurObj = Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
-		auteurObj.setToken(getToken());
-		auteur_obj = new HashMap<>();
-        auteur_obj.put(auteur_string, auteurObj);
+        auteur_obj = new HashMap<>();
+        Auteur auteurObj = null;
 
+        try {
+            String auteur_string = auteur.get("auteur_string").toString();
+            if(auteur.containsKey("auteur_id")){
+                String auteur_id = auteur.get("auteur_id").toString();
+                auteurObj = Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
+            }
+            else {
+                auteurObj = Connexion.getConnetion(getToken()).request("auteur", "nom", auteur_string).as(Auteur.class);
+                String auteur_id = auteurObj.get_id();
+                auteur.put("auteur_id", auteur_id);
+            }
+
+            auteurObj.setToken(getToken());
+            auteur_obj.put(auteur_string, auteurObj);
+
+        }
+        catch (NullPointerException npe){
+
+        }
     	return auteur_obj;
 	}
 
