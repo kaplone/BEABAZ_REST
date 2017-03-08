@@ -42,12 +42,12 @@ public class Commande  extends Commun{
 
     @Override
 	public void update(){
-
+		System.out.println("getToken() dans update() : " + getToken());
     	Connexion.getConnetion(getToken()).update("commande", this);
 	}
 	@Override
     public Commande save(){
-
+		System.out.println("getToken() dans save() : " + getToken());
 		return (Commande) Connexion.getConnetion(getToken()).save("commande", this);
 	}
     
@@ -60,6 +60,9 @@ public class Commande  extends Commun{
         List<Map<String, Traitement>> traitements_attendusObj = new ArrayList<>();
 
         for(Map<String, String> m : traitements_attendus){
+
+			System.out.println("getToken() dans save() : " + getTraitements_attendus());
+
             String traitement_attendu_string = m.get("traitement_attendu_string").toString();
             String traitement_attendu_id = m.get("traitement_attendu_id").toString();
             Traitement traitement_attenduObj = Connexion.getConnetion(getToken()).request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
@@ -143,6 +146,7 @@ public class Commande  extends Commun{
 	public void setModele(Map<String, String> modele) {
 		this.modele = modele;
 		if (this.modele.get("modele_string") != null && ! this.modele.containsKey("modele_id")) {
+			System.out.println("getToken() dans setModel() : " + getToken());
             Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
             String modele_id = modeleObj.get_id();
             this.modele.put("modele_id", modele_id);
