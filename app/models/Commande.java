@@ -142,8 +142,12 @@ public class Commande  extends Commun{
 
 	public void setModele(Map<String, String> modele) {
 		this.modele = modele;
+
+        System.out.println("getToken() dans setModel() : " + getToken());
+        System.out.println("getToken() dans setModel() : " + this.getNom());
+        System.out.println("getToken() dans setModel() : " + this.getToken());
+
 		if (this.modele.get("modele_string") != null &&  this.modele.get("modele_id") == null) {
-			System.out.println("getToken() dans setModel() : " + getToken());
             Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
             String modele_id = modeleObj.get_id();
             this.modele.put("modele_id", modele_id);

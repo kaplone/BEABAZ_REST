@@ -43,12 +43,7 @@ public class Connexion {
         String token = new String(bytes);
 
         if (accessMap.containsKey(token)){
-
-            System.out.println("getLimiteValidite() : " + accessMap.get(token).getLimiteValidite());
-            System.out.println("now()               : " + Instant.now());
-
             if (accessMap.get(token).getLimiteValidite().isAfter(Instant.now())){
-
                 System.out.println("accès depuis le Map");
                 return accessMap.get(token).getAccess();
             }
@@ -67,7 +62,7 @@ public class Connexion {
         byte[] encrypted = decoder.decode(bytes);
         String decrypted = new String(cipher.doFinal(encrypted));
 
-        System.out.println(decrypted);
+        //System.out.println(decrypted);
 
         MongoAccess access_temp = new MongoAccess();
         Jongo connect_temp = access_temp.connect(
@@ -84,8 +79,6 @@ public class Connexion {
         connexion_temp.setLimiteValidite(Instant.now());
 
         accessMap.put(token, connexion_temp);
-
-        System.out.println("nouvelle entrée Map");
         return access_temp;
     }
 
@@ -100,7 +93,7 @@ public class Connexion {
 
     }
 
-        public Jongo getConnect(){
+    public Jongo getConnect(){
         return connect;
     }
 
