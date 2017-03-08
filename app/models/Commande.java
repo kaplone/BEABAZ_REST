@@ -27,11 +27,10 @@ public class Commande  extends Commun{
 
 	private String dateFinProjet;
 
-	//@JsonIgnore
 	private Map<String, String> modele;
-
-	//@JsonIgnore
 	private Map<String, String> auteur;
+    private Map<String, Model> modele_obj;
+    private Map<String, Auteur> auteur_obj;
 
 	private List<Map<String, String>> oeuvresTraitees;
 
@@ -145,36 +144,41 @@ public class Commande  extends Commun{
     	this.modele = modele;
 	}
 
-	public Map<String, Model> getModele() {
+	public Map<String, Model> getModele_obj() {
 
 		String modele_string = modele.get("modele_string").toString();
 		String modele_id = modele.get("modele_id").toString();
 		Model modeleObj = Connexion.getConnetion(getToken()).request("model", new ObjectId(modele_id)).as(Model.class);
 		modeleObj.setToken(getToken());
-		Map<String, Model> map = new HashMap<>();
-		map.put(modele_string, modeleObj);
+		modele_obj = new HashMap<>();
+        modele_obj.put(modele_string, modeleObj);
 
-		return map;
+		return modele_obj;
 	}
 
+    public Map<String, String> getModele() {
+        return modele;
+    }
 
 	public void setAuteur(Map<String, String> auteur) {
         this.auteur = auteur;
 	}
 
-	public Map<String, Auteur> getAuteur() {
+	public Map<String, Auteur> getAuteur_obj() {
 
 		String auteur_string = auteur.get("auteur_string").toString();
 		String auteur_id = auteur.get("auteur_id").toString();
 		Auteur auteurObj = Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur_id)).as(Auteur.class);
 		auteurObj.setToken(getToken());
-		Map<String, Auteur> map = new HashMap<>();
-		map.put(auteur_string, auteurObj);
+		auteur_obj = new HashMap<>();
+        auteur_obj.put(auteur_string, auteurObj);
 
-    	return map;
+    	return auteur_obj;
 	}
 
-
+    public Map<String, String> getAuteur() {
+        return auteur;
+    }
 
 	public List<Map<String, String>> getOeuvresTraitees() {
 		return oeuvresTraitees;
