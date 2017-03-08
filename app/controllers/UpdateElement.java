@@ -34,6 +34,8 @@ public class UpdateElement extends Controller {
 
         byte[] bytes = request().getHeader("monToken").getBytes();
 
+        System.out.println("Dans UpdateElement (byte[] bytes): \n" + bytes);
+
         access = Connexion.getConnetion(bytes);
 
         mapper = new ObjectMapper();
@@ -74,6 +76,8 @@ public class UpdateElement extends Controller {
                 case "traitement" :      m = Json.fromJson(json, Traitement.class);
                     break;
             }
+
+            System.out.println("Dans UpdateElement (access.getToken()): \n" + access.getToken());
 
             m.setToken(access.getToken());
             m.setUpdated_at(new Date().toString());
