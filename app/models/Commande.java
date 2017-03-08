@@ -142,7 +142,7 @@ public class Commande  extends Commun{
 
 	public void setModele(Map<String, String> modele) {
 		this.modele = modele;
-		if (! this.modele.containsKey("modele_id")) {
+		if (this.modele.get("modele_string") != null && ! this.modele.containsKey("modele_id")) {
 			Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
 			String modele_id = modeleObj.get_id();
 			this.modele.put("modele_id", modele_id);
@@ -182,7 +182,7 @@ public class Commande  extends Commun{
 
 	public void setAuteur(Map<String, String> auteur) {
 		this.auteur = auteur;
-		if (! this.auteur.containsKey("auteur_id")) {
+		if (this.auteur.get("auteur_string") != null && !! this.auteur.containsKey("auteur_id")) {
 			Auteur auteurObj = Connexion.getConnetion(getToken()).request("auteur", "nom", this.auteur.get("auteur_string")).as(Auteur.class);
 			String auteur_id = auteurObj.get_id();
 			this.auteur.put("auteur_id", auteur_id);
