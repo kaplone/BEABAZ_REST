@@ -42,12 +42,10 @@ public class Commande  extends Commun{
 
     @Override
 	public void update(){
-		System.out.println("getToken() dans update() : " + getToken());
     	Connexion.getConnetion(getToken()).update("commande", this);
 	}
 	@Override
     public Commande save(){
-		System.out.println("getToken() dans save() : " + getToken());
 		return (Commande) Connexion.getConnetion(getToken()).save("commande", this);
 	}
     
@@ -142,23 +140,6 @@ public class Commande  extends Commun{
 
 	public void setModele(Map<String, String> modele) {
 		this.modele = modele;
-
-        System.out.println("getToken() dans setModel() : " + getToken());
-        System.out.println("getToken() dans setModel() : " + this.getNom());
-        System.out.println("getToken() dans setModel() : " + this.getToken());
-
-		if (this.modele.get("modele_string") != null &&  this.modele.get("modele_id") == null) {
-            Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
-            String modele_id = modeleObj.get_id();
-            this.modele.put("modele_id", modele_id);
-        }
-        else {
-            this.modele.put("modele_id", null);
-        }
-
-        System.out.println(this.modele);
-        System.out.println(this.modele.get("modele_string"));
-        System.out.println(this.modele.get("modele_id"));
 	}
 
 	public Map<String, Model> getModele_obj() {
@@ -194,14 +175,6 @@ public class Commande  extends Commun{
 
 	public void setAuteur(Map<String, String> auteur) {
 		this.auteur = auteur;
-		if (this.auteur.get("auteur_string") != null && !! this.auteur.containsKey("auteur_id")) {
-			Auteur auteurObj = Connexion.getConnetion(getToken()).request("auteur", "nom", this.auteur.get("auteur_string")).as(Auteur.class);
-			String auteur_id = auteurObj.get_id();
-			this.auteur.put("auteur_id", auteur_id);
-		}
-        else {
-            this.auteur.put("auteur_id", null);
-        }
 	}
 
 	public Map<String, Auteur> getAuteur_obj() {
