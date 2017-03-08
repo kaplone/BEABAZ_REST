@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.typesafe.config.ConfigException;
 import models.*;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -85,9 +86,10 @@ public class UpdateElement extends Controller {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return badRequest();
-
-
+        }
+        catch (ConfigException.Null npe){
+            npe.printStackTrace();
+            return badRequest();
         }
     }
-
 }

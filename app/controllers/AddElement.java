@@ -2,8 +2,6 @@ package controllers;
 
 import com.typesafe.config.ConfigException;
 import models.*;
-import play.api.http.HttpErrorHandlerExceptions;
-import play.api.http.HttpErrorHandlerExceptions$;
 import play.mvc.*;
 import play.libs.Json;
 import utils.Connexion;

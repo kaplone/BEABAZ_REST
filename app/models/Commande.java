@@ -43,7 +43,7 @@ public class Commande  extends Commun{
     @Override
 	public void update(){
 
-    	//Connexion.getConnetion(getToken()).update("commande", this);
+    	Connexion.getConnetion(getToken()).update("commande", this);
 	}
 	@Override
     public Commande save(){
