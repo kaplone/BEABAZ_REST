@@ -60,9 +60,6 @@ public class Commande  extends Commun{
         List<Map<String, Traitement>> traitements_attendusObj = new ArrayList<>();
 
         for(Map<String, String> m : traitements_attendus){
-
-			System.out.println("getToken() dans save() : " + getTraitements_attendus());
-
             String traitement_attendu_string = m.get("traitement_attendu_string").toString();
             String traitement_attendu_id = m.get("traitement_attendu_id").toString();
             Traitement traitement_attenduObj = Connexion.getConnetion(getToken()).request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
