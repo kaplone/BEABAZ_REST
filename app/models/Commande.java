@@ -34,7 +34,7 @@ public class Commande  extends Commun{
 
 	private List<Map<String, String>> oeuvresTraitees;
 
-	private List<Map<String, Object>> traitements_attendus;
+	private List<Map<String, String>> traitements_attendus;
 
     public Commande(){
         super();
@@ -59,7 +59,7 @@ public class Commande  extends Commun{
 
         List<Map<String, Traitement>> traitements_attendusObj = new ArrayList<>();
 
-        for(Map<String, Object> m : traitements_attendus){
+        for(Map<String, String> m : traitements_attendus){
             String traitement_attendu_string = m.get("traitement_attendu_string").toString();
             String traitement_attendu_id = m.get("traitement_attendu_id").toString();
             Traitement traitement_attenduObj = Connexion.getConnetion(getToken()).request("traitement", new ObjectId(traitement_attendu_id)).as(Traitement.class);
@@ -71,7 +71,7 @@ public class Commande  extends Commun{
     	return traitements_attendusObj;
 	}
 
-	public void setTraitements_attendus(List<Map<String, Object>> traitements_attendus) {
+	public void setTraitements_attendus(List<Map<String, String>> traitements_attendus) {
 		this.traitements_attendus = traitements_attendus;
 	}
 
@@ -141,7 +141,12 @@ public class Commande  extends Commun{
 	}
 
 	public void setModele(Map<String, String> modele) {
-    	this.modele = modele;
+		this.modele = modele;
+		if (! this.modele.containsKey("modele_id")) {
+			Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
+			String modele_id = modeleObj.get_id();
+			this.modele.put("modele_id", modele_id);
+		}
 	}
 
 	public Map<String, Model> getModele_obj() {
@@ -176,7 +181,12 @@ public class Commande  extends Commun{
     }
 
 	public void setAuteur(Map<String, String> auteur) {
-        this.auteur = auteur;
+		this.auteur = auteur;
+		if (! this.auteur.containsKey("auteur_id")) {
+			Auteur auteurObj = Connexion.getConnetion(getToken()).request("auteur", "nom", this.auteur.get("auteur_string")).as(Auteur.class);
+			String auteur_id = auteurObj.get_id();
+			this.auteur.put("auteur_id", auteur_id);
+		}
 	}
 
 	public Map<String, Auteur> getAuteur_obj() {
