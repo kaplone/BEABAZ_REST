@@ -143,10 +143,17 @@ public class Commande  extends Commun{
 	public void setModele(Map<String, String> modele) {
 		this.modele = modele;
 		if (this.modele.get("modele_string") != null && ! this.modele.containsKey("modele_id")) {
-			Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
-			String modele_id = modeleObj.get_id();
-			this.modele.put("modele_id", modele_id);
-		}
+            Model modeleObj = Connexion.getConnetion(getToken()).request("model", "nom", this.modele.get("modele_string")).as(Model.class);
+            String modele_id = modeleObj.get_id();
+            this.modele.put("modele_id", modele_id);
+        }
+        else {
+            this.modele.put("modele_id", null);
+        }
+
+        System.out.println(this.modele);
+        System.out.println(this.modele.get("modele_string"));
+        System.out.println(this.modele.get("modele_id"));
 	}
 
 	public Map<String, Model> getModele_obj() {
@@ -187,6 +194,9 @@ public class Commande  extends Commun{
 			String auteur_id = auteurObj.get_id();
 			this.auteur.put("auteur_id", auteur_id);
 		}
+        else {
+            this.auteur.put("auteur_id", null);
+        }
 	}
 
 	public Map<String, Auteur> getAuteur_obj() {
