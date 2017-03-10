@@ -21,11 +21,11 @@ public class Model extends Commun{
 
 	}
 
-//	@JsonIgnore
-//	public Path getCheminVersModel() {
-//		return Paths.get(cheminVersModelSTR);
-//	}
-//
+	@JsonIgnore
+	public Path getCheminVersModel() {
+		return Paths.get(cheminVersModelSTR);
+	}
+
 	public String getCheminVersModelSTR() {
 		return cheminVersModelSTR;
 	}
