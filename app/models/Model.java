@@ -2,6 +2,8 @@ package models;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import utils.Connexion;
 
 public class Model extends Commun{
@@ -19,9 +21,11 @@ public class Model extends Commun{
 
 	}
 
-	public Path getCheminVersModel() {
-		return Paths.get(cheminVersModelSTR);
-	}
+//	@JsonIgnore
+//	public Path getCheminVersModel() {
+//		return Paths.get(cheminVersModelSTR);
+//	}
+//
 	public String getCheminVersModelSTR() {
 		return cheminVersModelSTR;
 	}

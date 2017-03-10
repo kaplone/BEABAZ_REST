@@ -38,48 +38,6 @@ public class TacheTraitement extends Commun{
 		return (TacheTraitement) Connexion.getConnetion(getToken()).save("tacheTraitement", this);
 
 	}
-    
-//    public void addProduit(Produit p){
-//
-//    	if (! produitsLies.keySet().contains(p.getNom())){
-//    		produitsLies.put(p.getNom(), p.get_id());
-//    	}
-//
-//    }
-//
-//    public void addProduit(String p){
-//
-//    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", "nom", p).as(Produit.class);
-//    	p_.setToken(getToken());
-//    	this.addProduit(p_);
-//
-//    }
-//
-//    public void addProduit(ObjectId id){
-//    	Produit p_ = Connexion.getConnetion(getToken()).request("produit", id).as(Produit.class);
-//    	p_.setToken(getToken());
-//    	this.addProduit(p_);
-//    }
-//
-//    public void deleteProduit(Produit p){
-//
-//    	for (String p_ : produitsLies.keySet()){
-//    		if (p.getNom().equals(p_)){
-//    			produitsLies.remove(p_);
-//    			break;
-//    		}
-//    	}
-//    }
-//
-//    public void deleteProduit(String p){
-//
-//    	for (String p_ : produitsLies.keySet()){
-//    		if (p_.equals(p)){
-//    			produitsLies.remove(p_);
-//    			break;
-//    		}
-//    	}
-//    }
 
 	public String getFait() {
 		return fait_.toString();
@@ -105,25 +63,15 @@ public class TacheTraitement extends Commun{
 	public void setTraitement_id(String traitement) {
 		this.traitement_id = traitement;
 	}
+	public void setTraitement_id(ObjectId id) {
+		this.traitement_id = id.toString();
+	}
 	
 	public Traitement getTraitement(){
     	Traitement t_ = Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
     	t_.setToken(getToken());
     	 return t_;
 	}
-	
-//	public ImageView getIcone_progression() {
-//
-//
-//        Image image = new Image(fait_.getUsedImage());
-//
-//        ImageView usedImage = new ImageView();
-//        usedImage.setFitHeight(15);
-//        usedImage.setPreserveRatio(true);
-//        usedImage.setImage(image);
-//
-//		return usedImage;
-//	}
 
 	public boolean isSupp() {
 		return supp;
@@ -147,6 +95,10 @@ public class TacheTraitement extends Commun{
 	public Set<String> getProduitsLies_names() {
 		return produitsLies.keySet();
 	}
+
+//	public void setProduitsLies_names(Map<String, String> produitsLies) {
+//		this.produitsLies = produitsLies;
+//	}
 	
 	public  Collection<String> getProduitsLies_id() {
 		return produitsLies.values();
