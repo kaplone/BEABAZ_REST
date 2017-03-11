@@ -24,6 +24,7 @@ public class TacheTraitement extends Commun{
 	private String complement;
 	private Map<String, String> produitsLies;
 	private String nom_complet;
+	private Traitement traitement;
     
     private boolean supp; 
     
@@ -73,11 +74,11 @@ public class TacheTraitement extends Commun{
 		System.out.println("ObjectId : " + this.traitement_id);
 	}
 	
-	public Traitement getTraitement(){
-    	Traitement t_ = Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
-    	t_.setToken(getToken());
-    	 return t_;
-	}
+//	public Traitement getTraitement(){
+//    	Traitement t_ = Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
+//    	t_.setToken(getToken());
+//    	 return t_;
+//	}
 
 	public boolean isSupp() {
 		return supp;
@@ -126,4 +127,11 @@ public class TacheTraitement extends Commun{
 		this.produitsLies = produitsLies;
 	}
 
+	public Traitement getTraitement() {
+		return traitement;
+	}
+
+	public void setTraitement(Traitement traitement) {
+		this.traitement = traitement;
+	}
 }
