@@ -69,14 +69,6 @@ public class TacheTraitement extends Commun{
 		this.traitement_id = id.toString();
 		System.out.println("ObjectId : " + this.traitement_id);
 	}
-	public void setTraitement_id(Traitement id) {
-		this.traitement_id = id.get_id();
-		System.out.println("Traitement : " + this.traitement_id);
-	}
-	public void setTraitement_id(Object id) {
-		this.traitement_id = id.toString();
-		System.out.println("Object : " + this.traitement_id);
-	}
 	
 	public Traitement getTraitement(){
     	Traitement t_ = Connexion.getConnetion(getToken()).request("traitement", traitement_id).as(Traitement.class);
