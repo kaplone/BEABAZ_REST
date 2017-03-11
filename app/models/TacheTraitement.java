@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import utils.Connexion;
 import javafx.scene.image.Image;
@@ -21,6 +23,7 @@ public class TacheTraitement extends Commun{
 	private String traitement_id;
 	private String complement;
 	private Map<String, String> produitsLies;
+	private String nom_complet;
     
     private boolean supp; 
     
@@ -85,7 +88,11 @@ public class TacheTraitement extends Commun{
 	}
 	
 	public String getNom_complet(){
-		return this.getTraitement().getNom_complet() + this.getComplement() != null ? " " + this.getComplement() : "";
+		return this.nom_complet;
+	}
+	public void setNom_complet(String nom_complet){
+		this.nom_complet  = nom_complet;
+
 	}
 	
 	public Progression getFait_(){
