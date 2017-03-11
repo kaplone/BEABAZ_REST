@@ -60,6 +60,7 @@ public class TacheTraitement extends Commun{
 	public String getTraitement_id() {
 		return traitement_id;
 	}
+
 	public void setTraitement_id(String traitement) {
 		this.traitement_id = traitement;
 		System.out.println("String : " + this.traitement_id);
@@ -71,6 +72,10 @@ public class TacheTraitement extends Commun{
 	public void setTraitement_id(Traitement id) {
 		this.traitement_id = id.get_id();
 		System.out.println("Traitement : " + this.traitement_id);
+	}
+	public void setTraitement_id(Object id) {
+		this.traitement_id = id.toString();
+		System.out.println("Object : " + this.traitement_id);
 	}
 	
 	public Traitement getTraitement(){
