@@ -54,18 +54,23 @@ public class AddFromDocument extends Controller {
 
         System.out.println("Dans AddFromDocument : \n" + json);
 
+        System.out.println( json.get("document").size());
+        System.out.println( json.get("document"));
+
         json.get("document").forEach(a -> {
+
+            System.out.println(a);
 
             try {
 
-                jsonOeuvre = adaptationJson.adaptationVersOeuvre(json.get("oeuvre"), access);
+                jsonOeuvre = adaptationJson.adaptationVersOeuvre(a.get("oeuvre"), access);
 
                 o = Json.fromJson(jsonOeuvre, Oeuvre.class);
                 o.setToken(access.getToken());
                 o.setCreated_at(new Date().toString());
                 o = o.save();
 
-                jsonOeuvreTraitee = adaptationJson.adaptationVersOeuvreTraitee(json.get("oeuvreTraitee"), o.get_id(), access);
+                jsonOeuvreTraitee = adaptationJson.adaptationVersOeuvreTraitee(a.get("oeuvreTraitee"), o.get_id(), access);
 
                 ot = Json.fromJson(jsonOeuvreTraitee, OeuvreTraitee.class);
                 ot.setOeuvre_id(o.get_id());
