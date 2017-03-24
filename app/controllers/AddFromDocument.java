@@ -101,7 +101,7 @@ public class AddFromDocument extends Controller {
 
         commande.setToken(access.getToken());
         commande.setCreated_at(new Date().toString());
-        commande = commande.save();
+        commande.update();
 
         String stringResult = mapper.writeValueAsString(commande);
 
