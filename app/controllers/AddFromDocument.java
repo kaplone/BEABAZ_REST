@@ -57,14 +57,13 @@ public class AddFromDocument extends Controller {
         commande = access.request("commande", json.get("document").get(0).get("oeuvreTraitee").get("commande_id").asText()).as(Commande.class);
 
         List<Map<String, String>> ots = commande.getOeuvresTraitees() != null ? commande.getOeuvresTraitees() : new ArrayList<>();
-        final Map<String, String> ot_map = new HashMap<>();
 
 
         System.out.println("Dans AddFromDocument : \n" + json);
 
         json.get("document").forEach(a -> {
 
-            ot_map.clear();
+            Map<String, String> ot_map = new HashMap<>();
 
             try {
 
@@ -76,9 +75,7 @@ public class AddFromDocument extends Controller {
                 o = o.save();
 
                 jsonOeuvreTraitee = adaptationJson.adaptationVersOeuvreTraitee(a.get("oeuvreTraitee"),
-                                                                                      o.get_id(),
-                                                                                      o.getCote_archives_6s(),
-                                                                                      o.getNom(),
+                                                                                      o,
                                                                                       access);
 
                 ot = Json.fromJson(jsonOeuvreTraitee, OeuvreTraitee.class);

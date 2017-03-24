@@ -50,6 +50,17 @@ public class GetElements extends Controller {
 
     }
 
+    public Result getId(String collection, ObjectId objectId) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
+
+        byte[] bytes = request().getHeader("monToken").getBytes();
+
+        access = Connexion.getConnetion(bytes);
+
+        return ok(new ObjectMapper().readTree(mapping(access.request(collection, objectId), collection).toString()));
+
+
+    }
+
     public Result getField(String collection, String champ, String valeur) throws InvalidAlgorithmParameterException, UnsupportedOperationException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException{
 
         valeur = valeur.replace("%20", " ");

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.Auteur;
-import models.Matiere;
-import models.TacheTraitement;
-import models.Technique;
+import models.*;
 
 import java.util.*;
 
@@ -84,11 +81,16 @@ public class AdaptationJson {
         return jsonOrigine;
     }
 
-    public JsonNode adaptationVersOeuvreTraitee(JsonNode jsonOrigine, String oeuvre_id, String coteOeuvre, String nomOeuvre, MongoAccess access){
+    public JsonNode adaptationVersOeuvreTraitee(JsonNode jsonOrigine, Oeuvre o, MongoAccess access){
 
-        ((ObjectNode) jsonOrigine).put("oeuvre_id", oeuvre_id);
-        ((ObjectNode) jsonOrigine).put("cote", coteOeuvre);
-        ((ObjectNode) jsonOrigine).put("nom", nomOeuvre);
+        ((ObjectNode) jsonOrigine).put("oeuvre_id", o.get_id());
+        ((ObjectNode) jsonOrigine).put("cote", o.getCote_archives_6s());
+        ((ObjectNode) jsonOrigine).put("key1", o.getTitre_de_l_oeuvre());
+        ((ObjectNode) jsonOrigine).put("key2", o.getDimensions());
+        ((ObjectNode) jsonOrigine).put("nom", o.getNom());
+
+        ((ObjectNode) jsonOrigine).put("etat", "BON");
+        ((ObjectNode) jsonOrigine).put("progressionOeuvreTraitee", "TODO_");
 
         ArrayNode alterations = JsonNodeFactory.instance.arrayNode();
         ArrayNode listeTraitementsAttendus = JsonNodeFactory.instance.arrayNode();
