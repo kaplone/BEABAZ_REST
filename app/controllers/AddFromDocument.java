@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by kaplone on 01/05/16.
@@ -36,6 +36,8 @@ public class AddFromDocument extends Controller {
 
     private AdaptationJson adaptationJson;
 
+    private Commande commande;
+
     private int compte;
 
 
@@ -52,14 +54,17 @@ public class AddFromDocument extends Controller {
 
         compte = 0;
 
-        System.out.println("Dans AddFromDocument : \n" + json);
+        commande = access.request("commande", json.get("document").get(0).get("oeuvreTraitee").get("commande_id").asText()).as(Commande.class);
 
-        System.out.println( json.get("document").size());
-        System.out.println( json.get("document"));
+        List<Map<String, String>> ots = commande.getOeuvresTraitees() != null ? commande.getOeuvresTraitees() : new ArrayList<>();
+        final Map<String, String> ot_map = new HashMap<>();
+
+
+        System.out.println("Dans AddFromDocument : \n" + json);
 
         json.get("document").forEach(a -> {
 
-            System.out.println(a);
+            ot_map.clear();
 
             try {
 
@@ -70,7 +75,11 @@ public class AddFromDocument extends Controller {
                 o.setCreated_at(new Date().toString());
                 o = o.save();
 
-                jsonOeuvreTraitee = adaptationJson.adaptationVersOeuvreTraitee(a.get("oeuvreTraitee"), o.get_id(), access);
+                jsonOeuvreTraitee = adaptationJson.adaptationVersOeuvreTraitee(a.get("oeuvreTraitee"),
+                                                                                      o.get_id(),
+                                                                                      o.getCote_archives_6s(),
+                                                                                      o.getNom(),
+                                                                                      access);
 
                 ot = Json.fromJson(jsonOeuvreTraitee, OeuvreTraitee.class);
                 ot.setOeuvre_id(o.get_id());
@@ -78,12 +87,24 @@ public class AddFromDocument extends Controller {
                 ot.setCreated_at(new Date().toString());
                 ot = ot.save();
 
+                ot_map.put("oeuvresTraitee_id", ot.get_id());
+                ot_map.put("oeuvresTraitee_string", ot.getNom());
+                ot_map.put("oeuvresTraitee_etat", "TODO_");
+
+                ots.add(ot_map);
+
                 compte++;
             }catch (ConfigException.Null npe) {
                 npe.printStackTrace();
             }
         });
 
-        return ok(String.format("%d objets créés", compte));
+        commande.setToken(access.getToken());
+        commande.setCreated_at(new Date().toString());
+        commande = commande.save();
+
+        String stringResult = mapper.writeValueAsString(commande);
+
+        return ok(new ObjectMapper().readTree(stringResult));
     }
 }

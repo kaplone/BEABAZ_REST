@@ -6,11 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import utils.Connexion;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import enums.Progression;
 import utils.MongoAccess;
@@ -31,6 +29,11 @@ public class TacheTraitement extends Commun{
     public TacheTraitement(){
     	produitsLies = new HashMap<>();
     }
+
+	public TacheTraitement(String traitementStr, MongoAccess access){
+		traitement = access.request("traitement", "nom", traitementStr).as(Traitement.class);
+		produitsLies = new HashMap<>();
+	}
     
     public void update(){
 

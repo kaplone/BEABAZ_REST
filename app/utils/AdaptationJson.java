@@ -6,12 +6,10 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Auteur;
 import models.Matiere;
+import models.TacheTraitement;
 import models.Technique;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -86,9 +84,66 @@ public class AdaptationJson {
         return jsonOrigine;
     }
 
-    public JsonNode adaptationVersOeuvreTraitee(JsonNode jsonOrigine, String oeuvre_id, MongoAccess access){
+    public JsonNode adaptationVersOeuvreTraitee(JsonNode jsonOrigine, String oeuvre_id, String coteOeuvre, String nomOeuvre, MongoAccess access){
 
         ((ObjectNode) jsonOrigine).put("oeuvre_id", oeuvre_id);
+        ((ObjectNode) jsonOrigine).put("cote", coteOeuvre);
+        ((ObjectNode) jsonOrigine).put("nom", nomOeuvre);
+
+        ArrayNode alterations = JsonNodeFactory.instance.arrayNode();
+        ArrayNode listeTraitementsAttendus = JsonNodeFactory.instance.arrayNode();
+
+        String alterationsStr = jsonOrigine.get("alterations depot").asText();
+        List<String> alterations_raw = Arrays.asList(alterationsStr.split(","));
+        alterations_raw.forEach(a -> {
+            String b = a.trim();
+            alterations.add(b);
+        });
+
+        alterationsStr = jsonOrigine.get("alterations physiques").asText();
+        alterations_raw = Arrays.asList(alterationsStr.split(","));
+        alterations_raw.forEach(a -> {
+            String b = a.trim();
+            alterations.add(b);
+        });
+
+        alterationsStr = jsonOrigine.get("alterations chimiques").asText();
+        alterations_raw = Arrays.asList(alterationsStr.split(","));
+        alterations_raw.forEach(a -> {
+            String b = a.trim();
+            alterations.add(b);
+        });
+
+        alterationsStr = jsonOrigine.get("alterations techniques").asText();
+        alterations_raw = Arrays.asList(alterationsStr.split(","));
+        alterations_raw.forEach(a -> {
+            String b = a.trim();
+            alterations.add(b);
+        });
+
+        ((ObjectNode) jsonOrigine).set("alterations_string", alterations);
+
+
+        // traitement suppression elements // traitement consolidation // traitement depoussierage //
+        String traitementsStr = jsonOrigine.get("traitement depoussierage").asText();
+        List<String> traitements_raw = Arrays.asList(traitementsStr.split(","));
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
+        ((ObjectNode) jsonOrigine).set("traitementsAttendus", listeTraitementsAttendus);
 
         return jsonOrigine;
 
