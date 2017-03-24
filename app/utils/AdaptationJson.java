@@ -200,6 +200,7 @@ public class AdaptationJson {
             TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
             tacheTraitementObj.setToken(access.getToken());
             tacheTraitementObj.setCreated_at(new Date().toString());
+            tacheTraitementObj.setFait_("TODO_");
             tacheTraitementObj = tacheTraitementObj.save();
 
             traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
