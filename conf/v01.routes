@@ -9,6 +9,7 @@ GET     /:collection/:champ/:valeur/all                 controllers.GetElements.
 GET     /:collection/:champ/:valeur/:regex              controllers.GetElements.getFieldRegex(collection: String, champ: String, valeur: String, regex: String)
 GET     /:collection/:champ1/:valeur1/:champ2/:valeur2  controllers.GetElements.getFields(collection: String, champ1: String, valeur1: String, champ2: String, valeur2: String)
 
+POST    /ajout                                          controllers.AddFromDocument.add()
 POST    /ajout/:collection                              controllers.AddElement.addOne(collection :String)
 POST    /update/:collection                             controllers.UpdateElement.updateOne(collection :String)
 
