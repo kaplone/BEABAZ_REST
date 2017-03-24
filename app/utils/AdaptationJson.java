@@ -23,6 +23,7 @@ public class AdaptationJson {
         if (auteurObj == null){
             auteurObj = new Auteur();
             auteurObj.setNom(auteurStr);
+            auteurObj.setCreated_at(new Date().toString());
             auteurObj.setToken(access.getToken());
             auteurObj = auteurObj.save();
         }
@@ -43,6 +44,7 @@ public class AdaptationJson {
                 if (matiereObj == null){
                     matiereObj = new Matiere();
                     matiereObj.setNom(b);
+                    matiereObj.setCreated_at(new Date().toString());
                     matiereObj.setToken(access.getToken());
                     matiereObj = matiereObj.save();
                 }
@@ -67,6 +69,7 @@ public class AdaptationJson {
                 if (techniqueObj == null){
                     techniqueObj = new Technique();
                     techniqueObj.setNom(b);
+                    techniqueObj.setCreated_at(new Date().toString());
                     techniqueObj.setToken(access.getToken());
                     techniqueObj = techniqueObj.save();
                 }
