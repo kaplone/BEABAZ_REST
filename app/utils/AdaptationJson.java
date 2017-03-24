@@ -32,7 +32,7 @@ public class AdaptationJson {
 
         ((ObjectNode) jsonOrigine).put("auteur", auteurObj.get_id());
 
-        String listeMatieresStr = jsonOrigine.get("matieres").asText();
+        String listeMatieresStr = jsonOrigine.get("matieres") != null ? jsonOrigine.get("matieres").asText() : "";
         if (listeMatieresStr != null){
 
             List<String> listeMatieres = Arrays.asList(listeMatieresStr.split(","));
@@ -56,7 +56,7 @@ public class AdaptationJson {
             ((ObjectNode) jsonOrigine).set("matieresUtilisees_id", on);
         }
 
-        String listeTechniquesStr = jsonOrigine.get("techniques").asText();
+        String listeTechniquesStr = jsonOrigine.get("techniques") != null ? jsonOrigine.get("techniques").asText() : "";
         if (listeTechniquesStr != null){
 
             List<String> listeTechniques = Arrays.asList(listeTechniquesStr.split(","));
@@ -94,28 +94,28 @@ public class AdaptationJson {
         ArrayNode listeTraitementsAttendus = JsonNodeFactory.instance.arrayNode();
         ArrayNode produits = JsonNodeFactory.instance.arrayNode();
 
-        String alterationsStr = jsonOrigine.get("alterations depot").asText();
+        String alterationsStr = jsonOrigine.get("alterations depot") != null ? jsonOrigine.get("alterations depot").asText() : "";
         List<String> alterations_raw = Arrays.asList(alterationsStr.split(","));
         alterations_raw.forEach(a -> {
             String b = a.trim();
             alterations.add(b);
         });
 
-        alterationsStr = jsonOrigine.get("alterations physiques").asText();
+        alterationsStr = jsonOrigine.get("alterations physiques") != null ? jsonOrigine.get("alterations physiques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
         alterations_raw.forEach(a -> {
             String b = a.trim();
             alterations.add(b);
         });
 
-        alterationsStr = jsonOrigine.get("alterations chimiques").asText();
+        alterationsStr = jsonOrigine.get("alterations chimiques") != null ? jsonOrigine.get("alterations chimiques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
         alterations_raw.forEach(a -> {
             String b = a.trim();
             alterations.add(b);
         });
 
-        alterationsStr = jsonOrigine.get("alterations techniques").asText();
+        alterationsStr = jsonOrigine.get("alterations techniques") != null ? jsonOrigine.get("alterations techniques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
         alterations_raw.forEach(a -> {
             String b = a.trim();
@@ -126,7 +126,7 @@ public class AdaptationJson {
 
 
         // traitement suppression elements // traitement consolidation // traitement depoussierage //
-        String traitementsStr = jsonOrigine.get("traitement depoussierage").asText();
+        String traitementsStr = jsonOrigine.get("traitement depoussierage") != null ? jsonOrigine.get("traitement depoussierage").asText() : "";
         List<String> traitements_raw = Arrays.asList(traitementsStr.split(","));
         traitements_raw.forEach(a -> {
             String b = a.trim();
@@ -144,7 +144,7 @@ public class AdaptationJson {
             listeTraitementsAttendus.add(traitementAttendu_node);
         });
 
-        traitementsStr = jsonOrigine.get("traitement suppression elements").asText();
+        traitementsStr = jsonOrigine.get("traitement suppression elements") != null ? jsonOrigine.get("traitement suppression elements").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
         traitements_raw.forEach(a -> {
             String b = a.trim();
@@ -162,7 +162,7 @@ public class AdaptationJson {
             listeTraitementsAttendus.add(traitementAttendu_node);
         });
 
-        traitementsStr = jsonOrigine.get("traitements aqueux").asText();
+        traitementsStr = jsonOrigine.get("traitements aqueux") != null ? jsonOrigine.get("traitements aqueux").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
         traitements_raw.forEach(a -> {
             String b = a.trim();
@@ -180,7 +180,7 @@ public class AdaptationJson {
             listeTraitementsAttendus.add(traitementAttendu_node);
         });
 
-        traitementsStr = jsonOrigine.get("traitement consolidation").asText();
+        traitementsStr = jsonOrigine.get("traitement consolidation") != null ? jsonOrigine.get("traitement consolidation").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
         traitements_raw.forEach(a -> {
             String b = a.trim();
@@ -198,7 +198,7 @@ public class AdaptationJson {
             listeTraitementsAttendus.add(traitementAttendu_node);
         });
 
-        traitementsStr = jsonOrigine.get("traitement mise a plat").asText();
+        traitementsStr = jsonOrigine.get("traitement mise a plat") != null ? jsonOrigine.get("traitement mise a plat").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
         traitements_raw.forEach(a -> {
             String b = a.trim();
@@ -216,7 +216,7 @@ public class AdaptationJson {
             listeTraitementsAttendus.add(traitementAttendu_node);
         });
 
-        traitementsStr = jsonOrigine.get("traitement retouche").asText();
+        traitementsStr = jsonOrigine.get("traitement retouche") != null ? jsonOrigine.get("traitement retouche").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
         traitements_raw.forEach(a -> {
             String b = a.trim();
