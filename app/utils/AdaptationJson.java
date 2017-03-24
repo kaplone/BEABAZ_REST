@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
-import org.bson.types.ObjectId;
 
 import java.util.*;
 
@@ -102,24 +101,31 @@ public class AdaptationJson {
 
         String alterationsStr = jsonOrigine.get("alterations depot") != null ? jsonOrigine.get("alterations depot").asText() : "";
         List<String> alterations_raw = Arrays.asList(alterationsStr.split(","));
-        alterations_raw.forEach(a -> {
-            String b = a.trim();
-            alterations.add(b);
-        });
+        if (! alterations_raw.isEmpty()){
+            alterations_raw.forEach(a -> {
+                String b = a.trim();
+                alterations.add(b);
+            });
+        }
 
         alterationsStr = jsonOrigine.get("alterations physiques") != null ? jsonOrigine.get("alterations physiques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
-        alterations_raw.forEach(a -> {
-            String b = a.trim();
-            alterations.add(b);
-        });
+        if (! alterations_raw.isEmpty()){
+            alterations_raw.forEach(a -> {
+                String b = a.trim();
+                alterations.add(b);
+            });
+        }
 
         alterationsStr = jsonOrigine.get("alterations chimiques") != null ? jsonOrigine.get("alterations chimiques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
-        alterations_raw.forEach(a -> {
-            String b = a.trim();
-            alterations.add(b);
-        });
+        if (! alterations_raw.isEmpty()){
+            alterations_raw.forEach(a -> {
+                String b = a.trim();
+                alterations.add(b);
+            });
+        }
+
 
         alterationsStr = jsonOrigine.get("alterations techniques") != null ? jsonOrigine.get("alterations techniques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
@@ -134,114 +140,41 @@ public class AdaptationJson {
         // traitement suppression elements // traitement consolidation // traitement depoussierage //
         String traitementsStr = jsonOrigine.get("traitement depoussierage") != null ? jsonOrigine.get("traitement depoussierage").asText() : "";
         List<String> traitements_raw = Arrays.asList(traitementsStr.split(","));
-        traitements_raw.forEach(a -> {
-            String b = a.trim();
-
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
-
-            traitementAttendu_node.put("traitementAttendu_string", b);
-
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj = tacheTraitementObj.save();
-
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
-        });
+        if (! traitements_raw.isEmpty()){
+            listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
+        }
 
         traitementsStr = jsonOrigine.get("traitement suppression elements") != null ? jsonOrigine.get("traitement suppression elements").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
-        traitements_raw.forEach(a -> {
-            String b = a.trim();
-
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
-
-            traitementAttendu_node.put("traitementAttendu_string", b);
-
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj = tacheTraitementObj.save();
-
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
-        });
+        if (! traitements_raw.isEmpty()){
+            listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
+        }
 
         traitementsStr = jsonOrigine.get("traitements aqueux") != null ? jsonOrigine.get("traitements aqueux").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
-        traitements_raw.forEach(a -> {
-            String b = a.trim();
-
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
-
-            traitementAttendu_node.put("traitementAttendu_string", b);
-
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj = tacheTraitementObj.save();
-
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
-        });
+        if (! traitements_raw.isEmpty()){
+            listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
+        }
 
         traitementsStr = jsonOrigine.get("traitement consolidation") != null ? jsonOrigine.get("traitement consolidation").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
-        traitements_raw.forEach(a -> {
-            String b = a.trim();
-
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
-
-            traitementAttendu_node.put("traitementAttendu_string", b);
-
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj = tacheTraitementObj.save();
-
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
-        });
+        if (! traitements_raw.isEmpty()){
+            listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
+        }
 
         traitementsStr = jsonOrigine.get("traitement mise a plat") != null ? jsonOrigine.get("traitement mise a plat").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
-        traitements_raw.forEach(a -> {
-            String b = a.trim();
-
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
-
-            traitementAttendu_node.put("traitementAttendu_string", b);
-
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj = tacheTraitementObj.save();
-
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
-        });
+        if (! traitements_raw.isEmpty()){
+            listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
+        }
 
         traitementsStr = jsonOrigine.get("traitement retouche") != null ? jsonOrigine.get("traitement retouche").asText() : "";
         traitements_raw = Arrays.asList(traitementsStr.split(","));
-        traitements_raw.forEach(a -> {
-            String b = a.trim();
-
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
-
-            traitementAttendu_node.put("traitementAttendu_string", b);
-
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj = tacheTraitementObj.save();
-
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
-        });
+        if (! traitements_raw.isEmpty()){
+            listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
+        }
 
         ((ObjectNode) jsonOrigine).set("traitementsAttendus", listeTraitementsAttendus);
-
 
         String produitsStr = jsonOrigine.get("produits utilisés") != null ? jsonOrigine.get("produits utilisés").asText() : "";
         List<String> produits_raw = Arrays.asList(produitsStr.split(","));
@@ -253,5 +186,28 @@ public class AdaptationJson {
         ((ObjectNode) jsonOrigine).set("produits_string", produits);
 
         return jsonOrigine;
+    }
+
+    public ArrayNode ajouterTraitement(List<String> traitements_raw, MongoAccess access, ArrayNode listeTraitementsAttendus){
+
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj.setCreated_at(new Date().toString());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
+        return listeTraitementsAttendus;
+
     }
 }
