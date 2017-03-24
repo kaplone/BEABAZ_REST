@@ -145,7 +145,9 @@ public class GetElements extends Controller {
 
                     break;
                 case "fichier" : Fichier m_fichier = find.as(Fichier.class);
-                    m_fichier.setToken(access.getToken());
+                    if (m_fichier != null){
+                        m_fichier.setToken(access.getToken());
+                    }
                     stringResult = mapper.writeValueAsString(m_fichier);
 
                     break;
