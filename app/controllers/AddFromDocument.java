@@ -99,6 +99,8 @@ public class AddFromDocument extends Controller {
             }
         });
 
+        commande.setOeuvresTraitees(ots);
+
         commande.setToken(access.getToken());
         commande.setCreated_at(new Date().toString());
         commande.update();
