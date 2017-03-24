@@ -52,6 +52,9 @@ public class OeuvreTraitee extends Commun {
 	public void setEtat(EtatFinal etat) {
 		this.etat = etat;
 	}
+	public void setEtat(String etat) {
+		this.etat = EtatFinal.valueOf(etat);
+	}
 
 	public List<Map<String, String>> getFichiers() {
 

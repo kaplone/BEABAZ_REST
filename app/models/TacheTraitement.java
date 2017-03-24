@@ -105,6 +105,9 @@ public class TacheTraitement extends Commun{
 	public void setFait_(Progression p){
 		fait_ = p;
 	}
+	public void setFait_(String p){
+		fait_ = Progression.valueOf(p);
+	}
 
 	public Set<String> getProduitsLies_names() {
 		return produitsLies.keySet();

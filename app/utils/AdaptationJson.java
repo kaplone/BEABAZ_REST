@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
+import org.bson.types.ObjectId;
 
 import java.util.*;
 
@@ -252,6 +253,5 @@ public class AdaptationJson {
         ((ObjectNode) jsonOrigine).set("produits_string", produits);
 
         return jsonOrigine;
-
     }
 }
