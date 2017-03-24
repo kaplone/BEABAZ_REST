@@ -237,7 +237,7 @@ public class AdaptationJson {
         ((ObjectNode) jsonOrigine).set("traitementsAttendus", listeTraitementsAttendus);
 
 
-        String produitsStr = jsonOrigine.get("alterations depot").asText();
+        String produitsStr = jsonOrigine.get("produits utilisés") != null ? jsonOrigine.get("produits utilisés").asText() : "";
         List<String> produits_raw = Arrays.asList(produitsStr.split(","));
         produits_raw.forEach(a -> {
             String b = a.trim();
