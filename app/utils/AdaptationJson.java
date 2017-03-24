@@ -92,6 +92,7 @@ public class AdaptationJson {
 
         ArrayNode alterations = JsonNodeFactory.instance.arrayNode();
         ArrayNode listeTraitementsAttendus = JsonNodeFactory.instance.arrayNode();
+        ArrayNode produits = JsonNodeFactory.instance.arrayNode();
 
         String alterationsStr = jsonOrigine.get("alterations depot").asText();
         List<String> alterations_raw = Arrays.asList(alterationsStr.split(","));
@@ -143,7 +144,107 @@ public class AdaptationJson {
             listeTraitementsAttendus.add(traitementAttendu_node);
         });
 
+        traitementsStr = jsonOrigine.get("traitement suppression elements").asText();
+        traitements_raw = Arrays.asList(traitementsStr.split(","));
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
+        traitementsStr = jsonOrigine.get("traitements aqueux").asText();
+        traitements_raw = Arrays.asList(traitementsStr.split(","));
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
+        traitementsStr = jsonOrigine.get("traitement consolidation").asText();
+        traitements_raw = Arrays.asList(traitementsStr.split(","));
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
+        traitementsStr = jsonOrigine.get("traitement mise a plat").asText();
+        traitements_raw = Arrays.asList(traitementsStr.split(","));
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
+        traitementsStr = jsonOrigine.get("traitement retouche").asText();
+        traitements_raw = Arrays.asList(traitementsStr.split(","));
+        traitements_raw.forEach(a -> {
+            String b = a.trim();
+
+            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+
+            traitementAttendu_node.put("traitementAttendu_string", b);
+
+            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+            tacheTraitementObj.setToken(access.getToken());
+            tacheTraitementObj = tacheTraitementObj.save();
+
+            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
+
+            listeTraitementsAttendus.add(traitementAttendu_node);
+        });
+
         ((ObjectNode) jsonOrigine).set("traitementsAttendus", listeTraitementsAttendus);
+
+
+        String produitsStr = jsonOrigine.get("alterations depot").asText();
+        List<String> produits_raw = Arrays.asList(produitsStr.split(","));
+        produits_raw.forEach(a -> {
+            String b = a.trim();
+            produits.add(b);
+        });
+
+        ((ObjectNode) jsonOrigine).set("produits_string", produits);
 
         return jsonOrigine;
 
