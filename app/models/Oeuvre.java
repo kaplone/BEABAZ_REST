@@ -246,10 +246,13 @@ public class Oeuvre extends Commun{
 	}
 
 	public Map<String, String> getTechniquesUtilisees_id() {
+
+		System.out.println("getTechniquesUtilisees_id() : " + techniquesUtilisees_id);
 		return techniquesUtilisees_id;
 	}
 
 	public void setTechniquesUtilisees_id(Map<String, String> techniquesUtilisees_id) {
+		System.out.println("setTechniquesUtilisees_id() : " + techniquesUtilisees_id);
 		this.techniquesUtilisees_id = techniquesUtilisees_id;
 	}
 	
@@ -258,8 +261,11 @@ public class Oeuvre extends Commun{
 		return getTechniquesUtilisees_id().entrySet()
                                           .stream()
                                           .map(a -> {
+											  System.out.println("getTechniquesUtilisees_noms_complets() a -> : " + a);
+											  System.out.println("getTechniquesUtilisees_noms_complets() a -> : " + a.getValue());
                                           	  Technique t_ = Connexion.getConnetion(getToken()).request("technique", new ObjectId(a.getValue()))
                                                                .as(Technique.class);
+											  System.out.println("getTechniquesUtilisees_noms_complets() t -> : " + t_);
                                           	  t_.setToken(getToken());
                                           	  return t_.getNom_complet();
                                           })
