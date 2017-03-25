@@ -16,41 +16,47 @@ public class AdaptationJson {
 
     public JsonNode adaptationVersOeuvre(JsonNode jsonOrigine, MongoAccess access){
 
-        String auteurStr = jsonOrigine.get("auteur").asText();
+        if (jsonOrigine.get("auteur") != null){
 
-        Auteur auteurObj = access.request("auteur", "nom", auteurStr).as(Auteur.class);
+            String auteurStr = jsonOrigine.get("auteur").asText();
 
-        if (auteurObj == null){
-            auteurObj = new Auteur();
-            auteurObj.setNom(auteurStr);
-            auteurObj.setCreated_at(new Date().toString());
-            auteurObj.setToken(access.getToken());
-            auteurObj = auteurObj.save();
+            Auteur auteurObj = access.request("auteur", "nom", auteurStr).as(Auteur.class);
+
+            if (auteurObj == null){
+                auteurObj = new Auteur();
+                auteurObj.setNom(auteurStr);
+                auteurObj.setCreated_at(new Date().toString());
+                auteurObj.setToken(access.getToken());
+                auteurObj = auteurObj.save();
+            }
+
+            ((ObjectNode) jsonOrigine).put("auteur", auteurObj.get_id());
         }
-
-        ((ObjectNode) jsonOrigine).put("auteur", auteurObj.get_id());
 
         String listeMatieresStr = jsonOrigine.get("matieres") != null ? jsonOrigine.get("matieres").asText() : "";
         if (listeMatieresStr != null){
 
             List<String> listeMatieres = Arrays.asList(listeMatieresStr.split(","));
-
             ObjectNode on = JsonNodeFactory.instance.objectNode();
 
-            listeMatieres.forEach(a -> {
-                String b = a.trim();
-                Matiere matiereObj = access.request("matiere", "nom", b).as(Matiere.class);
+            if (! listeMatieres.isEmpty()){
 
-                if (matiereObj == null){
-                    matiereObj = new Matiere();
-                    matiereObj.setNom(b);
-                    matiereObj.setCreated_at(new Date().toString());
-                    matiereObj.setToken(access.getToken());
-                    matiereObj = matiereObj.save();
-                }
+                listeMatieres.forEach(a -> {
+                    String b = a.trim();
+                    Matiere matiereObj = access.request("matiere", "nom", b).as(Matiere.class);
 
-                on.put(b, matiereObj.get_id());
-            });
+                    if (matiereObj == null){
+                        matiereObj = new Matiere();
+                        matiereObj.setNom(b);
+                        matiereObj.setCreated_at(new Date().toString());
+                        matiereObj.setToken(access.getToken());
+                        matiereObj = matiereObj.save();
+                    }
+
+                    on.put(b, matiereObj.get_id());
+                });
+
+            }
 
             ((ObjectNode) jsonOrigine).set("matieresUtilisees_id", on);
         }
@@ -59,23 +65,25 @@ public class AdaptationJson {
         if (listeTechniquesStr != null){
 
             List<String> listeTechniques = Arrays.asList(listeTechniquesStr.split(","));
-
             ObjectNode on = JsonNodeFactory.instance.objectNode();
 
-            listeTechniques.forEach(a -> {
-                String b = a.trim();
-                Technique techniqueObj = access.request("technique", "nom", b).as(Technique.class);
+            if (! listeTechniques.isEmpty()) {
 
-                if (techniqueObj == null){
-                    techniqueObj = new Technique();
-                    techniqueObj.setNom(b);
-                    techniqueObj.setCreated_at(new Date().toString());
-                    techniqueObj.setToken(access.getToken());
-                    techniqueObj = techniqueObj.save();
-                }
+                listeTechniques.forEach(a -> {
+                    String b = a.trim();
+                    Technique techniqueObj = access.request("technique", "nom", b).as(Technique.class);
 
-                on.put(b, techniqueObj.get_id());
-            });
+                    if (techniqueObj == null){
+                        techniqueObj = new Technique();
+                        techniqueObj.setNom(b);
+                        techniqueObj.setCreated_at(new Date().toString());
+                        techniqueObj.setToken(access.getToken());
+                        techniqueObj = techniqueObj.save();
+                    }
+
+                    on.put(b, techniqueObj.get_id());
+                });
+            }
 
             ((ObjectNode) jsonOrigine).set("techniquesUtilisees_id", on);
 
