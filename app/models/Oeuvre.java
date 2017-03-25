@@ -234,10 +234,14 @@ public class Oeuvre extends Commun{
 	}
 
 	public Map<String, String> getMatieresUtilisees_id() {
-		return matieresUtilisees_id;
+
+		System.out.println("getMatieresUtilisees_id() : " + matieresUtilisees_id);
+    	return matieresUtilisees_id;
 	}
 
 	public void setMatieresUtilisees_id(Map<String, String> matieresUtilisees_id) {
+
+    	System.out.println("setMatieresUtilisees_id() : " + matieresUtilisees_id);
 		this.matieresUtilisees_id = matieresUtilisees_id;
 	}
 
@@ -267,8 +271,11 @@ public class Oeuvre extends Commun{
 		return getMatieresUtilisees_id().entrySet()
                                         .stream()
                                         .map(a -> {
+											System.out.println("getMatieresUtilisees_noms_complets() a -> : " + a);
+											System.out.println("getMatieresUtilisees_noms_complets() a -> : " + a.getValue());
                                         	Matiere m_ = Connexion.getConnetion(getToken()).request("matiere", new ObjectId(a.getValue()))
 													.as(Matiere.class);
+											System.out.println("getMatieresUtilisees_noms_complets() m -> : " + m_);
                                         	m_.setToken(getToken());
 											return m_.getNom_complet();
 										})
