@@ -43,17 +43,20 @@ public class AdaptationJson {
 
                 listeMatieres.forEach(a -> {
                     String b = a.trim();
-                    Matiere matiereObj = access.request("matiere", "nom", b).as(Matiere.class);
 
-                    if (matiereObj == null){
-                        matiereObj = new Matiere();
-                        matiereObj.setNom(b);
-                        matiereObj.setCreated_at(new Date().toString());
-                        matiereObj.setToken(access.getToken());
-                        matiereObj = matiereObj.save();
+                    if (! b.equals("")){
+                        Matiere matiereObj = access.request("matiere", "nom", b).as(Matiere.class);
+
+                        if (matiereObj == null){
+                            matiereObj = new Matiere();
+                            matiereObj.setNom(b);
+                            matiereObj.setCreated_at(new Date().toString());
+                            matiereObj.setToken(access.getToken());
+                            matiereObj = matiereObj.save();
+                        }
+
+                        on.put(b, matiereObj.get_id());
                     }
-
-                    on.put(b, matiereObj.get_id());
                 });
 
             }
@@ -71,17 +74,20 @@ public class AdaptationJson {
 
                 listeTechniques.forEach(a -> {
                     String b = a.trim();
-                    Technique techniqueObj = access.request("technique", "nom", b).as(Technique.class);
 
-                    if (techniqueObj == null){
-                        techniqueObj = new Technique();
-                        techniqueObj.setNom(b);
-                        techniqueObj.setCreated_at(new Date().toString());
-                        techniqueObj.setToken(access.getToken());
-                        techniqueObj = techniqueObj.save();
+                    if (! b.equals("")){
+                        Technique techniqueObj = access.request("technique", "nom", b).as(Technique.class);
+
+                        if (techniqueObj == null){
+                            techniqueObj = new Technique();
+                            techniqueObj.setNom(b);
+                            techniqueObj.setCreated_at(new Date().toString());
+                            techniqueObj.setToken(access.getToken());
+                            techniqueObj = techniqueObj.save();
+                        }
+
+                        on.put(b, techniqueObj.get_id());
                     }
-
-                    on.put(b, techniqueObj.get_id());
                 });
             }
 
@@ -112,7 +118,9 @@ public class AdaptationJson {
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
-                alterations.add(b);
+                if (! b.equals("")) {
+                    alterations.add(b);
+                }
             });
         }
 
@@ -121,7 +129,9 @@ public class AdaptationJson {
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
-                alterations.add(b);
+                if (! b.equals("")) {
+                    alterations.add(b);
+                }
             });
         }
 
@@ -130,17 +140,23 @@ public class AdaptationJson {
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
-                alterations.add(b);
+                if (! b.equals("")) {
+                    alterations.add(b);
+                }
             });
         }
 
 
         alterationsStr = jsonOrigine.get("alterations techniques") != null ? jsonOrigine.get("alterations techniques").asText() : "";
         alterations_raw = Arrays.asList(alterationsStr.split(","));
-        alterations_raw.forEach(a -> {
-            String b = a.trim();
-            alterations.add(b);
-        });
+        if (! alterations_raw.isEmpty()){
+            alterations_raw.forEach(a -> {
+                String b = a.trim();
+                if (! b.equals("")) {
+                    alterations.add(b);
+                }
+            });
+        }
 
         ((ObjectNode) jsonOrigine).set("alterations_string", alterations);
 
@@ -200,20 +216,21 @@ public class AdaptationJson {
 
         traitements_raw.forEach(a -> {
             String b = a.trim();
+            if (! b.equals("")){
+                ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
 
-            ObjectNode traitementAttendu_node = JsonNodeFactory.instance.objectNode();
+                traitementAttendu_node.put("traitementAttendu_string", b);
 
-            traitementAttendu_node.put("traitementAttendu_string", b);
+                TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+                tacheTraitementObj.setToken(access.getToken());
+                tacheTraitementObj.setCreated_at(new Date().toString());
+                tacheTraitementObj.setFait_("TODO_");
+                tacheTraitementObj = tacheTraitementObj.save();
 
-            TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
-            tacheTraitementObj.setToken(access.getToken());
-            tacheTraitementObj.setCreated_at(new Date().toString());
-            tacheTraitementObj.setFait_("TODO_");
-            tacheTraitementObj = tacheTraitementObj.save();
+                traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
 
-            traitementAttendu_node.put("traitementAttendu_id", tacheTraitementObj.get_id());
-
-            listeTraitementsAttendus.add(traitementAttendu_node);
+                listeTraitementsAttendus.add(traitementAttendu_node);
+            }
         });
 
         return listeTraitementsAttendus;
