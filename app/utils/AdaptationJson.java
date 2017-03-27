@@ -224,7 +224,7 @@ public class AdaptationJson {
 
                 TacheTraitement tacheTraitementObj = new TacheTraitement(b, access);
 
-                if (tacheTraitementObj == null  || tacheTraitementObj.getNom().equals(null)){
+                if (tacheTraitementObj == null  || tacheTraitementObj.getNom() == null){
                     tacheTraitementObj = new TacheTraitement();
                     tacheTraitementObj.setNom(b);
                     tacheTraitementObj.setNom_complet(b);
