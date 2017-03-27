@@ -20,8 +20,8 @@ public class OeuvreTraitee extends Commun {
 	private EtatFinal etat;
 	private String complement_etat;
 	
-	private List<String> alterations;
-	
+	private List<String> alterations_string;
+
 	private List<Map<String, String>> fichiers;
 	
 	private Progression progressionOeuvreTraitee;
@@ -36,7 +36,7 @@ public class OeuvreTraitee extends Commun {
     public OeuvreTraitee(){
     	
     	traitementsAttendus = new ArrayList<>();
-    	alterations = new ArrayList<>();
+    	alterations_string = new ArrayList<>();
     	fichiers = new ArrayList<>();
     	
     }
@@ -139,11 +139,12 @@ public class OeuvreTraitee extends Commun {
 	}
 
 	public List<String> getAlterations_string() {
-		return alterations;
+		return alterations_string;
 	}
-	public void setAlterations_string(ArrayList<String> alterations) {
-		this.alterations = alterations;
+	public void setAlterations_string(List<String> alterations_string) {
+		this.alterations_string = alterations_string;
 	}
+
 	public EtatFinal getEtat() {
 		return etat;
 	}
