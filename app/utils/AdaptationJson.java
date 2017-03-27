@@ -222,7 +222,12 @@ public class AdaptationJson {
 
                 traitementAttendu_node.put("traitementAttendu_string", b);
 
-                TacheTraitement tacheTraitementObj = new TacheTraitement("b", access);
+                TacheTraitement tacheTraitementObj = new TacheTraitement(b, access);
+
+                if (tacheTraitementObj.getNom().equals(null)){
+                    tacheTraitementObj.setNom(b);
+                    tacheTraitementObj.setNom_complet(b);
+                }
                 tacheTraitementObj.setToken(access.getToken());
                 tacheTraitementObj.setCreated_at(new Date().toString());
                 tacheTraitementObj.setFait_("TODO_");
