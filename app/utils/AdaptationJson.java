@@ -110,7 +110,7 @@ public class AdaptationJson {
         ((ObjectNode) jsonOrigine).put("etat", "BON");
         ((ObjectNode) jsonOrigine).put("progressionOeuvreTraitee", "TODO_");
 
-        ArrayNode alterations = JsonNodeFactory.instance.arrayNode();
+        ArrayNode alterations_string = JsonNodeFactory.instance.arrayNode();
         ArrayNode listeTraitementsAttendus = JsonNodeFactory.instance.arrayNode();
         ArrayNode produits = JsonNodeFactory.instance.arrayNode();
 
@@ -120,7 +120,7 @@ public class AdaptationJson {
             alterations_raw.forEach(a -> {
                 String b = a.trim();
                 if (! b.equals("")) {
-                    alterations.add(b);
+                    alterations_string.add(b);
                 }
             });
         }
@@ -131,7 +131,7 @@ public class AdaptationJson {
             alterations_raw.forEach(a -> {
                 String b = a.trim();
                 if (! b.equals("")) {
-                    alterations.add(b);
+                    alterations_string.add(b);
                 }
             });
         }
@@ -142,7 +142,7 @@ public class AdaptationJson {
             alterations_raw.forEach(a -> {
                 String b = a.trim();
                 if (! b.equals("")) {
-                    alterations.add(b);
+                    alterations_string.add(b);
                 }
             });
         }
@@ -154,12 +154,12 @@ public class AdaptationJson {
             alterations_raw.forEach(a -> {
                 String b = a.trim();
                 if (! b.equals("")) {
-                    alterations.add(b);
+                    alterations_string.add(b);
                 }
             });
         }
 
-        ((ObjectNode) jsonOrigine).set("alterations_string", alterations);
+        ((ObjectNode) jsonOrigine).set("alterations_string", alterations_string);
 
 
         // traitement suppression elements // traitement consolidation // traitement depoussierage //
