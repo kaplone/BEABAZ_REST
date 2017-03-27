@@ -33,6 +33,7 @@ public class AdaptationJson {
             ((ObjectNode) jsonOrigine).put("auteur", auteurObj.get_id());
         }
 
+
         String listeMatieresStr = jsonOrigine.get("matieres") != null ? jsonOrigine.get("matieres").asText() : "";
         if (listeMatieresStr != null){
 

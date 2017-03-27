@@ -48,21 +48,21 @@ public class Oeuvre extends Commun{
 	
 	@Override
 	public String getNom(){
-		
-		if(getCote_archives_6s().equals("SN")){
-			return String.format("   SN - %s" , titre_de_l_oeuvre);
-		}
-		else {
-			try {
-				return String.format("%04d - %s", Integer.parseInt(getCote_archives_6s() != "" ? getCote_archives_6s() : "0") , titre_de_l_oeuvre);
-			}
-			catch (NumberFormatException nfe) {
-				return String.format("%04d - %s", Integer.parseInt(getCote_archives_6s() != "" ? getCote_archives_6s().split("\\.")[0] : "0") , titre_de_l_oeuvre);
-			}
-		}
-		
-		
-		
+
+        if(getCote_archives_6s().equals("SN")){
+            return String.format("   SN - %s" , titre_de_l_oeuvre);
+        }
+        else if(getCote_archives_6s().length() < 5 ){
+            try {
+                return String.format("%04d - %s", Integer.parseInt(getCote_archives_6s() != "" ? getCote_archives_6s() : "0") , titre_de_l_oeuvre);
+            }
+            catch (NumberFormatException nfe) {
+                return String.format("%04d - %s", Integer.parseInt(getCote_archives_6s() != "" ? getCote_archives_6s().split("\\.")[0] : "0") , titre_de_l_oeuvre);
+            }
+        }
+        else {
+            return String.format("%s - %s", getCote_archives_6s(), titre_de_l_oeuvre);
+        }
 	}
 	
 	public void update(){
