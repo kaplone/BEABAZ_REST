@@ -201,9 +201,11 @@ public class Oeuvre extends Commun{
 		this.format_de_conditionnement = format_de_conditionnement;
 	}
 
-	public String getAuteur() {
-		return auteur;
+	public Auteur getAuteur() {
+		return Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur)).as(Auteur.class);
 	}
+
+
 
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
