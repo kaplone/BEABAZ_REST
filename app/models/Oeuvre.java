@@ -202,7 +202,12 @@ public class Oeuvre extends Commun{
 	}
 
 	public Auteur getAuteur() {
-		return Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur)).as(Auteur.class);
+        if (auteur != null){
+            return Connexion.getConnetion(getToken()).request("auteur", new ObjectId(auteur)).as(Auteur.class);
+        }
+		else {
+            return null;
+        }
 	}
 
 
