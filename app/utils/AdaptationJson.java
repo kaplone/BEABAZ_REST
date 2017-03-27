@@ -115,7 +115,7 @@ public class AdaptationJson {
         ArrayNode produits = JsonNodeFactory.instance.arrayNode();
 
         String alterationsStr = jsonOrigine.get("alterations depot") != null ? jsonOrigine.get("alterations depot").asText() : "";
-        List<String> alterations_raw = Arrays.asList(alterationsStr.split(". "));
+        List<String> alterations_raw = Arrays.asList(alterationsStr.split("\\. "));
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
@@ -126,7 +126,7 @@ public class AdaptationJson {
         }
 
         alterationsStr = jsonOrigine.get("alterations physiques") != null ? jsonOrigine.get("alterations physiques").asText() : "";
-        alterations_raw = Arrays.asList(alterationsStr.split(". "));
+        alterations_raw = Arrays.asList(alterationsStr.split("\\. "));
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
@@ -137,7 +137,7 @@ public class AdaptationJson {
         }
 
         alterationsStr = jsonOrigine.get("alterations chimiques") != null ? jsonOrigine.get("alterations chimiques").asText() : "";
-        alterations_raw = Arrays.asList(alterationsStr.split(". "));
+        alterations_raw = Arrays.asList(alterationsStr.split("\\. "));
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
@@ -149,7 +149,7 @@ public class AdaptationJson {
 
 
         alterationsStr = jsonOrigine.get("alterations techniques") != null ? jsonOrigine.get("alterations techniques").asText() : "";
-        alterations_raw = Arrays.asList(alterationsStr.split(". "));
+        alterations_raw = Arrays.asList(alterationsStr.split("\\. "));
         if (! alterations_raw.isEmpty()){
             alterations_raw.forEach(a -> {
                 String b = a.trim();
@@ -164,37 +164,37 @@ public class AdaptationJson {
 
         // traitement suppression elements // traitement consolidation // traitement depoussierage //
         String traitementsStr = jsonOrigine.get("traitement depoussierage") != null ? jsonOrigine.get("traitement depoussierage").asText() : "";
-        List<String> traitements_raw = Arrays.asList(traitementsStr.split(". "));
+        List<String> traitements_raw = Arrays.asList(traitementsStr.split("\\. "));
         if (! traitements_raw.isEmpty()){
             listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
         }
 
         traitementsStr = jsonOrigine.get("traitement suppression elements") != null ? jsonOrigine.get("traitement suppression elements").asText() : "";
-        traitements_raw = Arrays.asList(traitementsStr.split(". "));
+        traitements_raw = Arrays.asList(traitementsStr.split("\\. "));
         if (! traitements_raw.isEmpty()){
             listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
         }
 
         traitementsStr = jsonOrigine.get("traitements aqueux") != null ? jsonOrigine.get("traitements aqueux").asText() : "";
-        traitements_raw = Arrays.asList(traitementsStr.split(". "));
+        traitements_raw = Arrays.asList(traitementsStr.split("\\. "));
         if (! traitements_raw.isEmpty()){
             listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
         }
 
         traitementsStr = jsonOrigine.get("traitement consolidation") != null ? jsonOrigine.get("traitement consolidation").asText() : "";
-        traitements_raw = Arrays.asList(traitementsStr.split(". "));
+        traitements_raw = Arrays.asList(traitementsStr.split("\\. "));
         if (! traitements_raw.isEmpty()){
             listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
         }
 
         traitementsStr = jsonOrigine.get("traitement mise a plat") != null ? jsonOrigine.get("traitement mise a plat").asText() : "";
-        traitements_raw = Arrays.asList(traitementsStr.split(". "));
+        traitements_raw = Arrays.asList(traitementsStr.split("\\. "));
         if (! traitements_raw.isEmpty()){
             listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
         }
 
         traitementsStr = jsonOrigine.get("traitement retouche") != null ? jsonOrigine.get("traitement retouche").asText() : "";
-        traitements_raw = Arrays.asList(traitementsStr.split(". "));
+        traitements_raw = Arrays.asList(traitementsStr.split("\\. "));
         if (! traitements_raw.isEmpty()){
             listeTraitementsAttendus = ajouterTraitement(traitements_raw, access, listeTraitementsAttendus);
         }
@@ -202,7 +202,7 @@ public class AdaptationJson {
         ((ObjectNode) jsonOrigine).set("traitementsAttendus", listeTraitementsAttendus);
 
         String produitsStr = jsonOrigine.get("produits utilisés") != null ? jsonOrigine.get("produits utilisés").asText() : "";
-        List<String> produits_raw = Arrays.asList(produitsStr.split(". "));
+        List<String> produits_raw = Arrays.asList(produitsStr.split("\\. "));
         produits_raw.forEach(a -> {
             String b = a.trim();
             produits.add(b);
