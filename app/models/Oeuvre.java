@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import utils.Connexion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import utils.MongoAccess;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Oeuvre extends Commun{
@@ -241,11 +242,12 @@ public class Oeuvre extends Commun{
 
     	techniquesUtilisees_id = new HashMap<>();
 
+		MongoAccess access = Connexion.getConnetion(getToken());
+
     	if(! techniquesUtilisees_names.isEmpty()){
-    		techniquesUtilisees_names.forEach(a -> {
-    				techniquesUtilisees_id.put(a, Connexion.getConnetion(getToken()).request("technique", "nom", a)
-							.as(Technique.class).get_id());
-			});
+    		techniquesUtilisees_names.forEach(a ->
+    				techniquesUtilisees_id.put(a, access.request("technique", "nom", a)
+							.as(Technique.class).get_id()));
 		}
 	}
 
@@ -253,11 +255,12 @@ public class Oeuvre extends Commun{
 
 		matieresUtilisees_id = new HashMap<>();
 
+		MongoAccess access = Connexion.getConnetion(getToken());
+
 		if(! matieresUtilisees_names.isEmpty()){
-			 matieresUtilisees_names.forEach(a -> {
-				 matieresUtilisees_id.put(a, Connexion.getConnetion(getToken()).request("matiere", "nom", a)
-						.as(Matiere.class).get_id());
-			});
+			 matieresUtilisees_names.forEach(a ->
+				 matieresUtilisees_id.put(a, access.request("matiere", "nom", a)
+						.as(Matiere.class).get_id()));
 		}
 	}
 
