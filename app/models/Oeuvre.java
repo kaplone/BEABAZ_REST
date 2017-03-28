@@ -35,8 +35,9 @@ public class Oeuvre extends Commun{
 	
 	private Map<String, String> matieresUtilisees_id;
 	private Map<String, String> techniquesUtilisees_id;
-	
-	private String etat_current;
+
+	private List<String> techniquesUtilisees_names;
+	private List<String> matieresUtilisees_names;
 	
 	public Oeuvre(){
 		matieresUtilisees_id = new HashMap<>();
@@ -218,13 +219,6 @@ public class Oeuvre extends Commun{
 		this.auteur = auteur;
 	}
 
-	public String getEtat_current() {
-		return etat_current;
-	}
-
-	public void setEtat_current(String etat_current) {
-		this.etat_current = etat_current;
-	}
 
 	public Set<String> getMatieresUtilisees_names() {
 		return matieresUtilisees_id.keySet();
@@ -239,7 +233,10 @@ public class Oeuvre extends Commun{
 	}
 
 	public void setTechniquesUtilisees_names(List<String> techniquesUtilisees_names) {
+    	this.techniquesUtilisees_names = techniquesUtilisees_names;
+	}
 
+	public void convertTechniquesUtilisees_name(){
     	techniquesUtilisees_id = new HashMap<>();
 
 		MongoAccess access = Connexion.getConnetion(getToken());
@@ -252,6 +249,10 @@ public class Oeuvre extends Commun{
 	}
 
 	public void setMatieresUtilisees_names(List<String> matieresUtilisees_names) {
+		this.matieresUtilisees_names = matieresUtilisees_names;
+	}
+
+	public void convertMatieresUtilisees_name(){
 
 		matieresUtilisees_id = new HashMap<>();
 

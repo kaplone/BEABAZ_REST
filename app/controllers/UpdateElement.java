@@ -64,6 +64,9 @@ public class UpdateElement extends Controller {
                 case "model" :           m = Json.fromJson(json, Model.class);
                     break;
                 case "oeuvre" :          m = Json.fromJson(json, Oeuvre.class);
+                                         m.setToken(access.getToken());
+                                         ((Oeuvre)m).convertTechniquesUtilisees_name();
+                                         ((Oeuvre)m).convertMatieresUtilisees_name();
                     break;
                 case "oeuvreTraitee" :   m = Json.fromJson(json, OeuvreTraitee.class);
                     break;
