@@ -1,6 +1,7 @@
 package models;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -236,6 +237,30 @@ public class Oeuvre extends Commun{
 		return techniquesUtilisees_id.keySet();
 	}
 
+	public void setTechniquesUtilisees_names(List<String> techniquesUtilisees_names) {
+
+    	techniquesUtilisees_id = new HashMap<>();
+
+    	if(! techniquesUtilisees_names.isEmpty()){
+    		techniquesUtilisees_names.forEach(a -> {
+    				techniquesUtilisees_id.put(a, Connexion.getConnetion(getToken()).request("technique", "nom", a)
+							.as(Technique.class).get_id());
+			});
+		}
+	}
+
+	public void setMatieresUtilisees_names(List<String> matieresUtilisees_names) {
+
+		matieresUtilisees_id = new HashMap<>();
+
+		if(! matieresUtilisees_names.isEmpty()){
+			 matieresUtilisees_names.forEach(a -> {
+				 matieresUtilisees_id.put(a, Connexion.getConnetion(getToken()).request("matiere", "nom", a)
+						.as(Matiere.class).get_id());
+			});
+		}
+	}
+
 	public void addTechniqueUtilisee(Technique techniqueUtilisee) {
 		this.techniquesUtilisees_id.put(techniqueUtilisee.getNom(), techniqueUtilisee.get_id());
 	}
@@ -268,11 +293,8 @@ public class Oeuvre extends Commun{
 		return getTechniquesUtilisees_id().entrySet()
                                           .stream()
                                           .map(a -> {
-											  System.out.println("getTechniquesUtilisees_noms_complets() a -> : " + a);
-											  System.out.println("getTechniquesUtilisees_noms_complets() a -> : " + a.getValue());
                                           	  Technique t_ = Connexion.getConnetion(getToken()).request("technique", new ObjectId(a.getValue()))
                                                                .as(Technique.class);
-											  System.out.println("getTechniquesUtilisees_noms_complets() t -> : " + t_);
                                           	  t_.setToken(getToken());
                                           	  return t_.getNom_complet();
                                           })
@@ -284,11 +306,8 @@ public class Oeuvre extends Commun{
 		return getMatieresUtilisees_id().entrySet()
                                         .stream()
                                         .map(a -> {
-											System.out.println("getMatieresUtilisees_noms_complets() a -> : " + a);
-											System.out.println("getMatieresUtilisees_noms_complets() a -> : " + a.getValue());
                                         	Matiere m_ = Connexion.getConnetion(getToken()).request("matiere", new ObjectId(a.getValue()))
 													.as(Matiere.class);
-											System.out.println("getMatieresUtilisees_noms_complets() m -> : " + m_);
                                         	m_.setToken(getToken());
 											return m_.getNom_complet();
 										})
